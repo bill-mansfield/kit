@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function SignIn(props) {
+export default withRouter(function SignIn(props) {
 	const classes = useStyles();
 
 	const [email, setEmail] = useState('');
@@ -93,4 +93,4 @@ export default function SignIn(props) {
 			alert(error.message)
 		}
 	}
-}
+})

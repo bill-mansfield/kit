@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function Register(props) {
+export default withRouter( function Register(props) {
 	const classes = useStyles();
 
 	const [name, setName] = useState('')
@@ -99,11 +99,11 @@ export default function Register(props) {
 
 	async function onRegister() {
 		try {
-			await firebase.register(name, email, password)
-			await firebase.addQuote(quote)
-			props.history.replace('/dashboard')
+			await firebase.register(name, email, password);
+			await firebase.addQuote(quote);
+			props.history.replace('/dashboard');
 		} catch(error) {
-			alert(error.message)
+			alert(error.message);
 		}
 	}
-}
+})
