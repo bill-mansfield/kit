@@ -39,15 +39,15 @@ export default withRouter (function Dashboard(props) {
     const [quote, setQuote] = useState('');
 
 	useEffect(() => {
+		if (!firebase.getCurrentUsername()) {
+			// not logged in
+			alert('Please login first');
+			props.history.replace('/login');
+		} else {
 		firebase.getCurrentUserQuote().then(setQuote);
+		}
 	},[quote])
 
-	if (!firebase.getCurrentUsername()) {
-		// not logged in
-		alert('Please login first');
-		props.history.replace('/login');
-		return null
-	}
 
 	return (
 		<main className={classes.main}>
