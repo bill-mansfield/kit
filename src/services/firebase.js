@@ -3,13 +3,13 @@ import 'firebase/auth'
 import 'firebase/firebase-firestore'
 
 const config = {
-    apiKey: "AIzaSyD0YqoUlO-xijvUZUgTNxdRfRwapoTKVnw",
-    authDomain: "kitt-da2fa.firebaseapp.com",
-    databaseURL: "https://kitt-da2fa.firebaseio.com",
-    projectId: "kitt-da2fa",
-    storageBucket: "kitt-da2fa.appspot.com",
-    messagingSenderId: "739682532519",
-    appId: "1:739682532519:web:fc2749cbbaebbdfe1d2f82"
+	apiKey: "AIzaSyD0YqoUlO-xijvUZUgTNxdRfRwapoTKVnw",
+	authDomain: "kitt-da2fa.firebaseapp.com",
+	databaseURL: "https://kitt-da2fa.firebaseio.com",
+	projectId: "kitt-da2fa",
+	storageBucket: "kitt-da2fa.appspot.com",
+	messagingSenderId: "739682532519",
+	appId: "1:739682532519:web:fc2749cbbaebbdfe1d2f82"
 };
 
 class Firebase {
@@ -39,7 +39,7 @@ class Firebase {
 			return alert('Not authorized')
 		}
 
-		return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
+		return this.db.doc(`users_quote/${this.auth.currentUser.uid}`).set({
 			quote
 		})
 	}
@@ -55,7 +55,7 @@ class Firebase {
 	}
 
 	async getCurrentUserQuote() {
-		const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
+		const quote = await this.db.doc(`users_quote/${this.auth.currentUser.uid}`).get()
 		return quote.get('quote')
 	}
 }

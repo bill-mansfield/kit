@@ -3,18 +3,15 @@ import Homepage from '../Homepage';
 import Login from '../Login';
 import Register from '../Register';
 import Dashboard from '../Dashboard';
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import Theme from '../theme/theme';
+import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, CircularProgress } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import firebase from '../../services/firebase';
+import { createBrowserHistory } from "history";
 
-const theme = createMuiTheme({
-    status: {
-        body1: {
-            fontSize: '32px',
-        }
-    },
-});
+const history = createBrowserHistory();
 
 const useStyles = makeStyles(theme => ({
     '*': {
@@ -44,10 +41,9 @@ export default function App() {
 
 
 	return firebaseInitialized !== false ? (
-
-        <ThemeProvider theme={theme}>
+        <Theme>
             <CssBaseline />
-            <Router>
+            <Router history={history}>
                 <Switch>
                     <Route exact path='/' component={Homepage} />
                     <Route exact path='/login' component={Login} />
@@ -55,6 +51,6 @@ export default function App() {
                     <Route exact path='/dashboard' component={Dashboard} />
                 </Switch>
             </Router>
-        </ThemeProvider>
+        </Theme>
 	) : <div className={classes.loader} id="loader"><CircularProgress /></div>
 }

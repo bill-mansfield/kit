@@ -101,6 +101,7 @@ export default withRouter( function Register(props) {
 		try {
 			await firebase.register(name, email, password);
 			await firebase.addQuote(quote);
+			await firebase.login(email, password);
 			props.history.replace('/dashboard');
 		} catch(error) {
 			alert(error.message);

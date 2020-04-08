@@ -87,10 +87,10 @@ export default withRouter(function SignIn(props) {
 
 	async function login() {
 		try {
-			await firebase.login(email, password)
-			props.history.replace('/dashboard')
+			await firebase.login(email, password);
+			props.history.replace('/dashboard');
 		} catch(error) {
-			alert(error.message)
+			alert(error.message);
 		}
 	}
 })
