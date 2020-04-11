@@ -4,30 +4,10 @@ import { Typography, Paper, Avatar, Button } from '@material-ui/core';
 import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined';
 import { Link } from 'react-router-dom';
 import BackgroundImage from '../layouts/backgroundImage';
+import AuthMain from '../layouts/auth-main';
+import AuthPaper from '../layouts/auth-paper';
 
 const useStyles = makeStyles(theme => ({
-	main: {
-		width: 'auto',
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: '100vh',
-		marginLeft: theme.spacing.unit * 3,
-		marginRight: theme.spacing.unit * 3,
-		position: 'relative',
-
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-			marginLeft: 'auto',
-			marginRight: 'auto',
-		},
-	},
-	paper: {
-		display: 'flex',
-		width: '30vw',
-		flexDirection: 'column',
-		alignItems: 'center',
-		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-	},
 	avatar: {
 		margin: theme.spacing.unit,
 		backgroundColor: theme.palette.secondary.main,
@@ -43,13 +23,13 @@ export default function Homepage() {
 	return (
 		<>
 		<BackgroundImage />
-			<main className={classes.main}>
-				<Paper className={classes.paper}>
+			<AuthMain>
+				<AuthPaper>
 					<Avatar className={classes.avatar}>
 						<VerifiedUserOutlined />
 					</Avatar>
-					<Typography component="h1" variant="h5">
-						Hello Guest!
+					<Typography variant="h1">
+						Hello Crusher!
 					</Typography>
 					<Button
 						type="submit"
@@ -81,8 +61,8 @@ export default function Homepage() {
 						className={classes.submit}>
 						Dashboard
 					</Button>
-				</Paper>
-			</main>
+				</AuthPaper>
+			</AuthMain>
 		</>
 	)
 }

@@ -9,7 +9,7 @@ import { CssBaseline, CircularProgress } from '@material-ui/core';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 import firebase from '../../services/firebase';
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
