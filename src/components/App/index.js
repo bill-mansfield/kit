@@ -13,7 +13,7 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     '*': {
         margin: '0',
         padding: '0',
@@ -25,32 +25,34 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-    }
-  }));
+    },
+}));
 
 export default function App() {
-
     const classes = useStyles();
     const [firebaseInitialized, setFirebaseInitialized] = useState(false);
 
-	useEffect(() => {
-		firebase.isInitialized().then(val => {
-			setFirebaseInitialized(val);
-		})
-	});
+    useEffect(() => {
+        firebase.isInitialized().then((val) => {
+            setFirebaseInitialized(val);
+        });
+    });
 
-
-	return firebaseInitialized !== false ? (
+    return firebaseInitialized !== false ? (
         <Theme>
             <CssBaseline />
             <Router history={history}>
                 <Switch>
-                    <Route exact path='/' component={Homepage} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Register} />
-                    <Route exact path='/dashboard' component={Dashboard} />
+                    <Route exact path="/" component={Homepage} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
             </Router>
         </Theme>
-	) : <div className={classes.loader} id="loader"><CircularProgress /></div>
+    ) : (
+        <div className={classes.loader} id="loader">
+            <CircularProgress />
+        </div>
+    );
 }
