@@ -7,19 +7,19 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		width: '80vw',
 		[theme.breakpoints.up('md')]: {
-			width: '40vw',
+			width: '60vw',
 		},
 		[theme.breakpoints.up('lg')]: {
-			width: '30vw',
+			width: '50vw',
 		},
 		flexDirection: 'column',
 		alignItems: 'center',
-		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+		padding: `${theme.spacing(2)}px ${theme.spacing(2)}px ${theme.spacing(2)}px`,
 		backgroundColor: 'transparent',
 	},
 }));
 
-export default function AuthPaper(props) {
+export default function AuthInnerWrapper(props) {
     const classes = useStyles();
     const children = props;
 

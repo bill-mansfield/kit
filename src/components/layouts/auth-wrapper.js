@@ -8,17 +8,17 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: '100vh',
-		marginLeft: theme.spacing.unit * 3,
-		marginRight: theme.spacing.unit * 3,
+		marginLeft: theme.spacing(3),
+		marginRight: theme.spacing(3),
 		position: 'relative',
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+		[theme.breakpoints.up(400 + theme.spacing(6))]: {
 			marginLeft: 'auto',
 			marginRight: 'auto',
 		},
 	},
 }));
 
-export default function AuthMain(props) {
+export default function AuthWrapper(props) {
     const classes = useStyles();
     const children = props;
 

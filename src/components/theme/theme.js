@@ -1,4 +1,3 @@
-import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import createBreakpoints from "@material-ui/core/styles/createBreakpoints";
@@ -25,6 +24,7 @@ const theme = createMuiTheme({
 			h1: {
 				fontSize: pxToRem(24),
 				color: white,
+				marginBottom: '15px',
 				[breakpoints.up("md")]: {
 					fontSize: pxToRem(32)
 				}
@@ -32,6 +32,9 @@ const theme = createMuiTheme({
 			h2: {
 				fontSize: pxToRem(21),
 				color: white,
+				fontWeight: '400',
+				marginBottom: '10px',
+				textAlign: 'center',
 				[breakpoints.up("md")]: {
 					fontSize: pxToRem(24)
 				}
@@ -39,6 +42,9 @@ const theme = createMuiTheme({
 			h3: {
 				fontSize: pxToRem(18),
 				color: white,
+				fontWeight: '300',
+				marginBottom: '10px',
+				textAlign: 'center',
 				[breakpoints.up("md")]: {
 					fontSize: pxToRem(21)
 				}

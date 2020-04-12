@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
-import { Typography, Paper, Avatar, Button, FormControl, Input, InputLabel } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Typography, Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
 import firebase from '../../services/firebase';
-import BackgroundImage from '../layouts/backgroundImage';
-import AuthMain from '../layouts/auth-main';
-import AuthPaper from '../layouts/auth-paper';
+import BackgroundImage from '../layouts/background-image';
+import AuthWrapper from '../layouts/auth-wrapper';
+import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
+import IconAvatar from '../icon-avatar';
 
 const useStyles = makeStyles(theme => ({
-	avatar: {
-		margin: theme.spacing.unit,
-		backgroundColor: theme.palette.secondary.main,
-	},
 	form: {
-		width: '100%',
+		width: '50%',
 		'& > label': {
 			color: theme.palette.primary.main,
 		}
 	},
 	submit: {
-		marginTop: theme.spacing.unit * 3,
+		marginTop: theme.spacing(3),
 	},
 }));
 
@@ -35,11 +31,9 @@ export default withRouter( function Register(props) {
 	return (
 		<>
 			<BackgroundImage />
-			<AuthMain>
-				<AuthPaper>
-					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
-					</Avatar>
+			<AuthWrapper>
+				<AuthInnerWrapper>
+					<IconAvatar />
 					<Typography variant="h1">
 						Register Account
 					</Typography>
@@ -82,8 +76,8 @@ export default withRouter( function Register(props) {
 							Go back to Login
 						</Button>
 					</form>
-				</AuthPaper>
-			</AuthMain>
+				</AuthInnerWrapper>
+			</AuthWrapper>
 		</>
 	)
 
