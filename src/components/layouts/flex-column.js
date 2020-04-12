@@ -7,6 +7,8 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        height: '100vh',
+        backgroundColor: theme.palette.secondary.dark,
     }
 
 }));
@@ -16,7 +18,7 @@ export default function FlexColumn(props) {
     const children = props;
 
 	return (
-        <div className={classes.flexcolumn} 
+        <div className={classes.flexColumn} 
             { ...children }
         />
 	)
