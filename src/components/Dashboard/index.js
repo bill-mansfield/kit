@@ -29,21 +29,38 @@ export default withRouter(function Dashboard(props) {
             <Navbar />
             <FlexColumn
                 style={{
-                    justifyContent: 'flex-start',
+                    justifyContent: 'center',
+                    height: '91vh',
                 }}
             >
                 <FlexRow>
                     <FlexColumn>
-                        {/* <Typography variant="h1">
-							Hello { firebase.getCurrentUsername() }, welcome to your dashboard
-						</Typography>
-						<Typography variant="h2">
-							Your quote: {quote ? `"${quote}"` : <CircularProgress size={20} />}
-						</Typography> */}
+                        <Typography variant="h1">
+                            Hello {firebase.getCurrentUsername()}, welcome to
+                            your dashboard
+                        </Typography>
+                        <Typography variant="h2">
+                            Your quote:{' '}
+                            {quote ? (
+                                `"${quote}"`
+                            ) : (
+                                <CircularProgress size={20} />
+                            )}
+                        </Typography>
                     </FlexColumn>
                 </FlexRow>
-                <FlexRow>
-                    <Uploader />
+                <FlexRow
+                    style={{
+                        width: '50vw',
+                    }}
+                >
+                    <FlexColumn
+                        style={{
+                            height: '30vh',
+                        }}
+                    >
+                        <Uploader awaitingUpload />
+                    </FlexColumn>
                 </FlexRow>
             </FlexColumn>
         </>
