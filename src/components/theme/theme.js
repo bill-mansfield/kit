@@ -90,7 +90,7 @@ const theme = createMuiTheme({
 		  light: '#C2DEFF',
 		  main: '#59BDFF',
 		  dark: '#3D83B3',
-		  text: white,
+		  text: '#fff',
 		},
 		secondary: {
 		  light: '#FFBC40',
@@ -98,6 +98,14 @@ const theme = createMuiTheme({
 		  dark: '#483D4C',
 		  text: '#000',
 		},
+		success: {
+			light: '#98FB98',
+			main: '#4BB543',
+		},
+		danger: {
+			light: '#FA8072',
+			main: '#F32013',
+		}
 	  },
 });
 

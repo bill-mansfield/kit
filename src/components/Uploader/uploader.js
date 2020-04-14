@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
 import 'react-dropzone-uploader/dist/styles.css';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Dropzone from 'react-dropzone-uploader';
 import firebase from '../../services/firebase';
 
 const useStyles = makeStyles((theme) => ({
-    dropzoneStyles: {
-        dropzone: {
-            backgroundColor: '#483D4C',
-            overflow: 'hidden',
-            border: 'dashed 5px #59BDFF',
-        },
-        previewImage: {
-            color: '#fff',
-        },
-        inputLabelWithFiles: {
-            display: 'none',
-        },
-        dropzoneReject: {
-            borderColor: 'red',
-            backgroundColor: '#DAA',
-        },
+    dropZoneWrapper: {
+        backgroundColor: theme.palette.secondary.dark,
+        overflow: 'hidden',
+        border: 'dashed 5px #59BDFF',
     },
+    previewImage: {
+        color: theme.palette.primary.text,
+    },
+    inputLabelWithFiles: {
+        display: 'none',
+        color: theme.palette.primary.text,
+    },
+    dropzoneReject: {
+        borderColor: theme.palette.danger.main,
+        backgroundColor: theme.palette.danger.light,
+    },
+    dropzoneActive: {
+        borderColor: theme.palette.success.main,
+        backgroundColor: theme.palette.success.light,
+    },
+    preview: {
+        padding: '50px 3%',
+        borderBottom: 'none',
+        '& > span':{
+            color: theme.palette.primary.text,
+        },
+        '& > div > progress': {
+            backgroundColor: 'red',
+        },
+        '& > div > span': {
+            backgroundImage: 'none !important',
+        }
+
+    }
 }));
 
 export default function Uploader(props) {
@@ -64,10 +81,17 @@ export default function Uploader(props) {
                     inputContent={(files, extra) =>
                         extra.reject ? '.csv files only' : 'Drag Files'
                     }
-                    addClassNames={classes.dropzoneStyles}
+                    addClassNames={{
+                        dropzone: classes.dropZoneWrapper,
+                        previewImage: classes.previewImage,
+                        inputLabelWithFiles: classes.inputLabelWithFiles,
+                        dropzoneReject: classes.dropzoneReject,
+                        dropzoneActive: classes.dropzoneActive,
+                        preview: classes.preview,
+                    }}
                     styles={{
                         inputLabel: (files, extra) =>
-                            extra.reject
+                            extra.reject 
                                 ? { color: 'red' }
                                 : { color: 'white' },
                     }}

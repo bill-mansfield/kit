@@ -7,6 +7,7 @@ import Navbar from '../Nav/navbar';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import Uploader from '../Uploader/uploader';
+import metresClimbed from './stats/metresClimbed';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -60,6 +61,11 @@ export default withRouter(function Dashboard(props) {
                         }}
                     >
                         <Uploader awaitingUpload />
+                    </FlexColumn>
+                </FlexRow>
+                <FlexRow>
+                    <FlexColumn>
+                        <metresClimbed />
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>

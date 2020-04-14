@@ -67,6 +67,30 @@ class Firebase {
         const storageRef = this.storage.ref();
         return storageRef.child(`usercsvs/${this.auth.currentUser.uid}.csv`);
     }
+
+    getDataDownloadURL() {
+        this.getStorageRef.getDownloadURL().then(function(url) {
+            return (url);
+          }).catch(function(error) {
+
+            switch (error.code) {
+              case 'storage/object-not-found':
+                console.log('not found');
+                break;
+          
+              case 'storage/unauthorized':
+                console.log('not authorizes');
+                break;
+          
+              case 'storage/canceled':
+                console.log('cancelled');
+                break;
+              case 'storage/unknown':
+                console.log('not found');
+                break;
+            }
+          });
+    }
 }
 
 export default new Firebase();
