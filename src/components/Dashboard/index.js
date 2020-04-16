@@ -7,7 +7,7 @@ import Navbar from '../Nav/navbar';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import Uploader from '../Uploader/uploader';
-import metresClimbed from './stats/metresClimbed';
+import MetresClimbed from './stats/metres-climbed';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -28,7 +28,7 @@ export default withRouter(function Dashboard(props) {
     return (
         <>
             <Navbar />
-            <FlexColumn
+            <FlexColumn 
                 style={{
                     justifyContent: 'center',
                     height: '91vh',
@@ -36,7 +36,7 @@ export default withRouter(function Dashboard(props) {
             >
                 <FlexRow>
                     <FlexColumn>
-                        <Typography variant="h1">
+                        {/* <Typography variant="h1">
                             Hello {firebase.getCurrentUsername()}, welcome to
                             your dashboard
                         </Typography>
@@ -47,7 +47,7 @@ export default withRouter(function Dashboard(props) {
                             ) : (
                                 <CircularProgress size={20} />
                             )}
-                        </Typography>
+                        </Typography> */}
                     </FlexColumn>
                 </FlexRow>
                 <FlexRow
@@ -65,7 +65,7 @@ export default withRouter(function Dashboard(props) {
                 </FlexRow>
                 <FlexRow>
                     <FlexColumn>
-                        <metresClimbed />
+                        <MetresClimbed />
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>

@@ -36,6 +36,36 @@ class Firebase {
         });
     }
 
+    isInitialized() {
+        return new Promise((resolve) => {
+            this.auth.onAuthStateChanged(resolve);
+        });
+    }
+
+
+    addAscents(file) {
+        return this.db.collection(`users/${this.auth.currentUser.uid}/ascents`).add({
+            file,
+        });
+    }
+
+    async getCurrentUserAscents() {
+        let ascentsRef = this.db.collection('users').doc(`${this.auth.currentUser.uid}`).collection('ascents');
+        await ascentsRef.get().then(token => {return token.docs.map(doc => doc.data())});
+        
+        // .then(function(doc) {
+        //     if(doc.exists) {
+        //         console.log("Document data:", doc.data());
+        //     } else {
+        //         console.log('no doc')
+        //     }
+        // });
+    }
+
+    getCurrentUsername() {
+        return this.auth.currentUser && this.auth.currentUser.displayName;
+    }
+
     addQuote(quote) {
         if (!this.auth.currentUser) {
             return alert('Not authorized');
@@ -44,16 +74,6 @@ class Firebase {
         return this.db.doc(`users_quote/${this.auth.currentUser.uid}`).set({
             quote,
         });
-    }
-
-    isInitialized() {
-        return new Promise((resolve) => {
-            this.auth.onAuthStateChanged(resolve);
-        });
-    }
-
-    getCurrentUsername() {
-        return this.auth.currentUser && this.auth.currentUser.displayName;
     }
 
     async getCurrentUserQuote() {
@@ -68,29 +88,29 @@ class Firebase {
         return storageRef.child(`usercsvs/${this.auth.currentUser.uid}.csv`);
     }
 
-    getDataDownloadURL() {
-        this.getStorageRef.getDownloadURL().then(function(url) {
-            return (url);
-          }).catch(function(error) {
+    // getDataDownloadURL() {
+    //     this.getStorageRef.getDownloadURL().then(function(url) {
+    //         return (url);
+    //       }).catch(function(error) {
 
-            switch (error.code) {
-              case 'storage/object-not-found':
-                console.log('not found');
-                break;
+    //         switch (error.code) {
+    //           case 'storage/object-not-found':
+    //             console.log('not found');
+    //             break;
           
-              case 'storage/unauthorized':
-                console.log('not authorizes');
-                break;
+    //           case 'storage/unauthorized':
+    //             console.log('not authorizes');
+    //             break;
           
-              case 'storage/canceled':
-                console.log('cancelled');
-                break;
-              case 'storage/unknown':
-                console.log('not found');
-                break;
-            }
-          });
-    }
+    //           case 'storage/canceled':
+    //             console.log('cancelled');
+    //             break;
+    //           case 'storage/unknown':
+    //             console.log('not found');
+    //             break;
+    //         }
+    //       });
+    // }
 }
 
 export default new Firebase();

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Dropzone from 'react-dropzone-uploader';
+import Papa from 'papaparse';
 import firebase from '../../services/firebase';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,18 @@ export default function Uploader(props) {
         return { url: 'https://httpbin.org/post' };
     };
 
+    const storeAscents = (file) => {
+        Papa.parse(file, {
+            complete: function(results) {
+                let numberOfAscents = results.data.length
+                for (let i = 0; i < numberOfAscents; i++) {
+                    firebase.addAscents(results.data[i]);
+                    console.log('climb logged')
+                }
+            }
+        });
+    }
+
     const handleChangeStatus = ({ meta, file }, status) => {
         console.log(status, meta, file);
 
@@ -57,16 +70,11 @@ export default function Uploader(props) {
             alert('Bad file type, please upload a .csv file');
         }
         if (status === 'headers_received') {
-            console.log(file);
-            firebase
-                .getStorageRef()
-                .put(file)
-                .then(function () {
-                    console.log('Uploaded a file!');
-                    setAwaitingUpload(false);
-                });
+            storeAscents(file);
         }
     };
+
+
 
     const toggleUploader = () => {
         return awaitingUpload ? (
