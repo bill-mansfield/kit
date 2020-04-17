@@ -12,9 +12,14 @@ const useStyles = makeStyles((theme) => ({
 export default function MetresClimbed() {
     const classes = useStyles();
 
-    console.log(firebase.getCurrentUserAscents());
-    let ascents = firebase.getCurrentUserAscents()
-    console.log(ascents)
+    async function ascents() {
+        const response = await firebase.getCurrentUserAscents();
+        console.log(response);
+        return response;
+    }
+
+    ascents();
+
     return (
         <Typography className={classes.metresClimbed} variant="h3">
             Metres climbed: 

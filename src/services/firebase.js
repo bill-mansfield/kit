@@ -50,16 +50,16 @@ class Firebase {
     }
 
     async getCurrentUserAscents() {
-        let ascentsRef = this.db.collection('users').doc(`${this.auth.currentUser.uid}`).collection('ascents');
-        await ascentsRef.get().then(token => {return token.docs.map(doc => doc.data())});
-        
-        // .then(function(doc) {
-        //     if(doc.exists) {
-        //         console.log("Document data:", doc.data());
-        //     } else {
-        //         console.log('no doc')
-        //     }
-        // });
+        const ascentsRef = this.db.collection('users').doc(`${this.auth.currentUser.uid}`).collection('ascents');
+
+        const response = await ascentsRef.get().then(function(querySnapshot) {
+            let ascents = [];
+            querySnapshot.forEach(function(doc) {
+                ascents.push(doc.data());
+            });
+            return ascents;
+        });
+        return response;
     }
 
     getCurrentUsername() {
@@ -82,35 +82,6 @@ class Firebase {
             .get();
         return quote.get('quote');
     }
-
-    getStorageRef() {
-        const storageRef = this.storage.ref();
-        return storageRef.child(`usercsvs/${this.auth.currentUser.uid}.csv`);
-    }
-
-    // getDataDownloadURL() {
-    //     this.getStorageRef.getDownloadURL().then(function(url) {
-    //         return (url);
-    //       }).catch(function(error) {
-
-    //         switch (error.code) {
-    //           case 'storage/object-not-found':
-    //             console.log('not found');
-    //             break;
-          
-    //           case 'storage/unauthorized':
-    //             console.log('not authorizes');
-    //             break;
-          
-    //           case 'storage/canceled':
-    //             console.log('cancelled');
-    //             break;
-    //           case 'storage/unknown':
-    //             console.log('not found');
-    //             break;
-    //         }
-    //       });
-    // }
 }
 
 export default new Firebase();
