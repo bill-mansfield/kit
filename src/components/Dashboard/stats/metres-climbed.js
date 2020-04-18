@@ -13,12 +13,28 @@ export default function MetresClimbed() {
     const classes = useStyles();
 
     async function ascents() {
-        const response = await firebase.getCurrentUserAscents();
-        console.log(response);
-        return response;
+        return await firebase.getCurrentUserAscents();
     }
 
-    ascents();
+    const metres = (value) => {
+        let totalMetres = 0;
+        let i = 0;
+        // console.log(value)
+        for (let i = 0; i < value.length - 1; i++) {
+            let climbLength = value[i].file[7];
+
+            climbLength = climbLength.replace('m', '');
+            climbLength = parseInt(climbLength);
+            // console.log(climbLength);
+            totalMetres += climbLength;
+        }
+        return totalMetres;
+    }
+
+    ascents().then(function(value) {
+        console.log(metres(value) + ' metres climbed');
+    });
+
 
     return (
         <Typography className={classes.metresClimbed} variant="h3">
