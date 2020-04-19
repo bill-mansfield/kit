@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 		alignItems: 'center',
 		padding: `${theme.spacing(2)}px ${theme.spacing(2)}px ${theme.spacing(2)}px`,
 		backgroundColor: 'transparent',
+		boxShadow: 'unset',
 	},
 }));
 
