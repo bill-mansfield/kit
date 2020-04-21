@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Homepage from '../Homepage';
 import Login from '../Login';
 import Register from '../Register';
+import Uploader from '../Uploader';
 import Dashboard from '../Dashboard';
 import Theme from '../theme/theme';
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,6 +47,7 @@ export default function App() {
                     <Route exact path="/" component={Homepage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/uploader" component={Uploader} />
                     <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
             </Router>

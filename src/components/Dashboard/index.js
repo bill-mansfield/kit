@@ -24,7 +24,7 @@ export default withRouter(function Dashboard(props) {
             firebase.getCurrentUserQuote().then(setQuote);
         }
     }, [quote]);
-
+    
     return (
         <>
             <Navbar />
@@ -36,7 +36,7 @@ export default withRouter(function Dashboard(props) {
             >
                 <FlexRow>
                     <FlexColumn>
-                        {/* <Typography variant="h1">
+                        <Typography variant="h1">
                             Hello {firebase.getCurrentUsername()}, welcome to
                             your dashboard
                         </Typography>
@@ -47,7 +47,7 @@ export default withRouter(function Dashboard(props) {
                             ) : (
                                 <CircularProgress size={20} />
                             )}
-                        </Typography> */}
+                        </Typography>
                     </FlexColumn>
                 </FlexRow>
                 <FlexRow
@@ -60,7 +60,6 @@ export default withRouter(function Dashboard(props) {
                             height: '30vh',
                         }}
                     >
-                        <Uploader awaitingUpload />
                     </FlexColumn>
                 </FlexRow>
                 <FlexRow>

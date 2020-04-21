@@ -126,7 +126,7 @@ export default withRouter(function Register(props) {
             await firebase.register(name, email, password);
             await firebase.addQuote(quote);
             await firebase.login(email, password);
-            props.history.replace('/dashboard');
+            props.history.replace('/uploader');
         } catch (error) {
             alert(error.message);
         }

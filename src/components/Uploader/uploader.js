@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 import Dropzone from 'react-dropzone-uploader';
 import Papa from 'papaparse';
 import firebase from '../../services/firebase';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     dropZoneWrapper: {
@@ -39,13 +40,16 @@ const useStyles = makeStyles((theme) => ({
         '& > div > span': {
             backgroundImage: 'none !important',
         }
-
     }
 }));
 
-export default function Uploader(props) {
+export default withRouter(function UploaderComponent(props) {
     const classes = useStyles();
     const [awaitingUpload, setAwaitingUpload] = useState(true);
+
+    const onUpload = () => {
+        props.history.replace('/dashboard')
+    }
 
     const getUploadParams = ({ meta }) => {
         return { url: 'https://httpbin.org/post' };
@@ -57,8 +61,9 @@ export default function Uploader(props) {
                 let numberOfAscents = results.data.length
                 for (let i = 0; i < numberOfAscents; i++) {
                     firebase.addAscents(results.data[i]);
-                    console.log('climb logged')
+                    console.log('climb logged');
                 }
+                onUpload();
             }
         });
     }
@@ -74,41 +79,34 @@ export default function Uploader(props) {
         }
     };
 
-
-
-    const toggleUploader = () => {
-        return awaitingUpload ? (
-            <>
-                <Typography variant="h3">
-                    Please upload your ascent data in in a .csv below
-                </Typography>
-                <Dropzone
-                    getUploadParams={getUploadParams}
-                    onChangeStatus={handleChangeStatus}
-                    accept="text/csv"
-                    inputContent={(files, extra) =>
-                        extra.reject ? '.csv files only' : 'Drag Files'
-                    }
-                    addClassNames={{
-                        dropzone: classes.dropZoneWrapper,
-                        previewImage: classes.previewImage,
-                        inputLabelWithFiles: classes.inputLabelWithFiles,
-                        dropzoneReject: classes.dropzoneReject,
-                        dropzoneActive: classes.dropzoneActive,
-                        preview: classes.preview,
-                    }}
-                    styles={{
-                        inputLabel: (files, extra) =>
-                            extra.reject 
-                                ? { color: 'red' }
-                                : { color: 'white' },
-                    }}
-                />
-            </>
-        ) : (
-            <Typography variant="h2">Upload successful</Typography>
-        );
-    };
-
-    return toggleUploader();
-}
+    return (
+        <>
+            <Typography variant="h3">
+                Please upload your ascent data in in a .csv below
+            </Typography>
+            <Dropzone
+                getUploadParams={getUploadParams}
+                onChangeStatus={handleChangeStatus}
+                accept="text/csv"
+                inputContent={(files, extra) =>
+                    extra.reject ? '.csv files only' : 'Drag Files'
+                }
+                addClassNames={{
+                    dropzone: classes.dropZoneWrapper,
+                    previewImage: classes.previewImage,
+                    inputLabelWithFiles: classes.inputLabelWithFiles,
+                    dropzoneReject: classes.dropzoneReject,
+                    dropzoneActive: classes.dropzoneActive,
+                    preview: classes.preview,
+                }}
+                styles={{
+                    inputLabel: (files, extra) =>
+                        extra.reject 
+                            ? { color: 'red' }
+                            : { color: 'white' },
+                }}
+            />
+        </>
+    );
+    
+});
