@@ -17,8 +17,17 @@ export default function MetresClimbed() {
             let totalMetres = 0;
                 for (let i = 0; i < result.length - 1; i++) {
                     let climbLength = result[i].file[7];
-                    if (climbLength === 'Route Height') {
-                        climbLength = climbLength.replace('Route Height', 0)
+                    
+                    switch (climbLength) {
+                        case 'Route Height':
+                            climbLength = climbLength.replace('Route Height', '0');
+                            break;
+                        case '': 
+                            climbLength = climbLength.replace('', '0');
+                            break;
+                        case undefined: 
+                            climbLength = '0';
+                            break;
                     }
 
                     climbLength = climbLength.replace('m', '');

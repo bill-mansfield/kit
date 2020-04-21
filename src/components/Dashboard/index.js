@@ -8,6 +8,7 @@ import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import Uploader from '../Uploader/uploader';
 import MetresClimbed from './stats/metres-climbed';
+import HardestAscent from './stats/hardestAscent';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -50,21 +51,10 @@ export default withRouter(function Dashboard(props) {
                         </Typography>
                     </FlexColumn>
                 </FlexRow>
-                <FlexRow
-                    style={{
-                        width: '50vw',
-                    }}
-                >
-                    <FlexColumn
-                        style={{
-                            height: '30vh',
-                        }}
-                    >
-                    </FlexColumn>
-                </FlexRow>
                 <FlexRow>
                     <FlexColumn>
                         <MetresClimbed />
+                        <HardestAscent />
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>
