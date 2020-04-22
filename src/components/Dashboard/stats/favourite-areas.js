@@ -1,0 +1,53 @@
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import firebase from '../../../services/firebase';
+import { Typography } from '@material-ui/core';
+import Ascents from '../../Ascents/Ascents';
+
+const useStyles = makeStyles((theme) => ({
+    listItem: {
+        color: theme.palette.primary.text,
+        listStyle: 'none',
+    }
+}));
+
+export default function FavouriteAreas() {
+    const classes = useStyles();
+    const [data, setData] = useState(['']);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await firebase.getCurrentUserAscents();
+            let climbingAreas = [];
+
+                for (let i = 0; i < result.length - 1; i++) {
+                    let ascent = result[i].file;
+                    let climbingArea = result[i].file[14];
+
+                    if (climbingAreas.includes(climbingArea) === false) {
+                        if (climbingArea != undefined) {
+                            climbingAreas.push(climbingArea);
+                        }
+                    }
+                }
+                setData(climbingAreas);
+            };
+        fetchData();
+    }, []);
+
+
+    return (
+        <>
+            <Typography variant='h2'>
+                Your Favourite climbing areas:
+            </Typography>
+            <ul>
+                {data.map(item => (
+                    <li key={item} className={classes.listItem}>
+                    {item}
+                    </li>
+                ))}
+            </ul>
+        </>
+    )
+}

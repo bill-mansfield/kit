@@ -6,9 +6,13 @@ import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
-import Uploader from '../Uploader/uploader';
 import MetresClimbed from './stats/metres-climbed';
-import HardestAscent from './stats/hardestAscent';
+import HardestAscent from './stats/hardest-ascent';
+import SuccessfulAscents from './stats/successful-ascents';
+import HardestFlash from './stats/hardest-flash';
+import HardestOnsight from './stats/hardest-onsight';
+import FavouriteAreas from './stats/favourite-areas';
+
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -54,7 +58,11 @@ export default withRouter(function Dashboard(props) {
                 <FlexRow>
                     <FlexColumn>
                         <MetresClimbed />
+                        <SuccessfulAscents />
                         <HardestAscent />
+                        <HardestFlash />
+                        <HardestOnsight />
+                        <FavouriteAreas />
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>
