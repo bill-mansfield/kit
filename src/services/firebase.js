@@ -62,20 +62,6 @@ class Firebase {
         return response;
     }
 
-    // setUploadStatus(value) {
-    //     return this.db.collection('users').doc(`${this.auth.currentUser.uid}`).doc('upload_status').set({
-    //         value,
-    //     });
-    // }
-
-    // async getUploadStatus() {
-    //     const status = await this.db
-    //         .collection('users').doc(`${this.auth.currentUser.uid}`).collection('upload_status')
-    //         .get();
-    //     return status;
-
-    // }
-
     getCurrentUsername() {
         return this.auth.currentUser && this.auth.currentUser.displayName;
     }

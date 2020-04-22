@@ -12,7 +12,7 @@ import SuccessfulAscents from './stats/successful-ascents';
 import HardestFlash from './stats/hardest-flash';
 import HardestOnsight from './stats/hardest-onsight';
 import FavouriteAreas from './stats/favourite-areas';
-
+import GradeBar from './charts/gradebar/grade-bar';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -65,6 +65,11 @@ export default withRouter(function Dashboard(props) {
                         <FavouriteAreas />
                     </FlexColumn>
                 </FlexRow>
+            </FlexColumn>
+            <FlexColumn style={{
+                height: '1200px'
+            }}>
+                <GradeBar />
             </FlexColumn>
         </>
     );

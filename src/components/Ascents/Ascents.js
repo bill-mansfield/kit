@@ -1,6 +1,16 @@
 class Ascents {
-    constructor() {
+
+    createGradeObject(grade, isflash, isOnsight) {
+        constructor() {
+            this.grade = grade; //string
+            this.onsight = isflash; //if true increment counter
+            this.flash = isOnsight; // if true increment counter
+            this.redpoint = isRedpoint; // if true increment counter
+        }
     }
+
+    //TODO:
+    // Create construtor/object creator to sort and evaluate incoming data to make it match the data the chart can use. See /charts/gradebar/data.json
 
     successfulTickType(ascentType) {
         const successfulTickTypes = [
