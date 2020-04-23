@@ -3,28 +3,57 @@ import { ResponsiveBar } from '@nivo/bar'
 import data from './data.json';
 import FlexRow from '../../../layouts/flex-row';
 import Ascents from '../../../Ascents/Ascents';
+import GradeTicks from '../../../Ascents/grade-ticks';
 import firebase from '../../../../services/firebase';
 
 export default function GradeBar() {
 
-    const [data, setData] = useState();
+    const [chartData, setChartData] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await firebase.getCurrentUserAscents();
-            let barChartAscents = [];
+            let gradeArr = [];
+            let gradeRefArr = [];
             console.log(result);
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
-                    let ascentGrade = parseInt(ascent[9]);
-                    let ascentTickType = ascent[3];
+                    let gradeValue = ascent[9];
+                    let tickType = ascent[3];
 
+                    if (gradeRefArr.includes(gradeValue) === false) {
+                        gradeRefArr.push(gradeValue);
+                        gradeArr.push(new GradeTicks(gradeValue, tickType));
+
+                    } else if(gradeRefArr.includes(gradeValue)) {
+                        for (let i = 0; i < gradeArr.length; i++) {
+                            if (gradeArr[i].grade === gradeValue) {
+                                gradeArr[i].addAscent(tickType);
+
+
+
+    //fuck all this shit use object literal
+
+    let gradetTicks = {};
+
+
+                            }
+                        }
+                    }
+                    console.log(gradeRefArr)
                 }
-                setData();
+                console.log(gradeArr);
+                console.log(gradeArr[1].getFlashes());
+                console.log(gradeArr[1].getOnsights());
+                console.log(gradeArr[1].getRedpoints());
+                setChartData();
             };
         fetchData();
     }, []);
+
+    let gradeObj = new GradeTicks('16', true, false, false)
+    
 
     return (
         <FlexRow style={{
