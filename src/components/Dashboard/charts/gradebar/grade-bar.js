@@ -8,14 +8,15 @@ import firebase from '../../../../services/firebase';
 
 export default function GradeBar() {
 
-    const [chartData, setChartData] = useState();
+    const [data, setData] = useState([{'grade': '16', 'Onsight': 3, 'Flash': 8, 'Redpoint': 15}]);
+
+    //Awaiting desparate refactor
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await firebase.getCurrentUserAscents();
             let gradeArr = [];
             let gradeRefArr = [];
-            console.log(result);
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
@@ -24,37 +25,61 @@ export default function GradeBar() {
 
                     if (gradeRefArr.includes(gradeValue) === false) {
                         gradeRefArr.push(gradeValue);
-                        gradeArr.push(new GradeTicks(gradeValue, tickType));
-
-                    } else if(gradeRefArr.includes(gradeValue)) {
-                        for (let i = 0; i < gradeArr.length; i++) {
-                            if (gradeArr[i].grade === gradeValue) {
-                                gradeArr[i].addAscent(tickType);
-
-
-
-    //fuck all this shit use object literal
-
-    let gradetTicks = {};
-
-
-                            }
+                        gradeArr.push(new Object({'Grade': gradeValue, 'Onsight': 0, 'Flash': 0, 'Redpoint': 0}));
+                        switch(tickType) {
+                            case 'Onsight':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Onsight++;
+                                    }
+                                }
+                                break;
+                            case 'Flash':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Flash++;
+                                    }
+                                }
+                                break;
+                            case 'Red point':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Redpoint++;
+                                    }
+                                }
+                                break;
                         }
+                    } else if(gradeRefArr.includes(gradeValue)) {
+                        switch(tickType) {
+                            case 'Onsight':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Onsight++;
+                                    }
+                                }
+                                break;
+                            case 'Flash':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Flash++;
+                                    }
+                                }
+                                break;
+                            case 'Red point':
+                                for (let i = 0; i < gradeArr.length; i++) {
+                                    if (gradeArr[i].Grade === gradeValue) {
+                                        gradeArr[i].Redpoint++;
+                                    }
+                                }
+                                break;
+                            }
                     }
-                    console.log(gradeRefArr)
                 }
-                console.log(gradeArr);
-                console.log(gradeArr[1].getFlashes());
-                console.log(gradeArr[1].getOnsights());
-                console.log(gradeArr[1].getRedpoints());
-                setChartData();
+                setData(gradeArr);
             };
         fetchData();
     }, []);
-
-    let gradeObj = new GradeTicks('16', true, false, false)
     
-
     return (
         <FlexRow style={{
             height: '50vh',

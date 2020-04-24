@@ -1,9 +1,8 @@
 export default class GradeTicks {
-    constructor(grade, addTickType) {
+    constructor(grade, addTickType, addAscent) {
         let onsightCounter = 0;
         let flashCounter = 0;
         let redpointCounter = 0;
-
         this.grade = grade;
         this.addTickType = addTickType;
         this.addAscent = function() {
@@ -28,10 +27,5 @@ export default class GradeTicks {
         this.getRedpoints = function() {
             return redpointCounter;
         }
-
-        if (addTickType) {
-            this.addAscent();
-        }
-
     }
 }
