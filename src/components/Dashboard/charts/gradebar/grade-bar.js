@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar'
-import data from './data.json';
 import FlexRow from '../../../layouts/flex-row';
-import Ascents from '../../../Ascents/Ascents';
-import GradeTicks from '../../../Ascents/grade-ticks';
 import firebase from '../../../../services/firebase';
 
 export default function GradeBar() {
@@ -75,10 +72,19 @@ export default function GradeBar() {
                             }
                     }
                 }
+                console.log(gradeArr)
+                gradeArr.sort(function(a, b){
+                    return a.Grade-b.Grade
+                })
                 setData(gradeArr);
             };
         fetchData();
     }, []);
+
+    const theme = {
+        textColor: '#fff'
+      };
+      
     
     return (
         <FlexRow style={{
@@ -87,9 +93,10 @@ export default function GradeBar() {
             <ResponsiveBar
                 data={data}
                 keys={[ 'Onsight', 'Flash', 'Redpoint', ]}
-                indexBy="grade"
+                indexBy="Grade"
                 margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                 padding={0.3}
+                theme={theme}
                 colors={{ scheme: 'nivo' }}
                 layout="horizontal"
                 defs={[
@@ -148,6 +155,7 @@ export default function GradeBar() {
                         itemDirection: 'left-to-right',
                         itemOpacity: 0.85,
                         symbolSize: 20,
+                        itemTextColor: '#fff',
                         effects: [
                             {
                                 on: 'hover',
