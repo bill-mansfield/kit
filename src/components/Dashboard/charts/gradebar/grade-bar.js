@@ -10,90 +10,55 @@ export default function GradeBar() {
     //Awaiting desparate refactor
     const UNSUCESSFUL_TICKS_TYPE = ['Hang dog', 'Second clean', 'Ghost', 'Attempt', 'Retreat', 'Second with rest', 'Top rope', 'Working', 'Top rope onsight'];
 
+    const incrementTickType = (gradeArray, tickType, gradeValue) => {
+        for (let i = 0; i < gradeArray.length; i++) {
+            if (UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {
+                tickType = 'Unsuccessful';
+            }
+            if (gradeArray[i].Grade === gradeValue) {
+                switch (tickType) {
+                    case 'Onsight':
+                        gradeArray[i].Onsight++;
+                        break;
+                    case 'Flash':
+                        gradeArray[i].Flash++;
+                        break;
+                    case 'Red point':
+                        gradeArray[i].Redpoint++;
+                        break;
+                    case 'Pink point':
+                        gradeArray[i].Redpoint++;
+                        break;
+                    case 'Tick':
+                        gradeArray[i].Tick++;
+                        break;
+                    case 'Unsuccessful':
+                        gradeArray[i].Unsuccessful++;
+                        break;
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await firebase.getCurrentUserAscents();
             let gradeArr = [];
             let gradeRefArr = [];
-            console.log(result);
             // Starts at 1 as the first row of the CSV(result) is column titles
                 for (let i = 1; i < result.length; i++) {
                     let ascent = result[i].file;
                     let gradeValue = ascent[9];
                     let tickType = ascent[3];
-                    console.log(ascent[0]);
 
+                    console.log(result)
                     if (gradeRefArr.includes(gradeValue) === false) {
                         gradeRefArr.push(gradeValue);
-                        gradeArr.push(new Object({'Grade': gradeValue, 'Onsight': 0, 'Flash': 0, 'Redpoint': 0, 'Unsuccessful': 0}));
-                        if (UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {
-                            for (let i = 0; i < gradeArr.length; i++) {
-                                if (gradeArr[i].Grade === gradeValue) {
-                                    gradeArr[i].Unsuccessful++;
-                                }
-                            }
-                        }
-                        switch(tickType) {
-                            case 'Onsight':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Onsight++;
-                                    }
-                                }
-                                break;
-                            case 'Flash':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Flash++;
-                                    }
-                                }
-                                break;
-                            case 'Red point' || 'Pink point':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Redpoint++;
-                                    }
-                                }
-                                break;
-                            case 'Pink point':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Redpoint++;
-                                    }
-                                }
-                            break;
-                        }
-                    } else if(gradeRefArr.includes(gradeValue)) {
-                        switch(tickType) {
-                            case 'Onsight':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Onsight++;
-                                    }
-                                }
-                                break;
-                            case 'Flash':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Flash++;
-                                    }
-                                }
-                                break;
-                            case 'Red point':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Redpoint++;
-                                    }
-                                }
-                                break;
-                            case 'Pink point':
-                                for (let i = 0; i < gradeArr.length; i++) {
-                                    if (gradeArr[i].Grade === gradeValue) {
-                                        gradeArr[i].Redpoint++;
-                                    }
-                                }
-                                break;
-                            }
+                        gradeArr.push(new Object({'Grade': gradeValue, 'Onsight': 0, 'Flash': 0, 'Redpoint': 0, 'Tick': 0, 'Unsuccessful': 0}));
+                        incrementTickType(gradeArr, tickType, gradeValue);
+
+                    } else if (gradeRefArr.includes(gradeValue)) {
+                        incrementTickType(gradeArr, tickType, gradeValue);
                     }
                 }
                 gradeArr.sort(function(a, b){
