@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar'
-import FlexRow from '../../../layouts/flex-row';
 import firebase from '../../../../services/firebase';
 
 export default function GradeBar() {
@@ -50,8 +49,8 @@ export default function GradeBar() {
                     let ascent = result[i].file;
                     let gradeValue = ascent[9];
                     let tickType = ascent[3];
-
                     console.log(result)
+
                     if (gradeRefArr.includes(gradeValue) === false) {
                         gradeRefArr.push(gradeValue);
                         gradeArr.push(new Object({'Grade': gradeValue, 'Onsight': 0, 'Flash': 0, 'Redpoint': 0, 'Tick': 0, 'Unsuccessful': 0}));
