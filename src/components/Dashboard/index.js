@@ -67,9 +67,14 @@ export default withRouter(function Dashboard(props) {
                 </FlexRow>
             </FlexColumn>
             <FlexColumn style={{
-                height: '1200px'
+                height: '65vh'
             }}>
-                <GradeBar />
+                <FlexRow style={{
+                    height: '60vh',
+                    width: '66vw'
+                }}>
+                    <GradeBar />
+                </FlexRow>
             </FlexColumn>
         </>
     );
