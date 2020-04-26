@@ -1,43 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar'
 import firebase from '../../../../services/firebase';
+import Ascents from '../../../Ascents/Ascents';
 
-export default function GradeBar() {
+export default function RouteBar() {
 
     const [data, setData] = useState([{'grade': '16', 'Onsight': 3, 'Flash': 8, 'Redpoint': 15}]);
-
-    //Awaiting desparate refactor
-    const UNSUCESSFUL_TICKS_TYPE = ['Hang dog', 'Second clean', 'Ghost', 'Attempt', 'Retreat', 'Second with rest', 'Top rope', 'Working', 'Top rope onsight'];
-
-    const incrementTickType = (gradeArray, tickType, gradeValue) => {
-        for (let i = 0; i < gradeArray.length; i++) {
-            if (UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {
-                tickType = 'Unsuccessful';
-            }
-            if (gradeArray[i].Grade === gradeValue) {
-                switch (tickType) {
-                    case 'Onsight':
-                        gradeArray[i].Onsight++;
-                        break;
-                    case 'Flash':
-                        gradeArray[i].Flash++;
-                        break;
-                    case 'Red point':
-                        gradeArray[i].Redpoint++;
-                        break;
-                    case 'Pink point':
-                        gradeArray[i].Redpoint++;
-                        break;
-                    case 'Tick':
-                        gradeArray[i].Tick++;
-                        break;
-                    case 'Unsuccessful':
-                        gradeArray[i].Unsuccessful++;
-                        break;
-                }
-            }
-        }
-    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,15 +17,20 @@ export default function GradeBar() {
                     let ascent = result[i].file;
                     let gradeValue = ascent[9];
                     let tickType = ascent[3];
-                    console.log(result)
+
+                    if (gradeValue != undefined && gradeValue.includes('V')) {
+                        continue;
+                    }
+                    // TODO:: Remoove undefined case
 
                     if (gradeRefArr.includes(gradeValue) === false) {
+                        //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade.
                         gradeRefArr.push(gradeValue);
                         gradeArr.push(new Object({'Grade': gradeValue, 'Onsight': 0, 'Flash': 0, 'Redpoint': 0, 'Tick': 0, 'Unsuccessful': 0}));
-                        incrementTickType(gradeArr, tickType, gradeValue);
+                        Ascents.incrementTickType(gradeArr, tickType, gradeValue);
 
                     } else if (gradeRefArr.includes(gradeValue)) {
-                        incrementTickType(gradeArr, tickType, gradeValue);
+                        Ascents.incrementTickType(gradeArr, tickType, gradeValue);
                     }
                 }
                 gradeArr.sort(function(a, b){

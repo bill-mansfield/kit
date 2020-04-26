@@ -12,7 +12,8 @@ import SuccessfulAscents from './stats/successful-ascents';
 import HardestFlash from './stats/hardest-flash';
 import HardestOnsight from './stats/hardest-onsight';
 import FavouriteAreas from './stats/favourite-areas';
-import GradeBar from './charts/gradebar/grade-bar';
+import RouteBar from './charts/gradebar/route-bar';
+import BoulderingBar from './charts/gradebar/boulder-bar'
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -73,7 +74,8 @@ export default withRouter(function Dashboard(props) {
                     height: '60vh',
                     width: '66vw'
                 }}>
-                    <GradeBar />
+                    <RouteBar />
+                    <BoulderingBar />
                 </FlexRow>
             </FlexColumn>
         </>

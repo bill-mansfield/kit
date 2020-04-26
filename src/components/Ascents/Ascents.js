@@ -1,4 +1,42 @@
+import * as Constants from './Constants';
+
 class Ascents {
+    incrementTickType(gradeArray, tickType, gradeValue) {
+        for (let i = 0; i < gradeArray.length; i++) {
+            if (Constants.UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {
+                tickType = 'Unsuccessful';
+            }
+            if (gradeArray[i].Grade === gradeValue) {
+                switch (tickType) {
+                    case 'Onsight':
+                        gradeArray[i].Onsight++;
+                        break;
+                    case 'Flash':
+                        gradeArray[i].Flash++;
+                        break;
+                    case 'Red point':
+                        gradeArray[i].Redpoint++;
+                        break;
+                    case 'Pink point':
+                        gradeArray[i].Redpoint++;
+                        break;
+                    case 'Tick':
+                        gradeArray[i].Tick++;
+                        break;
+                    case 'Send':
+                        gradeArray[i].Send++;
+                        break;
+                    case 'Repeat':
+                        gradeArray[i].Repeat++;
+                        break;
+                    case 'Unsuccessful':
+                        gradeArray[i].Unsuccessful++;
+                        break;
+                }
+            }
+        }
+    }
+
     successfulTickType(ascentType) {
         const successfulTickTypes = [
             'Red point',
