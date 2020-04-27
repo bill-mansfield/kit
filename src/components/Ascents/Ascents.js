@@ -1,6 +1,12 @@
 import * as Constants from './Constants';
+import ClimbingGrade from 'climbing-grade';
 
 class Ascents {
+    getAusGrade(foreignGrade, system) {
+        let grade = new ClimbingGrade(foreignGrade, system);
+        return grade.format('australian');
+    }
+
     incrementTickType(gradeArray, tickType, gradeValue) {
         for (let i = 0; i < gradeArray.length; i++) {
             if (Constants.UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {

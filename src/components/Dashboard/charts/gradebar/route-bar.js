@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar'
 import firebase from '../../../../services/firebase';
 import Ascents from '../../../Ascents/Ascents';
+import * as Constants from '../../../Ascents/Constants';
 
 export default function RouteBar() {
 
@@ -18,10 +19,27 @@ export default function RouteBar() {
                     let gradeValue = ascent[9];
                     let tickType = ascent[3];
 
-                    if (gradeValue != undefined && gradeValue.includes('V')) {
+                    // Check for French grades, convert to Aus grades
+                    if (gradeValue != undefined
+                        && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
+                        && gradeValue.includes('.') === false) 
+                        {
+                        gradeValue = Ascents.getAusGrade(gradeValue, 'french')
+                    }
+                    // Check for YDS grades, convert to Aus grades
+                    if (gradeValue != undefined && gradeValue.includes('.')) {
+                        gradeValue = Ascents.getAusGrade(gradeValue, 'yds')
+                    }
+
+                    // Remove boulder ascents/undefined/empty string cases 
+                    if (gradeValue != undefined && gradeValue.includes('V') || ascent[0] === '') {
                         continue;
                     }
-                    // TODO:: Remoove undefined case
+                    // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
+                    if (gradeValue.includes('/')) {
+                        let chars = gradeValue.split('');
+                        gradeValue = chars[0] + chars[1];
+                    }
 
                     if (gradeRefArr.includes(gradeValue) === false) {
                         //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade.
@@ -33,6 +51,7 @@ export default function RouteBar() {
                         Ascents.incrementTickType(gradeArr, tickType, gradeValue);
                     }
                 }
+                // Arrange grades in consecutive order
                 gradeArr.sort(function(a, b){
                     return a.Grade-b.Grade
                 })
