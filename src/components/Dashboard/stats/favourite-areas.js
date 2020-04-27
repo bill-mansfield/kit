@@ -22,7 +22,11 @@ export default function FavouriteAreas() {
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
-                    let climbingArea = result[i].file[14];
+                    let climbingArea = ascent[14];
+
+                    if (climbingArea === 'Crag Name') {
+                        continue;
+                    }
 
                     if (climbingAreas.includes(climbingArea) === false) {
                         if (climbingArea != undefined) {
@@ -39,7 +43,7 @@ export default function FavouriteAreas() {
     return (
         <>
             <Typography variant='h2'>
-                Your Favourite climbing areas:
+                Your climbing areas:
             </Typography>
             <ul>
                 {data.map(item => (

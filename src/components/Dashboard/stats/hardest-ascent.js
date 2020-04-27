@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import firebase from '../../../services/firebase';
 import { Typography } from '@material-ui/core';
 import Ascents from '../../Ascents/Ascents';
+import * as Constants from '../../Ascents/Constants';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -19,14 +20,26 @@ export default function HardestAscent() {
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
-                    let ascentGrade = parseInt(result[i].file[9])
+                    let gradeValue = ascent[9];
 
                     if (Ascents.successfulTickType(ascent[3])) {
-                        if (isNaN(ascentGrade)) {
-                            ascentGrade = 0;
+                        if (isNaN(gradeValue)) {
+                            gradeValue = '0';
                         }
                         
-                        gradeArr.push(ascent[9]);
+                        if (gradeValue != undefined
+                            && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
+                            && gradeValue.includes('.') === false) 
+                            {
+                            gradeValue = Ascents.getAusGrade(gradeValue, 'french')
+                        }
+    
+                        // Check for YDS grades, convert to Aus grades
+                        if (gradeValue != undefined && gradeValue.includes('.')) {
+                            gradeValue = Ascents.getAusGrade(gradeValue, 'yds')
+                        }
+
+                        gradeArr.push(parseInt(gradeValue));
                     }
                 }
                 setData(Math.max(...gradeArr));

@@ -19,6 +19,9 @@ export default function RouteBar() {
                     let gradeValue = ascent[9];
                     let tickType = ascent[3];
 
+                    if (gradeValue != undefined && Constants.TRASH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))) {
+                        continue;
+                    }
                     // Check for French grades, convert to Aus grades
                     if (gradeValue != undefined
                         && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
@@ -26,6 +29,7 @@ export default function RouteBar() {
                         {
                         gradeValue = Ascents.getAusGrade(gradeValue, 'french')
                     }
+
                     // Check for YDS grades, convert to Aus grades
                     if (gradeValue != undefined && gradeValue.includes('.')) {
                         gradeValue = Ascents.getAusGrade(gradeValue, 'yds')
