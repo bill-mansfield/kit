@@ -22,27 +22,17 @@ export default function RouteBar() {
                     if (gradeValue != undefined && Constants.TRASH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))) {
                         continue;
                     }
-                    // Check for French grades, convert to Aus grades
-                    if (gradeValue != undefined
-                        && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
-                        && gradeValue.includes('.') === false) 
-                        {
-                        gradeValue = Ascents.getAusGrade(gradeValue, 'french')
-                    }
-
-                    // Check for YDS grades, convert to Aus grades
-                    if (gradeValue != undefined && gradeValue.includes('.')) {
-                        gradeValue = Ascents.getAusGrade(gradeValue, 'yds')
-                    }
 
                     // Remove boulder ascents/undefined/empty string cases 
                     if (gradeValue != undefined && gradeValue.includes('V') || ascent[0] === '') {
                         continue;
                     }
+
+                    gradeValue = Ascents.convertGradeToAus(gradeValue);
+                    
                     // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
                     if (gradeValue.includes('/')) {
-                        let chars = gradeValue.split('');
-                        gradeValue = chars[0] + chars[1];
+                        gradeValue = Ascents.roundDownSplitGrades(gradeValue)
                     }
 
                     if (gradeRefArr.includes(gradeValue) === false) {

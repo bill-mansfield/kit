@@ -19,12 +19,17 @@ export default function HardestFlash() {
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
-                    let ascentGrade = parseInt(result[i].file[9])
+                    let gradeValue = ascent[9];
 
+                    // Remove boulder ascents/undefined/empty string cases 
+                    if (gradeValue != undefined && gradeValue.includes('V') || ascent[0] === '') {
+                        continue;
+                    } 
                     if (Ascents.isFlash(ascent[3])) { 
-                        if (Ascents.isANumber(ascentGrade)) {
-                            gradeArr.push(ascent[9]);
-                        }
+                        // Remove boulder ascents/undefined/empty string cases 
+                        gradeValue = Ascents.convertGradeToAus(gradeValue);
+                        gradeArr.push(gradeValue);
+                        console.log(gradeArr)
                     }
 
                 }

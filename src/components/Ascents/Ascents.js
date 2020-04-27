@@ -7,6 +7,26 @@ class Ascents {
         return grade.format('australian');
     }
 
+    convertGradeToAus(gradeValue) {
+        // Check for French
+        if (gradeValue != undefined
+            && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
+            && gradeValue.includes('.') === false) 
+            {
+            gradeValue = this.getAusGrade(gradeValue, 'french')
+            return gradeValue;
+        } else if (gradeValue != undefined && gradeValue.includes('.')) {
+            gradeValue = this.getAusGrade(gradeValue, 'yds')
+            return gradeValue;
+        } else {
+            return gradeValue
+        }
+    }
+    roundDownSplitGrades(splitGrade) {
+        let chars = splitGrade.split('');
+        return chars[0] + chars[1];
+    }
+
     incrementTickType(gradeArray, tickType, gradeValue) {
         for (let i = 0; i < gradeArray.length; i++) {
             if (Constants.UNSUCESSFUL_TICKS_TYPE.includes(tickType)) {

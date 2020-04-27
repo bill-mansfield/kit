@@ -21,24 +21,15 @@ export default function HardestAscent() {
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
                     let gradeValue = ascent[9];
-
+                    
+                    if (gradeValue != undefined && gradeValue.includes('V')) {
+                        continue;
+                    }
                     if (Ascents.successfulTickType(ascent[3])) {
-                        if (isNaN(gradeValue)) {
-                            gradeValue = '0';
+                        gradeValue = Ascents.convertGradeToAus(gradeValue);
+                        if (gradeValue != undefined && gradeValue.includes('/')) {
+                            gradeValue = Ascents.roundDownSplitGrades(gradeValue)
                         }
-                        
-                        if (gradeValue != undefined
-                            && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
-                            && gradeValue.includes('.') === false) 
-                            {
-                            gradeValue = Ascents.getAusGrade(gradeValue, 'french')
-                        }
-    
-                        // Check for YDS grades, convert to Aus grades
-                        if (gradeValue != undefined && gradeValue.includes('.')) {
-                            gradeValue = Ascents.getAusGrade(gradeValue, 'yds')
-                        }
-
                         gradeArr.push(parseInt(gradeValue));
                     }
                 }
