@@ -5,6 +5,7 @@ import {
     FormControl,
     Input,
     InputLabel,
+    CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
@@ -13,6 +14,7 @@ import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
 import IconAvatar from '../icon-avatar';
+import FlexRow from '../layouts/flex-row';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -33,6 +35,7 @@ export default withRouter(function Register(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [quote, setQuote] = useState('');
+    const [waiting, setWaiting] = useState(false);
 
     return (
         <>
@@ -93,16 +96,22 @@ export default withRouter(function Register(props) {
                             />
                         </FormControl>
 
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            onClick={onRegister}
-                            className={classes.submit}
-                        >
-                            Register
-                        </Button>
+                        {waiting ? (
+                            <FlexRow>
+                                <CircularProgress size={20} />
+                            </FlexRow>
+                        ) : (
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                onClick={onRegister}
+                                className={classes.submit}
+                            >
+                                Register
+                            </Button>
+                        )}
 
                         <Button
                             type="submit"
@@ -122,6 +131,7 @@ export default withRouter(function Register(props) {
     );
 
     async function onRegister() {
+        setWaiting(true);
         try {
             await firebase.register(name, email, password);
             await firebase.addQuote(quote);

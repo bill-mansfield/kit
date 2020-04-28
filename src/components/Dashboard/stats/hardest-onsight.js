@@ -19,12 +19,14 @@ export default function HardestOnsight() {
 
                 for (let i = 0; i < result.length - 1; i++) {
                     let ascent = result[i].file;
-                    let ascentGrade = parseInt(result[i].file[9])
+                    let gradeValue = ascent[9];
 
-                    if (Ascents.isOnsight(ascent[3])) { 
-                        if (Ascents.isANumber(ascentGrade)) {
-                            gradeArr.push(ascent[9]);
+                    if (Ascents.isOnsight(ascent[3])) {
+                        gradeValue = Ascents.convertGradeToAus(gradeValue);
+                        if (gradeValue != undefined && gradeValue.includes('/')) {
+                            gradeValue = Ascents.roundDownSplitGrades(gradeValue)
                         }
+                        gradeArr.push(gradeValue);
                     }
                 }
                 setData(Math.max(...gradeArr));

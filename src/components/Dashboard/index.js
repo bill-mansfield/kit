@@ -13,7 +13,8 @@ import HardestFlash from './stats/hardest-flash';
 import HardestOnsight from './stats/hardest-onsight';
 import FavouriteAreas from './stats/favourite-areas';
 import RouteBar from './charts/gradebar/route-bar';
-import BoulderingBar from './charts/gradebar/boulder-bar'
+import BoulderingBar from './charts/gradebar/boulder-bar';
+import RouteLine from './charts/gradeLine/route-line';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -30,11 +31,11 @@ export default withRouter(function Dashboard(props) {
             firebase.getCurrentUserQuote().then(setQuote);
         }
     }, [quote]);
-    
+
     return (
         <>
             <Navbar />
-            <FlexColumn 
+            <FlexColumn
                 style={{
                     justifyContent: 'center',
                     height: '91vh',
@@ -67,13 +68,31 @@ export default withRouter(function Dashboard(props) {
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>
-            <FlexColumn style={{
-                height: '65vh'
-            }}>
-                <FlexRow style={{
-                    height: '60vh',
-                    width: '66vw'
-                }}>
+            <FlexColumn
+                style={{
+                    height: '65vh',
+                }}
+            >
+                <FlexRow
+                    style={{
+                        height: '60vh',
+                        width: '66vw',
+                    }}
+                >
+                    <RouteLine />
+                </FlexRow>
+            </FlexColumn>
+            <FlexColumn
+                style={{
+                    height: '65vh',
+                }}
+            >
+                <FlexRow
+                    style={{
+                        height: '60vh',
+                        width: '66vw',
+                    }}
+                >
                     <RouteBar />
                     <BoulderingBar />
                 </FlexRow>

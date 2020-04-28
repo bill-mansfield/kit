@@ -9,17 +9,20 @@ class Ascents {
 
     convertGradeToAus(gradeValue) {
         // Check for French
-        if (gradeValue != undefined
-            && Constants.FRENCH_GRADE_IDENTIFYER.some(el => gradeValue.includes(el))
-            && gradeValue.includes('.') === false) 
-            {
-            gradeValue = this.getAusGrade(gradeValue, 'french')
+        if (
+            gradeValue != undefined &&
+            Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
+                gradeValue.includes(el),
+            ) &&
+            gradeValue.includes('.') === false
+        ) {
+            gradeValue = this.getAusGrade(gradeValue, 'french');
             return gradeValue;
         } else if (gradeValue != undefined && gradeValue.includes('.')) {
-            gradeValue = this.getAusGrade(gradeValue, 'yds')
+            gradeValue = this.getAusGrade(gradeValue, 'yds');
             return gradeValue;
         } else {
-            return gradeValue
+            return gradeValue;
         }
     }
     roundDownSplitGrades(splitGrade) {
@@ -63,6 +66,21 @@ class Ascents {
         }
     }
 
+    notableTickType(ascentType) {
+        const successfulTickTypes = [
+            'Red point',
+            'Pink point',
+            'Onsight',
+            'Flash',
+        ];
+
+        if (successfulTickTypes.includes(ascentType)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     successfulTickType(ascentType) {
         const successfulTickTypes = [
             'Red point',
@@ -73,7 +91,7 @@ class Ascents {
             'Deep water solo',
             'Ground up red point',
             'Top rope',
-        ]
+        ];
 
         if (successfulTickTypes.includes(ascentType)) {
             return true;
@@ -84,14 +102,14 @@ class Ascents {
 
     isOnsight(ascentType) {
         const onsightTickType = 'Onsight';
-        
+
         if (ascentType === onsightTickType) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     isFlash(ascentType) {
         const flashTickType = 'Flash';
 

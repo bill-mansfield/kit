@@ -28,8 +28,7 @@ export default function HardestFlash() {
                     if (Ascents.isFlash(ascent[3])) { 
                         // Remove boulder ascents/undefined/empty string cases 
                         gradeValue = Ascents.convertGradeToAus(gradeValue);
-                        gradeArr.push(gradeValue);
-                        console.log(gradeArr)
+                        gradeArr.push(parseInt(gradeValue));
                     }
 
                 }

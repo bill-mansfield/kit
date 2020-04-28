@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, FormControl, Input, InputLabel } from '@material-ui/core';
+import { Typography, Button, FormControl, Input, InputLabel, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
 import firebase from '../../services/firebase';
@@ -7,6 +7,7 @@ import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
 import IconAvatar from '../icon-avatar';
+import FlexRow from  '../layouts/flex-row';
 
 const useStyles = makeStyles(theme => ({
 	form: {
@@ -22,6 +23,7 @@ export default withRouter(function SignIn(props) {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [waiting, setWaiting] = useState(false);
 
 	return (
 		<>
@@ -41,15 +43,19 @@ export default withRouter(function SignIn(props) {
 							<InputLabel htmlFor="password">Password</InputLabel>
 							<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)} />
 						</FormControl>
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							color="primary"
-							onClick={login}
-							className={classes.submit}>
-							Sign in
-						</Button>
+						{waiting ? (
+                                <FlexRow><CircularProgress size={20} /></FlexRow>
+                            ) : (
+                                <Button
+									type="submit"
+									fullWidth
+									variant="contained"
+									color="primary"
+									onClick={login}
+									className={classes.submit}>
+									Sign in
+								</Button>
+                            )}
 						<Button
 							type="submit"
 							fullWidth
@@ -67,6 +73,7 @@ export default withRouter(function SignIn(props) {
 	)
 
 	async function login() {
+		setWaiting(true);
 		try {
 			await firebase.login(email, password);
 			props.history.replace('/dashboard');
