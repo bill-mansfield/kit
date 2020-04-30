@@ -2,13 +2,79 @@ import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
 
 class Ascents {
+    turnPinkPointsRed(tickType) {
+        if (tickType === 'Pink point') {
+            tickType = 'Red point';
+            return tickType;
+        }
+        return tickType;
+    }
+
+    logAscentfForTickType(
+        tickType,
+        ascentDate,
+        gradeValue,
+        tickTypeArr,
+        highestOnsights,
+        highestFlashes,
+        highestRedPoints,
+    ) {
+        let gradeAndTime = {};
+
+        gradeAndTime.x = ascentDate.slice(0, 10);
+        gradeAndTime.y = gradeValue;
+
+        switch (tickType) {
+            case 'Onsight':
+                highestOnsights.push(gradeAndTime);
+                highestOnsights.sort(function (a, b) {
+                    return new Date(a.x) - new Date(b.x);
+                });
+                for (let i = 0; i < tickTypeArr.length; i++) {
+                    if (tickTypeArr[i].id === 'Onsight') {
+                        tickTypeArr[i].data = highestOnsights;
+                    }
+                }
+                break;
+            case 'Flash':
+                highestFlashes.push(gradeAndTime);
+                highestFlashes.sort(function (a, b) {
+                    return new Date(a.x) - new Date(b.x);
+                });
+                for (let i = 0; i < tickTypeArr.length; i++) {
+                    if (tickTypeArr[i].id === 'Flash') {
+                        tickTypeArr[i].data = highestFlashes;
+                    }
+                }
+                break;
+            case 'Red point':
+                highestRedPoints.push(gradeAndTime);
+                highestRedPoints.sort(function (a, b) {
+                    return new Date(a.x) - new Date(b.x);
+                });
+                for (let i = 0; i < tickTypeArr.length; i++) {
+                    if (tickTypeArr[i].id === 'Red point') {
+                        tickTypeArr[i].data = highestRedPoints;
+                    }
+                }
+                break;
+        }
+    }
+
     getAusGrade(foreignGrade, system) {
         let grade = new ClimbingGrade(foreignGrade, system);
-        return grade.format('australian');
+        grade = grade.format('australian');
+        // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
+        if (grade.includes('/')) {
+            let chars = grade.split('');
+            grade = chars[0] + chars[1];
+
+            return grade;
+        }
+        return grade;
     }
 
     convertGradeToAus(gradeValue) {
-        // Check for French
         if (
             gradeValue != undefined &&
             Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
@@ -24,10 +90,6 @@ class Ascents {
         } else {
             return gradeValue;
         }
-    }
-    roundDownSplitGrades(splitGrade) {
-        let chars = splitGrade.split('');
-        return chars[0] + chars[1];
     }
 
     incrementTickType(gradeArray, tickType, gradeValue) {

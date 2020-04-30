@@ -50,8 +50,8 @@ export default function RouteLine() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await firebase.getCurrentUserAscents();
-            let tickTypeArr = [];
             let tickTypeRefArr = [];
+            let tickTypeArr = [];
             let highestOnsights = [];
             let highestFlashes = [];
             let highestRedPoints = [];
@@ -61,35 +61,22 @@ export default function RouteLine() {
                 let gradeValue = ascent[9];
                 let tickType = ascent[3];
                 let ascentDate = ascent[21];
-                let gradeAndTime = {};
 
-                if (
-                    gradeValue != undefined &&
-                    Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
-                        gradeValue.includes(el),
-                    )
-                ) {
-                    continue;
+                if (gradeValue != undefined) {
+                    // Remove boulder ascents/trash grades/empty string cases
+                    if (
+                        Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
+                            gradeValue.includes(el),
+                        ) ||
+                        gradeValue.includes('V') ||
+                        ascent[0] === ''
+                    ) {
+                        continue;
+                    }
                 }
 
-                // Remove boulder ascents/undefined/empty string cases
-                if (
-                    (gradeValue != undefined && gradeValue.includes('V')) ||
-                    ascent[0] === ''
-                ) {
-                    continue;
-                }
-
+                tickType = Ascents.turnPinkPointsRed(tickType);
                 gradeValue = Ascents.convertGradeToAus(gradeValue);
-
-                // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
-                if (gradeValue.includes('/')) {
-                    gradeValue = Ascents.roundDownSplitGrades(gradeValue);
-                }
-
-                if (tickType === 'Pink point') {
-                    tickType = 'Red point';
-                }
 
                 if (tickTypeRefArr.includes(tickType) === false) {
                     if (Ascents.notableTickType(tickType)) {
@@ -97,69 +84,20 @@ export default function RouteLine() {
                         let tickTypeObj = {};
                         tickTypeObj.id = tickType;
                         tickTypeArr.push(tickTypeObj);
-                        // console.log(tickTypeArr);
                     }
                 }
-
-                // TODO: Fix date format issue, format and sort dat before adding it to object
-
-                if (tickType === 'Onsight') {
-                    gradeAndTime.x = new Date(ascentDate);
-                    gradeAndTime.y = gradeValue;
-
-                    highestOnsights.push(gradeAndTime);
-                    highestOnsights.sort(function (a, b) {
-                        return a.y - b.y;
-                    });
-                    for (let i = 0; i < highestOnsights.length; i++) {
-                        let dateObject = highestOnsights[i].x;
-                        dateObject = dateObject.toISOString().slice(0, 10);
-                    }
-                    for (let i = 0; i < tickTypeArr.length; i++) {
-                        if (tickTypeArr[i].id === 'Onsight') {
-                            tickTypeArr[i].data = highestOnsights;
-                        }
-                    }
-                }
-                if (tickType === 'Flash') {
-                    gradeAndTime.x = new Date(ascentDate);
-                    gradeAndTime.y = gradeValue;
-
-                    highestFlashes.push(gradeAndTime);
-                    highestFlashes.sort(function (a, b) {
-                        return a.y - b.y;
-                    });
-                    for (let i = 0; i < highestFlashes.length; i++) {
-                        let dateObject = highestFlashes[i].x;
-                        dateObject = dateObject.toISOString().slice(0, 10);
-                    }
-                    for (let i = 0; i < tickTypeArr.length; i++) {
-                        if (tickTypeArr[i].id === 'Flash') {
-                            tickTypeArr[i].data = highestFlashes;
-                        }
-                    }
-                }
-                if (tickType === 'Red point') {
-                    gradeAndTime.x = new Date(ascentDate);
-                    gradeAndTime.y = gradeValue;
-
-                    highestRedPoints.push(gradeAndTime);
-                    highestRedPoints.sort(function (a, b) {
-                        return a.y - b.y;
-                    });
-                    for (let i = 0; i < highestRedPoints.length; i++) {
-                        let dateObject = highestRedPoints[i].x;
-                        dateObject = dateObject.toISOString().slice(0, 10);
-                    }
-                    for (let i = 0; i < tickTypeArr.length; i++) {
-                        if (tickTypeArr[i].id === 'Red point') {
-                            tickTypeArr[i].data = highestRedPoints;
-                        }
-                    }
-                }
+                Ascents.logAscentfForTickType(
+                    tickType,
+                    ascentDate,
+                    gradeValue,
+                    tickTypeArr,
+                    highestOnsights,
+                    highestFlashes,
+                    highestRedPoints,
+                );
             }
-            console.log(tickTypeArr[1].data[0].x);
-            setData(tickTypeArr);
+            console.log(tickTypeArr);
+            // setData(tickTypeArr);
         };
         fetchData();
     }, []);
