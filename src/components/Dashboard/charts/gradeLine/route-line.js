@@ -86,6 +86,7 @@ export default function RouteLine() {
                         tickTypeArr.push(tickTypeObj);
                     }
                 }
+
                 Ascents.logAscentfForTickType(
                     tickType,
                     ascentDate,
@@ -97,7 +98,7 @@ export default function RouteLine() {
                 );
             }
             console.log(tickTypeArr);
-            // setData(tickTypeArr);
+            setData(tickTypeArr);
         };
         fetchData();
     }, []);
@@ -171,8 +172,8 @@ export default function RouteLine() {
                         legendOffset: 12,
                     }}
                     axisBottom={{
-                        format: '%b %d',
-                        tickValues: 'every 2 days',
+                        format: '%b %d %y',
+                        tickValues: 'every 3 months',
                         legend: 'time scale',
                         legendOffset: -12,
                     }}

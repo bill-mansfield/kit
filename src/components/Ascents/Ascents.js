@@ -20,6 +20,7 @@ class Ascents {
         highestRedPoints,
     ) {
         let gradeAndTime = {};
+        let compare;
 
         gradeAndTime.x = ascentDate.slice(0, 10);
         gradeAndTime.y = gradeValue;
@@ -52,6 +53,14 @@ class Ascents {
                 highestRedPoints.sort(function (a, b) {
                     return new Date(a.x) - new Date(b.x);
                 });
+                console.log(highestRedPoints.length);
+                if (highestRedPoints.length === 11) {
+                    for (let i = 0; i < highestRedPoints.length; i++) {
+                        if (highestRedPoints[i].y > highestRedPoints[i + 1].y) {
+                            highestRedPoints.splice(i + 1, 1);
+                        }
+                    }
+                }
                 for (let i = 0; i < tickTypeArr.length; i++) {
                     if (tickTypeArr[i].id === 'Red point') {
                         tickTypeArr[i].data = highestRedPoints;
