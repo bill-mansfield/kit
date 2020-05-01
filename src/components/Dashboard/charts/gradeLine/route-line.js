@@ -11,12 +11,6 @@ export default function RouteLine() {
             data: [
                 { x: '2018-01-01', y: 5 },
                 { x: '2018-01-02', y: 5 },
-                { x: '2018-01-03', y: 6 },
-                { x: '2018-01-04', y: 7 },
-                { x: '2018-01-05', y: 7 },
-                { x: '2018-01-06', y: 8 },
-                { x: '2018-01-07', y: 9 },
-                { x: '2018-01-08', y: 9 },
             ],
         },
         {
@@ -24,12 +18,6 @@ export default function RouteLine() {
             data: [
                 { x: '2018-01-01', y: 6 },
                 { x: '2018-01-02', y: 6 },
-                { x: '2018-01-03', y: 6 },
-                { x: '2018-01-04', y: 7 },
-                { x: '2018-01-05', y: 7 },
-                { x: '2018-01-06', y: 7 },
-                { x: '2018-01-07', y: 8 },
-                { x: '2018-01-08', y: 10 },
             ],
         },
         {
@@ -37,15 +25,10 @@ export default function RouteLine() {
             data: [
                 { x: '2018-01-01', y: 7 },
                 { x: '2018-01-02', y: 8 },
-                { x: '2018-01-03', y: 8 },
-                { x: '2018-01-04', y: 9 },
-                { x: '2018-01-05', y: 9 },
-                { x: '2018-01-06', y: 9 },
-                { x: '2018-01-07', y: 12 },
-                { x: '2018-01-08', y: 13 },
             ],
         },
     ]);
+    const [lowestGrade, setLowestGrade] = useState(12);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -97,7 +80,7 @@ export default function RouteLine() {
                     highestRedPoints,
                 );
             }
-            console.log(tickTypeArr);
+            Ascents.getLowestGrade(tickTypeArr);
             setData(tickTypeArr);
         };
         fetchData();
@@ -113,47 +96,6 @@ export default function RouteLine() {
         } else {
             return (
                 <ResponsiveLine
-                    // data={[
-                    //     {
-                    //         id: 'Onsight',
-                    //         data: [
-                    //             { x: '2018-01-01', y: 5 },
-                    //             { x: '2018-01-02', y: 5 },
-                    //             { x: '2018-01-03', y: 6 },
-                    //             { x: '2018-01-04', y: 7 },
-                    //             { x: '2018-01-05', y: 7 },
-                    //             { x: '2018-01-06', y: 8 },
-                    //             { x: '2018-01-07', y: 9 },
-                    //             { x: '2018-01-08', y: 9 },
-                    //         ],
-                    //     },
-                    //     {
-                    //         id: 'Flash',
-                    //         data: [
-                    //             { x: '2018-01-01', y: 6 },
-                    //             { x: '2018-01-02', y: 6 },
-                    //             { x: '2018-01-03', y: 6 },
-                    //             { x: '2018-01-04', y: 7 },
-                    //             { x: '2018-01-05', y: 7 },
-                    //             { x: '2018-01-06', y: 7 },
-                    //             { x: '2018-01-07', y: 8 },
-                    //             { x: '2018-01-08', y: 10 },
-                    //         ],
-                    //     },
-                    //     {
-                    //         id: 'Redpoint',
-                    //         data: [
-                    //             { x: '2018-01-01', y: 7 },
-                    //             { x: '2018-01-02', y: 8 },
-                    //             { x: '2018-01-03', y: 8 },
-                    //             { x: '2018-01-04', y: 9 },
-                    //             { x: '2018-01-05', y: 9 },
-                    //             { x: '2018-01-06', y: 9 },
-                    //             { x: '2018-01-07', y: 12 },
-                    //             { x: '2018-01-08', y: 13 },
-                    //         ],
-                    //     },
-                    // ]}
                     data={data}
                     theme={theme}
                     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -166,6 +108,7 @@ export default function RouteLine() {
                     yScale={{
                         type: 'linear',
                         stacked: false,
+                        min: { lowestGrade },
                     }}
                     axisLeft={{
                         legend: 'linear scale',
@@ -173,7 +116,7 @@ export default function RouteLine() {
                     }}
                     axisBottom={{
                         format: '%b %d %y',
-                        tickValues: 'every 3 months',
+                        tickValues: 'every 6 months',
                         legend: 'time scale',
                         legendOffset: -12,
                     }}

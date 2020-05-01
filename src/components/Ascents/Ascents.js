@@ -10,6 +10,17 @@ class Ascents {
         return tickType;
     }
 
+    getLowestGrade(arr) {
+        let gradeArray = [];
+        for (let i = 0; i < arr.length; i++) {
+            let innerArr = arr[i].data;
+            for (let i = 0; i < innerArr.length; i++) {
+                gradeArray.push(innerArr[i].y);
+            }
+        }
+        console.lot(Math.max(gradeArray));
+    }
+
     logAscentfForTickType(
         tickType,
         ascentDate,
@@ -20,10 +31,13 @@ class Ascents {
         highestRedPoints,
     ) {
         let gradeAndTime = {};
-        let compare;
 
-        gradeAndTime.x = ascentDate.slice(0, 10);
-        gradeAndTime.y = gradeValue;
+        if (ascentDate != undefined) {
+            gradeAndTime.x = ascentDate.slice(0, 10);
+        }
+        if (this.isANumber(gradeValue)) {
+            gradeAndTime.y = gradeValue;
+        }
 
         switch (tickType) {
             case 'Onsight':
@@ -31,6 +45,7 @@ class Ascents {
                 highestOnsights.sort(function (a, b) {
                     return new Date(a.x) - new Date(b.x);
                 });
+                this.discardLesserGrades(highestOnsights);
                 for (let i = 0; i < tickTypeArr.length; i++) {
                     if (tickTypeArr[i].id === 'Onsight') {
                         tickTypeArr[i].data = highestOnsights;
@@ -42,6 +57,7 @@ class Ascents {
                 highestFlashes.sort(function (a, b) {
                     return new Date(a.x) - new Date(b.x);
                 });
+                this.discardLesserGrades(highestFlashes);
                 for (let i = 0; i < tickTypeArr.length; i++) {
                     if (tickTypeArr[i].id === 'Flash') {
                         tickTypeArr[i].data = highestFlashes;
@@ -53,20 +69,28 @@ class Ascents {
                 highestRedPoints.sort(function (a, b) {
                     return new Date(a.x) - new Date(b.x);
                 });
-                console.log(highestRedPoints.length);
-                if (highestRedPoints.length === 11) {
-                    for (let i = 0; i < highestRedPoints.length; i++) {
-                        if (highestRedPoints[i].y > highestRedPoints[i + 1].y) {
-                            highestRedPoints.splice(i + 1, 1);
-                        }
-                    }
-                }
+
+                //TODO: Add check only add ascent objects if they are the next highest grade
+                // Or remove them if they are not the next highest grade
+                this.discardLesserGrades(highestRedPoints);
                 for (let i = 0; i < tickTypeArr.length; i++) {
                     if (tickTypeArr[i].id === 'Red point') {
                         tickTypeArr[i].data = highestRedPoints;
                     }
                 }
                 break;
+        }
+    }
+
+    discardLesserGrades(arr) {
+        let highestGradeSoFar = 0;
+        for (let i = 0; i < arr.length; i++) {
+            let compareGrade = parseInt(arr[i].y);
+            if (compareGrade >= highestGradeSoFar) {
+                highestGradeSoFar = compareGrade;
+            } else {
+                arr.splice(i, 1);
+            }
         }
     }
 
