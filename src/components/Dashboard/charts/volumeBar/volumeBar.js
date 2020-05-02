@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import firebase from '../../../../services/firebase';
 import Ascents from '../../../Ascents/Ascents';
+import * as dayjs from 'dayjs';
 import * as Constants from '../../../Ascents/Constants';
 
 export default function VolumeBar() {
@@ -25,24 +26,47 @@ export default function VolumeBar() {
             for (let i = 1; i < result.length; i++) {
                 let ascent = result[i].file;
                 let ascentDate = ascent[21];
-                let counts = {};
+                //Get earliest ascent date
+                //Add a date to array for every month for each from from the earliest date until now
+                //Months with only one ascent may not be recorded...
 
                 if (ascentDate != undefined && ascentDate != 'Log Date') {
                     ascentDateArr.push(ascentDate.slice(0, 7));
                 }
-                ascentDateArr.sort(function (a, b) {
-                    return new Date(a) - new Date(b);
-                });
-                ascentDateArr.forEach(function (x) {
-                    counts[x] = (counts[x] || 0) + 1;
-                });
-
-                ascentArr = Object.entries(counts);
             }
+            ascentDateArr.sort(function (a, b) {
+                return new Date(a) - new Date(b);
+            });
+
+            //Get date for every month from earliest til now
+            let earliestDate = ascentDateArr[0];
+            let todaysDate = dayjs();
+            let incrementValue = todaysDate.diff(earliestDate, 'month');
+            let fullMonthArr = [];
+            for (let i = 1; i < incrementValue; i++) {
+                let additionalMonth = dayjs(earliestDate)
+                    .add(i, 'month')
+                    .format('YYYY-MM');
+                fullMonthArr.push(additionalMonth);
+            }
+            console.log(fullMonthArr);
+            ascentDateArr = ascentDateArr.concat(fullMonthArr);
+
+            ascentDateArr.sort(function (a, b) {
+                return new Date(a) - new Date(b);
+            });
+
+            let counts = {};
+            ascentDateArr.forEach(function (x) {
+                counts[x] = (counts[x] || 0) + 1;
+            });
+
+            ascentArr = Object.entries(counts);
+
             for (let i = 0; i < ascentArr.length; i++) {
                 let ascentObj = {};
                 ascentObj.x = ascentArr[i][0] + '-01';
-                ascentObj.y = ascentArr[i][1];
+                ascentObj.y = ascentArr[i][1] - 1; // Extra ascent removed as one was added during additon of null ascent months
                 ascentFinalArr.push(ascentObj);
             }
             // Nest data in required nivo format
@@ -85,16 +109,8 @@ export default function VolumeBar() {
                         min: 'auto',
                         max: 'auto',
                     }}
-                    axisLeft={{
-                        legend: 'Number of ascents',
-                        legendOffset: 12,
-                    }}
-                    axisBottom={{
-                        format: '%b %d %y',
-                        tickValues: 'every 3 months',
-                        legend: 'time',
-                        legendOffset: -12,
-                    }}
+                    axisLeft={null}
+                    axisBottom={null}
                     colors={{ scheme: 'nivo' }}
                     pointSize={10}
                     pointColor={{ theme: 'background' }}
@@ -104,12 +120,13 @@ export default function VolumeBar() {
                     pointLabelYOffset={-12}
                     useMesh={true}
                     enableArea={true}
-                    areaBaselineValue={1}
+                    areaBaselineValue={0}
                     enablePoints={false}
                     enableGridX={false}
+                    enableGridY={false}
                     legends={[
                         {
-                            anchor: 'bottom-right',
+                            anchor: 'top-left',
                             direction: 'column',
                             justify: false,
                             translateX: 100,
@@ -123,15 +140,6 @@ export default function VolumeBar() {
                             symbolShape: 'circle',
                             symbolBorderColor: 'rgba(0, 0, 0, .5)',
                             itemTextColor: '#fff',
-                            effects: [
-                                {
-                                    on: 'hover',
-                                    style: {
-                                        itemBackground: 'rgba(0, 0, 0, .03)',
-                                        itemOpacity: 1,
-                                    },
-                                },
-                            ],
                         },
                     ]}
                 />

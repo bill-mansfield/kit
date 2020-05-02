@@ -84,7 +84,7 @@ export default withRouter(function Dashboard(props) {
                 </FlexRow>
                 <FlexRow
                     style={{
-                        height: '60vh',
+                        height: '20vh',
                         width: '66vw',
                     }}
                 >

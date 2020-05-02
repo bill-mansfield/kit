@@ -129,6 +129,7 @@ export default function RouteLine() {
                     pointLabel="y"
                     pointLabelYOffset={-12}
                     useMesh={true}
+                    enableGridX={false}
                     legends={[
                         {
                             anchor: 'bottom-right',
