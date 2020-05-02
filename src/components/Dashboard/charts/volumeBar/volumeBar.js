@@ -4,27 +4,13 @@ import firebase from '../../../../services/firebase';
 import Ascents from '../../../Ascents/Ascents';
 import * as Constants from '../../../Ascents/Constants';
 
-export default function RouteLine() {
+export default function VolumeBar() {
     const [data, setData] = useState([
         {
-            id: 'Onsight',
+            id: 'Number of ascents',
             data: [
-                { x: '2018-01-01', y: 5 },
+                { x: '2018-01-01', y: 1 },
                 { x: '2018-01-02', y: 5 },
-            ],
-        },
-        {
-            id: 'Flash',
-            data: [
-                { x: '2018-01-01', y: 6 },
-                { x: '2018-01-02', y: 6 },
-            ],
-        },
-        {
-            id: 'Redpoint',
-            data: [
-                { x: '2018-01-01', y: 7 },
-                { x: '2018-01-02', y: 8 },
             ],
         },
     ]);
@@ -32,54 +18,43 @@ export default function RouteLine() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await firebase.getCurrentUserAscents();
-            let tickTypeRefArr = [];
-            let tickTypeArr = [];
-            let highestOnsights = [];
-            let highestFlashes = [];
-            let highestRedPoints = [];
             // Starts at 1 as the first row of the CSV(result) is column titles
+            let ascentDateArr = [];
+            let ascentArr = [];
+            let ascentFinalArr = [];
             for (let i = 1; i < result.length; i++) {
                 let ascent = result[i].file;
-                let gradeValue = ascent[9];
-                let tickType = ascent[3];
                 let ascentDate = ascent[21];
+                let counts = {};
 
-                if (gradeValue != undefined) {
-                    // Remove boulder ascents/trash grades/empty string cases
-                    if (
-                        Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
-                            gradeValue.includes(el),
-                        ) ||
-                        gradeValue.includes('V') ||
-                        ascent[0] === ''
-                    ) {
-                        continue;
-                    }
+                if (ascentDate != undefined && ascentDate != 'Log Date') {
+                    ascentDateArr.push(ascentDate.slice(0, 7));
                 }
+                ascentDateArr.sort(function (a, b) {
+                    return new Date(a) - new Date(b);
+                });
+                ascentDateArr.forEach(function (x) {
+                    counts[x] = (counts[x] || 0) + 1;
+                });
 
-                tickType = Ascents.turnPinkPointsRed(tickType);
-                gradeValue = Ascents.convertGradeToAus(gradeValue);
-
-                if (tickTypeRefArr.includes(tickType) === false) {
-                    if (Ascents.notableTickType(tickType)) {
-                        tickTypeRefArr.push(tickType);
-                        let tickTypeObj = {};
-                        tickTypeObj.id = tickType;
-                        tickTypeArr.push(tickTypeObj);
-                    }
-                }
-
-                Ascents.logAscentfForTickType(
-                    tickType,
-                    ascentDate,
-                    gradeValue,
-                    tickTypeArr,
-                    highestOnsights,
-                    highestFlashes,
-                    highestRedPoints,
-                );
+                ascentArr = Object.entries(counts);
             }
-            setData(tickTypeArr);
+            for (let i = 0; i < ascentArr.length; i++) {
+                let ascentObj = {};
+                ascentObj.x = ascentArr[i][0] + '-01';
+                ascentObj.y = ascentArr[i][1];
+                ascentFinalArr.push(ascentObj);
+            }
+            // Nest data in required nivo format
+            let finalObj = {};
+            let lastArr = [];
+            finalObj.id = 'Number of ascents';
+            finalObj.data = ascentFinalArr;
+            lastArr.push(finalObj);
+            console.log(lastArr);
+            if (lastArr.length != 0) {
+                setData(lastArr);
+            }
         };
         fetchData();
     }, []);
@@ -87,8 +62,6 @@ export default function RouteLine() {
     const theme = {
         textColor: '#fff',
     };
-
-    const yscale = 13;
 
     const renderChart = () => {
         if (data.length === 0) {
@@ -99,6 +72,7 @@ export default function RouteLine() {
                     data={data}
                     theme={theme}
                     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+                    curve="step"
                     xScale={{
                         type: 'time',
                         format: '%Y-%m-%d',
@@ -112,12 +86,12 @@ export default function RouteLine() {
                         max: 'auto',
                     }}
                     axisLeft={{
-                        legend: 'Grade',
+                        legend: 'Number of ascents',
                         legendOffset: 12,
                     }}
                     axisBottom={{
                         format: '%b %d %y',
-                        tickValues: 'every 6 months',
+                        tickValues: 'every 3 months',
                         legend: 'time',
                         legendOffset: -12,
                     }}
@@ -129,6 +103,10 @@ export default function RouteLine() {
                     pointLabel="y"
                     pointLabelYOffset={-12}
                     useMesh={true}
+                    enableArea={true}
+                    areaBaselineValue={1}
+                    enablePoints={false}
+                    enableGridX={false}
                     legends={[
                         {
                             anchor: 'bottom-right',

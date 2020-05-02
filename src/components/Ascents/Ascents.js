@@ -10,17 +10,6 @@ class Ascents {
         return tickType;
     }
 
-    getLowestGrade(arr) {
-        let gradeArray = [];
-        for (let i = 0; i < arr.length; i++) {
-            let innerArr = arr[i].data;
-            for (let i = 0; i < innerArr.length; i++) {
-                gradeArray.push(innerArr[i].y);
-            }
-        }
-        console.lot(Math.max(gradeArray));
-    }
-
     logAscentfForTickType(
         tickType,
         ascentDate,

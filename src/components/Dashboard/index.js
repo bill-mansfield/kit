@@ -15,6 +15,7 @@ import FavouriteAreas from './stats/favourite-areas';
 import RouteBar from './charts/gradebar/route-bar';
 import BoulderingBar from './charts/gradebar/boulder-bar';
 import RouteLine from './charts/gradeLine/route-line';
+import VolumeBar from './charts/volumeBar/volumeBar';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -70,7 +71,7 @@ export default withRouter(function Dashboard(props) {
             </FlexColumn>
             <FlexColumn
                 style={{
-                    height: '65vh',
+                    height: '140vh',
                 }}
             >
                 <FlexRow
@@ -80,6 +81,14 @@ export default withRouter(function Dashboard(props) {
                     }}
                 >
                     <RouteLine />
+                </FlexRow>
+                <FlexRow
+                    style={{
+                        height: '60vh',
+                        width: '66vw',
+                    }}
+                >
+                    <VolumeBar />
                 </FlexRow>
             </FlexColumn>
             <FlexColumn
