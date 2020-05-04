@@ -1,7 +1,7 @@
 import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
 
-class Ascents {
+class Utils {
     turnPinkPointsRed(tickType) {
         if (tickType === 'Pink point') {
             tickType = 'Red point';
@@ -213,4 +213,4 @@ class Ascents {
     }
 }
 
-export default new Ascents();
+export default new Utils();

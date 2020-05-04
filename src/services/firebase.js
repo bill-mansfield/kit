@@ -42,24 +42,19 @@ class Firebase {
         });
     }
 
-
-    addAscents(file) {
-        return this.db.collection(`users/${this.auth.currentUser.uid}/ascents`).add({
-            file,
-        });
+    getAscentsRef() {
+        return this.db
+            .collection('users')
+            .doc(`${this.auth.currentUser.uid}`)
+            .collection('ascents');
     }
 
-    async getCurrentUserAscents() {
-        const ascentsRef = this.db.collection('users').doc(`${this.auth.currentUser.uid}`).collection('ascents');
-
-        const response = await ascentsRef.get().then(function(querySnapshot) {
-            let ascents = [];
-            querySnapshot.forEach(function(doc) {
-                ascents.push(doc.data());
+    addAscents(file) {
+        return this.db
+            .collection(`users/${this.auth.currentUser.uid}/ascents`)
+            .add({
+                file,
             });
-            return ascents;
-        });
-        return response;
     }
 
     getCurrentUsername() {
