@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import firebase from '../../../../services/firebase';
-import Ascents from '../../../Ascents/Ascents';
-import * as Constants from '../../../Ascents/Constants';
+import Firebase from '../../../services/Firebase';
+import Ascents from '../../../models/Ascents';
+import * as Constants from '../../../utils/Constants';
 
 export default function RouteLine() {
     const [data, setData] = useState([
@@ -31,7 +31,7 @@ export default function RouteLine() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserAscents();
             let tickTypeRefArr = [];
             let tickTypeArr = [];
             let highestOnsights = [];

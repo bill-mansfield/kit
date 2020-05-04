@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import firebase from '../../../services/firebase';
+import Firebase from '../../../services/Firebase';
 import { Typography } from '@material-ui/core';
-import Ascents from '../../Ascents/Ascents';
-import * as Constants from '../../Ascents/Constants';
+import Ascents from '../../../models/Ascents';
+import * as Constants from '../../../utils/Constants';
 
-const useStyles = makeStyles((theme) => ({
-
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 export default function HardestAscent() {
     const classes = useStyles();
@@ -15,33 +13,32 @@ export default function HardestAscent() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserAscents();
             let gradeArr = [];
 
-                for (let i = 0; i < result.length - 1; i++) {
-                    let ascent = result[i].file;
-                    let gradeValue = ascent[9];
-                    
-                    if (gradeValue != undefined && gradeValue.includes('V')) {
-                        continue;
-                    }
-                    if (Ascents.successfulTickType(ascent[3])) {
-                        gradeValue = Ascents.convertGradeToAus(gradeValue);
-                        if (gradeValue != undefined && gradeValue.includes('/')) {
-                            gradeValue = Ascents.roundDownSplitGrades(gradeValue)
-                        }
-                        gradeArr.push(parseInt(gradeValue));
-                    }
+            for (let i = 0; i < result.length - 1; i++) {
+                let ascent = result[i].file;
+                let gradeValue = ascent[9];
+
+                if (gradeValue != undefined && gradeValue.includes('V')) {
+                    continue;
                 }
-                setData(Math.max(...gradeArr));
-            };
+                if (Ascents.successfulTickType(ascent[3])) {
+                    gradeValue = Ascents.convertGradeToAus(gradeValue);
+                    if (gradeValue != undefined && gradeValue.includes('/')) {
+                        gradeValue = Ascents.roundDownSplitGrades(gradeValue);
+                    }
+                    gradeArr.push(parseInt(gradeValue));
+                }
+            }
+            setData(Math.max(...gradeArr));
+        };
         fetchData();
     }, []);
-
 
     return (
         <Typography className={classes.metresClimbed} variant="h2">
             Hardest Ascent: {data}
         </Typography>
-    )
+    );
 }

@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
-import firebase from '../../services/firebase';
+import Firebase from '../../services/Firebase';
 import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
@@ -133,9 +133,9 @@ export default withRouter(function Register(props) {
     async function onRegister() {
         setWaiting(true);
         try {
-            await firebase.register(name, email, password);
-            await firebase.addQuote(quote);
-            await firebase.login(email, password);
+            await Firebase.register(name, email, password);
+            await Firebase.addQuote(quote);
+            await Firebase.login(email, password);
             props.history.replace('/uploader');
         } catch (error) {
             alert(error.message);

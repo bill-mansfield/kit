@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import firebase from '../../../../services/firebase';
-import Ascents from '../../../Ascents/Ascents';
+import Firebase from '../../../services/Firebase';
+import Ascents from '../../../models/Ascents';
 import * as dayjs from 'dayjs';
-import * as Constants from '../../../Ascents/Constants';
 
 export default function VolumeBar() {
     const [data, setData] = useState([
@@ -18,7 +17,7 @@ export default function VolumeBar() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserAscents();
             // Starts at 1 as the first row of the CSV(result) is column titles
             let ascentDateArr = [];
             let ascentArr = [];

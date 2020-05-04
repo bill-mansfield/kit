@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, CircularProgress } from '@material-ui/core';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { Router } from 'react-router-dom';
-import firebase from '../../services/firebase';
+import Firebase from '../../services/Firebase';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
@@ -34,7 +34,7 @@ export default function App() {
     const [firebaseInitialized, setFirebaseInitialized] = useState(false);
 
     useEffect(() => {
-        firebase.isInitialized().then((val) => {
+        Firebase.isInitialized().then((val) => {
             setFirebaseInitialized(val);
         });
     });

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import firebase from '../../../../services/firebase';
-import Ascents from '../../../Ascents/Ascents';
-import * as Constants from '../../../Ascents/Constants';
+import Firebase from '../../../services/Firebase';
+import Ascents from '../../../models/Ascents';
 
-export default function RouteBar() {
+export default function BoulderBar() {
     const [data, setData] = useState([
-        { grade: '16', Onsight: 3, Flash: 8, Redpoint: 15 },
+        { grade: 'V1', Onsight: 3, Flash: 8, Send: 15 },
     ]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserAscents();
             let gradeArr = [];
             let gradeRefArr = [];
             // Starts at 1 as the first row of the CSV(result) is column titles
@@ -20,40 +19,31 @@ export default function RouteBar() {
                 let gradeValue = ascent[9];
                 let tickType = ascent[3];
 
-                if (
-                    gradeValue != undefined &&
-                    Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
-                        gradeValue.includes(el),
-                    )
-                ) {
+                // Remove the 'V' from grading for sorting simplicity
+                // Skip over undefined cases
+                if (gradeValue != undefined) {
+                    if (
+                        gradeValue.includes('V') === false ||
+                        ascent[0] === ''
+                    ) {
+                        continue;
+                    } else {
+                        gradeValue = gradeValue.replace('V', '');
+                    }
+                } else {
                     continue;
                 }
-
-                // Remove boulder ascents/undefined/empty string cases
-                if (
-                    (gradeValue != undefined && gradeValue.includes('V')) ||
-                    ascent[0] === ''
-                ) {
-                    continue;
-                }
-
-                gradeValue = Ascents.convertGradeToAus(gradeValue);
-
-                // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
-                if (gradeValue.includes('/')) {
-                    gradeValue = Ascents.roundDownSplitGrades(gradeValue);
-                }
-
                 if (gradeRefArr.includes(gradeValue) === false) {
-                    //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade.
+                    //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade object in gradeArr..
                     gradeRefArr.push(gradeValue);
                     gradeArr.push(
                         new Object({
                             Grade: gradeValue,
                             Onsight: 0,
                             Flash: 0,
-                            Redpoint: 0,
+                            Send: 0,
                             Tick: 0,
+                            Repeat: 0,
                             Unsuccessful: 0,
                         }),
                     );
@@ -62,13 +52,17 @@ export default function RouteBar() {
                     Ascents.incrementTickType(gradeArr, tickType, gradeValue);
                 }
             }
-            // Arrange grades in consecutive order
+            // Order the grades from lowest to highests
             gradeArr.sort(function (a, b) {
                 return a.Grade - b.Grade;
             });
-            if (gradeArr.length != 0) {
-                setData(gradeArr);
+
+            // Put back the V from the grade that was previously removed
+            for (let i = 0; i < gradeArr.length; i++) {
+                let theV = 'V';
+                gradeArr[i].Grade = theV += gradeArr[i].Grade;
             }
+            setData(gradeArr);
         };
         fetchData();
     }, []);
@@ -84,7 +78,14 @@ export default function RouteBar() {
             return (
                 <ResponsiveBar
                     data={data}
-                    keys={['Onsight', 'Flash', 'Redpoint', 'Unsuccessful']}
+                    keys={[
+                        'Onsight',
+                        'Flash',
+                        'Send',
+                        'Tick',
+                        'Repeat',
+                        'Unsuccessful',
+                    ]}
                     indexBy="Grade"
                     margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
                     padding={0.3}

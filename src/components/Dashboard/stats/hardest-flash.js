@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import firebase from '../../../services/firebase';
+import Firebase from '../../../services/Firebase';
 import { Typography } from '@material-ui/core';
-import Ascents from '../../Ascents/Ascents';
+import Ascents from '../../../models/Ascents';
 
-const useStyles = makeStyles((theme) => ({
-
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 export default function HardestFlash() {
     const classes = useStyles();
@@ -14,33 +12,34 @@ export default function HardestFlash() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserAscents();
             let gradeArr = [];
 
-                for (let i = 0; i < result.length - 1; i++) {
-                    let ascent = result[i].file;
-                    let gradeValue = ascent[9];
+            for (let i = 0; i < result.length - 1; i++) {
+                let ascent = result[i].file;
+                let gradeValue = ascent[9];
 
-                    // Remove boulder ascents/undefined/empty string cases 
-                    if (gradeValue != undefined && gradeValue.includes('V') || ascent[0] === '') {
-                        continue;
-                    } 
-                    if (Ascents.isFlash(ascent[3])) { 
-                        // Remove boulder ascents/undefined/empty string cases 
-                        gradeValue = Ascents.convertGradeToAus(gradeValue);
-                        gradeArr.push(parseInt(gradeValue));
-                    }
-
+                // Remove boulder ascents/undefined/empty string cases
+                if (
+                    (gradeValue != undefined && gradeValue.includes('V')) ||
+                    ascent[0] === ''
+                ) {
+                    continue;
                 }
-                setData(Math.max(...gradeArr));
-            };
+                if (Ascents.isFlash(ascent[3])) {
+                    // Remove boulder ascents/undefined/empty string cases
+                    gradeValue = Ascents.convertGradeToAus(gradeValue);
+                    gradeArr.push(parseInt(gradeValue));
+                }
+            }
+            setData(Math.max(...gradeArr));
+        };
         fetchData();
     }, []);
-
 
     return (
         <Typography className={classes.metresClimbed} variant="h2">
             Hardest Flash: {data}
         </Typography>
-    )
+    );
 }

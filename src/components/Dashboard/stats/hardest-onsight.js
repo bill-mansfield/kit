@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import firebase from '../../../services/firebase';
 import { Typography } from '@material-ui/core';
-import Ascents from '../../../models/Ascents';
+import Firebase from '../../../services/Firebase';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -12,17 +11,17 @@ export default function HardestOnsight() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await firebase.getCurrentUserAscents();
+            const result = await Firebase.getCurrentUserFirebase();
             let gradeArr = [];
 
             for (let i = 0; i < result.length - 1; i++) {
                 let ascent = result[i].file;
                 let gradeValue = ascent[9];
 
-                if (Ascents.isOnsight(ascent[3])) {
-                    gradeValue = Ascents.convertGradeToAus(gradeValue);
+                if (Firebase.isOnsight(ascent[3])) {
+                    gradeValue = Firebase.convertGradeToAus(gradeValue);
                     if (gradeValue != undefined && gradeValue.includes('/')) {
-                        gradeValue = Ascents.roundDownSplitGrades(gradeValue);
+                        gradeValue = Firebase.roundDownSplitGrades(gradeValue);
                     }
                     gradeArr.push(gradeValue);
                 }
