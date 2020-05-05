@@ -13,7 +13,7 @@ export default function MetresClimbed() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await Stats.getTotalMetersClimbed();
-            setData(result + 'm');
+            setData(result + 'm'); // 'm' is for meters
         };
         fetchData();
     }, []);

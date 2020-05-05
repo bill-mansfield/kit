@@ -1,37 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Firebase from '../../../services/Firebase';
 import { Typography } from '@material-ui/core';
-import Ascents from '../../../models/Ascents';
-import * as Constants from '../../../utils/Constants';
+import Stats from '../../../models/Stats';
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function HardestAscent() {
     const classes = useStyles();
-    const [data, setData] = useState();
+    const [data, setData] = useState('9c+');
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await Firebase.getCurrentUserAscents();
-            let gradeArr = [];
-
-            for (let i = 0; i < result.length - 1; i++) {
-                let ascent = result[i].file;
-                let gradeValue = ascent[9];
-
-                if (gradeValue != undefined && gradeValue.includes('V')) {
-                    continue;
-                }
-                if (Ascents.successfulTickType(ascent[3])) {
-                    gradeValue = Ascents.convertGradeToAus(gradeValue);
-                    if (gradeValue != undefined && gradeValue.includes('/')) {
-                        gradeValue = Ascents.roundDownSplitGrades(gradeValue);
-                    }
-                    gradeArr.push(parseInt(gradeValue));
-                }
-            }
-            setData(Math.max(...gradeArr));
+            setData(await Stats.getHardestAscent());
         };
         fetchData();
     }, []);

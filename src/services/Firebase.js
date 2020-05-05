@@ -67,6 +67,19 @@ class Firebase {
         return response;
     }
 
+    async getRouteAscents() {
+        const ascentsRef = this.ascentsRef().where('isBoulder', '==', false);
+
+        const response = await ascentsRef.get().then(function (querySnapshot) {
+            let ascents = [];
+            querySnapshot.forEach(function (doc) {
+                ascents.push(doc.data());
+            });
+            return ascents;
+        });
+        return response;
+    }
+
     getCurrentUsername() {
         return this.auth.currentUser && this.auth.currentUser.displayName;
     }

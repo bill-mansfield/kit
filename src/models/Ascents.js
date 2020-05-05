@@ -1,6 +1,5 @@
-import * as Constants from '../utils/Constants';
-import ClimbingGrade from 'climbing-grade';
 import Firebase from '../services/Firebase';
+import Utils from '../utils/Utils';
 
 class Ascents {
     // Uploader methods
@@ -8,14 +7,11 @@ class Ascents {
         for (let i = 0; i < parsedResults.data.length; i++) {
             let ascent = parsedResults.data[i];
             if (ascent[1] === undefined) {
-                console.log('write skipped');
                 continue;
             } else if (ascent[0] === 'Ascent Label') {
-                console.log('write skipped');
                 continue;
             } else {
                 this.addAscent(ascent);
-                console.log('Ascent written');
             }
         }
     }
@@ -27,12 +23,13 @@ class Ascents {
         ascentObj.ascentId = ascent[1];
         ascentObj.ascentLink = ascent[2];
         ascentObj.ascentType = ascent[3];
-        ascentObj.ascentGrade = ascent[4];
+        ascentObj.ascentGrade = this.saveGradesInAus(ascent[4]);
+        ascentObj.isBoulder = this.isBoulder(ascent[4]);
         ascentObj.numberOfAscents = ascent[5];
         ascentObj.routeStars = ascent[6];
         ascentObj.routeHeight = this.sanitiseHeight(ascent[7]);
         ascentObj.routeName = ascent[8];
-        ascentObj.routeGrade = ascent[9];
+        ascentObj.routeGrade = this.saveGradesInAus(ascent[9]);
         ascentObj.routeId = ascent[10];
         ascentObj.routeLink = ascent[11];
         ascentObj.country = ascent[12];
@@ -58,6 +55,30 @@ class Ascents {
             return 0;
         } else {
             return (height = parseInt(height.slice(0, -1)));
+        }
+    }
+
+    isBoulder(grade) {
+        if (grade != undefined && grade.includes('V')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    saveGradesInAus(grade) {
+        if (grade.includes('V')) {
+            return;
+        } else if (grade === undefined) {
+            return 0;
+        } else {
+            let convertedGrade = Utils.convertGradeToAus(grade);
+            console.log(convertedGrade);
+            if (convertedGrade.includes('/')) {
+                convertedGrade = Utils.roundDownSplitGrades(grade);
+                console.log(convertedGrade);
+            }
+            return parseInt(convertedGrade);
         }
     }
 }

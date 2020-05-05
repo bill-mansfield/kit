@@ -61,11 +61,11 @@ export default withRouter(function Dashboard(props) {
                 <FlexRow>
                     <FlexColumn>
                         <MetresClimbed />
-                        {/* <SuccessfulAscents />
+                        <SuccessfulAscents />
                         <HardestAscent />
-                        <HardestFlash />
-                        <HardestOnsight />
-                        <FavouriteAreas /> */}
+                        {/* <HardestFlash /> */}
+                        {/* <HardestOnsight /> */}
+                        {/* <FavouriteAreas /> */}
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>
