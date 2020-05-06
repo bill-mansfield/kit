@@ -68,17 +68,16 @@ class Ascents {
 
     saveGradesInAus(grade) {
         if (grade.includes('V')) {
-            return;
+            return grade;
         } else if (grade === undefined) {
             return 0;
         } else {
             let convertedGrade = Utils.convertGradeToAus(grade);
-            console.log(convertedGrade);
             if (convertedGrade.includes('/')) {
                 convertedGrade = Utils.roundDownSplitGrades(grade);
-                console.log(convertedGrade);
             }
-            return parseInt(convertedGrade);
+            convertedGrade = parseInt(convertedGrade);
+            return convertedGrade;
         }
     }
 }

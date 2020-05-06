@@ -7,7 +7,7 @@ import Navbar from '../Nav/navbar';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import MetresClimbed from './stats/metres-climbed';
-import HardestAscent from './stats/hardest-ascent';
+import HardestAscents from './stats/hardest-ascents';
 import SuccessfulAscents from './stats/successful-ascents';
 import HardestFlash from './stats/hardest-flash';
 import HardestOnsight from './stats/hardest-onsight';
@@ -62,8 +62,8 @@ export default withRouter(function Dashboard(props) {
                     <FlexColumn>
                         <MetresClimbed />
                         <SuccessfulAscents />
-                        <HardestAscent />
-                        {/* <HardestFlash /> */}
+                        <HardestAscents />
+                        <HardestFlash />
                         {/* <HardestOnsight /> */}
                         {/* <FavouriteAreas /> */}
                     </FlexColumn>

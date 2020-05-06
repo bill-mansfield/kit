@@ -9,44 +9,71 @@ class Stats {
         let totalHeight = 0;
 
         for (let i = 0; i < result.length; i++) {
-            let height = result[i].ascent.routeHeight;
+            let height = result[i].routeHeight;
             totalHeight += height;
         }
         return totalHeight;
     }
 
     async getSuccessfulAscents() {
-        const result = await Firebase.getRouteAscents();
+        const result = await Firebase.getCurrentUserAscents();
         let successfulAscents = 0;
-
         for (let i = 0; i < result.length; i++) {
-            if (Utils.successfulTickType(result[i].ascent.ascentType)) {
+            if (Utils.successfulTickType(result[i].ascentType)) {
                 successfulAscents++;
             }
         }
         return successfulAscents;
     }
 
-    async getHardestAscent() {
+    async getHardestRouteAscent() {
         const result = await Firebase.getRouteAscents();
         let gradeArr = [];
 
         for (let i = 0; i < result.length; i++) {
-            let tickType = result[i].ascent.ascentType;
-            let gradeValue = result[i].ascent.ascentGrade;
+            let tickType = result[i].ascentType;
+            let gradeValue = result[i].ascentGrade;
 
-            if (gradeValue != undefined && gradeValue.includes('V')) {
-                continue;
-            }
             if (Utils.successfulTickType(tickType)) {
-                gradeValue = Utils.convertGradeToAus(gradeValue);
-                if (gradeValue != undefined && gradeValue.includes('/')) {
-                    gradeValue = Utils.roundDownSplitGrades(gradeValue);
-                }
-                gradeArr.push(parseInt(gradeValue));
+                gradeArr.push(gradeValue);
             }
         }
         return Math.max(...gradeArr);
+    }
+
+    async getHardestBoulderAscent() {
+        const result = await Firebase.getBoulderAscents();
+        let gradeArr = [];
+
+        for (let i = 0; i < result.length; i++) {
+            let tickType = result[i].ascentType;
+            let gradeValue = result[i].ascentGrade;
+
+            if (Utils.successfulTickType(tickType)) {
+                gradeValue = gradeValue.slice(1);
+                gradeArr.push(parseInt(gradeValue));
+            }
+        }
+        let hardestBoulderAscent = Math.max(...gradeArr);
+        return 'V' + hardestBoulderAscent;
+    }
+
+    async getHardestRouteFlash() {
+        const result = await Firebase.getRouteAscents();
+        let gradeArr = [];
+
+        for (let i = 0; i < result.length - 1; i++) {
+            if (Utils.isFlash(result.ascentType)) {
+                gradeArr.push(result.routeGrade);
+            }
+        }
+        let hardestRouteFlash = 0;
+        if (Math.max(...gradeArr) > 0) {
+            hardestRouteFlash = Math.max(...gradeArr);
+        } else {
+            hardestRouteFlash = 'No Route Flashes';
+        }
+        return hardestRouteFlash;
     }
 }
 

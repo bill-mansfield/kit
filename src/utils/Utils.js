@@ -166,18 +166,7 @@ class Utils {
     }
 
     successfulTickType(ascentType) {
-        const successfulTickTypes = [
-            'Red point',
-            'Pink point',
-            'Onsight',
-            'Flash',
-            'Tick',
-            'Deep water solo',
-            'Ground up red point',
-            'Top rope',
-        ];
-
-        if (successfulTickTypes.includes(ascentType)) {
+        if (Constants.SUCCESSFUL_TICK_TYPE.includes(ascentType)) {
             return true;
         } else {
             return false;
@@ -185,9 +174,7 @@ class Utils {
     }
 
     isOnsight(ascentType) {
-        const onsightTickType = 'Onsight';
-
-        if (ascentType === onsightTickType) {
+        if (ascentType === Constants.ONSIGHT_TICK_TYPE) {
             return true;
         } else {
             return false;
@@ -195,9 +182,7 @@ class Utils {
     }
 
     isFlash(ascentType) {
-        const flashTickType = 'Flash';
-
-        if (ascentType === flashTickType) {
+        if (ascentType === Constants.FLASH_TICK_TYPE) {
             return true;
         } else {
             return false;

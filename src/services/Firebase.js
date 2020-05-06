@@ -49,9 +49,7 @@ class Firebase {
     writeAscents(ascent) {
         return this.db
             .collection(`users/${this.auth.currentUser.uid}/ascents`)
-            .add({
-                ascent,
-            });
+            .add(ascent);
     }
 
     async getCurrentUserAscents() {
@@ -69,6 +67,19 @@ class Firebase {
 
     async getRouteAscents() {
         const ascentsRef = this.ascentsRef().where('isBoulder', '==', false);
+
+        const response = await ascentsRef.get().then(function (querySnapshot) {
+            let ascents = [];
+            querySnapshot.forEach(function (doc) {
+                ascents.push(doc.data());
+            });
+            return ascents;
+        });
+        return response;
+    }
+
+    async getBoulderAscents() {
+        const ascentsRef = this.ascentsRef().where('isBoulder', '==', true);
 
         const response = await ascentsRef.get().then(function (querySnapshot) {
             let ascents = [];
