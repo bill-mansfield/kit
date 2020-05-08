@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firebase-firestore';
 import 'firebase/firebase-storage';
+import * as Constants from '../utils/Constants';
 
 const config = {
     apiKey: 'AIzaSyD0YqoUlO-xijvUZUgTNxdRfRwapoTKVnw',
@@ -48,64 +49,64 @@ class Firebase {
         );
     }
 
+    successfulAscentsRef() {
+        return this.ascentsRef().where(
+            'ascentType',
+            'in',
+            Constants.SUCCESSFUL_TICK_TYPE,
+        );
+    }
+
     writeAscents(ascent) {
         return this.db
             .collection(`users/${this.auth.currentUser.uid}/ascents`)
             .add(ascent);
     }
 
-    async getCurrentUserAscents() {
+    async getAllAscents() {
         const ascentsRef = this.ascentsRef();
-
-        const response = await ascentsRef.get().then(function (querySnapshot) {
-            let ascents = [];
-            querySnapshot.forEach(function (doc) {
-                ascents.push(doc.data());
-            });
-            return ascents;
-        });
-        return response;
+        return await this.getRequestAscents(ascentsRef);
     }
 
     async getRouteAscents() {
         const ascentsRef = this.ascentsRef().where('isBoulder', '==', false);
-
-        const response = await ascentsRef.get().then(function (querySnapshot) {
-            let ascents = [];
-            querySnapshot.forEach(function (doc) {
-                ascents.push(doc.data());
-            });
-            return ascents;
-        });
-        return response;
+        return await this.getRequestAscents(ascentsRef);
     }
 
     async getBoulderAscents() {
         const ascentsRef = this.ascentsRef().where('isBoulder', '==', true);
-
-        const response = await ascentsRef.get().then(function (querySnapshot) {
-            let ascents = [];
-            querySnapshot.forEach(function (doc) {
-                ascents.push(doc.data());
-            });
-            return ascents;
-        });
-        return response;
+        return await this.getRequestAscents(ascentsRef);
     }
 
-    async getAllAscentsOfTickType(tickType) {
+    async getAscentsOfTickType(tickType) {
         const ascentsRef = this.ascentsRef().where(
             'ascentType',
             '==',
             tickType,
         );
+        return await this.getRequestAscents(ascentsRef);
+    }
 
-        const response = await ascentsRef.get().then(function (querySnapshot) {
-            let ascentsByType = [];
+    async getSuccessfulAscents() {
+        const ascentsRef = this.successfulAscentsRef();
+        return await this.getRequestAscents(ascentsRef);
+    }
+
+    async getSuccessfulBoulderAscents() {
+        const ascentsRef = this.ascentsRef()
+            .where('ascentType', 'in', Constants.SUCCESSFUL_TICK_TYPE)
+            .where('isBoulder', '==', true);
+        return await this.getRequestAscents(ascentsRef);
+    }
+
+    async getRequestAscents(ref) {
+        const response = await ref.get().then(function (querySnapshot) {
+            let ascents = [];
+
             querySnapshot.forEach(function (doc) {
-                ascentsByType.push(doc.data());
+                ascents.push(doc.data());
             });
-            return ascentsByType;
+            return ascents;
         });
         return response;
     }

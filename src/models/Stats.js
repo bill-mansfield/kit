@@ -5,68 +5,38 @@ import Utils from '../utils/Utils';
 class Stats {
     // Total Metres climbed method
     async getTotalMetersClimbed() {
-        const result = await Firebase.getCurrentUserAscents();
-        let totalHeight = 0;
+        const ascents = await Firebase.getAllAscents();
+        let heights = [];
 
-        for (let i = 0; i < result.length; i++) {
-            let height = result[i].routeHeight;
-            totalHeight += height;
+        for (const ascent of ascents) {
+            heights.push(ascent.routeHeight);
         }
-        return totalHeight;
+
+        return heights.reduce((totalHeight, height) => totalHeight + height);
     }
 
     async getSuccessfulAscents() {
-        const result = await Firebase.getCurrentUserAscents();
-        let successfulAscents = 0;
-        for (let i = 0; i < result.length; i++) {
-            if (Utils.successfulTickType(result[i].ascentType)) {
-                successfulAscents++;
-            }
-        }
-        return successfulAscents;
-    }
-
-    async getHardestRouteAscent() {
-        const result = await Firebase.getRouteAscents();
-        let gradeArr = [];
-
-        for (let i = 0; i < result.length; i++) {
-            let tickType = result[i].ascentType;
-            let gradeValue = result[i].ascentGrade;
-
-            if (Utils.successfulTickType(tickType)) {
-                gradeArr.push(gradeValue);
-            }
-        }
-        return Math.max(...gradeArr);
+        const ascents = await Firebase.getSuccessfulAscents();
+        return ascents.length;
     }
 
     async getHardestBoulderAscent() {
-        const result = await Firebase.getBoulderAscents();
-        let gradeArr = [];
-
-        for (let i = 0; i < result.length; i++) {
-            let tickType = result[i].ascentType;
-            let gradeValue = result[i].ascentGrade;
-
-            if (Utils.successfulTickType(tickType)) {
-                gradeValue = gradeValue.slice(1);
-                gradeArr.push(parseInt(gradeValue));
-            }
-        }
-        let hardestBoulderAscent = Math.max(...gradeArr);
-        return 'V' + hardestBoulderAscent;
+        const ascents = await Firebase.getSuccessfulBoulderAscents();
+        let gradeArr = ascents.map(ascent =>
+            parseInt(ascent.ascentGrade.slice(1)),
+        );
+        return 'V' + Math.max(...gradeArr);
     }
 
     async getFavouriteAreas() {
-        const ascents = await Firebase.getCurrentUserAscents();
+        const ascents = await Firebase.getAllAscents();
         let areas = [];
 
         for (const ascent of ascents) {
             let cragName = ascent.cragName;
 
             if (areas.includes(cragName) === false) {
-                if (cragName != undefined) {
+                if (cragName !== undefined) {
                     areas.push(cragName);
                 }
             }
@@ -75,7 +45,7 @@ class Stats {
     }
 
     async getHardestTickType(tickType) {
-        let tickTypeAscents = await Firebase.getAllAscentsOfTickType(tickType);
+        let tickTypeAscents = await Firebase.getAscentsOfTickType(tickType);
 
         let gradeArr = tickTypeAscents.map(function (ascent) {
             return ascent.ascentGrade;
