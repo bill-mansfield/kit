@@ -9,14 +9,14 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
-import firebase from '../../services/firebase';
+import Firebase from '../../services/Firebase';
 import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
 import IconAvatar from '../icon-avatar';
 import FlexRow from '../layouts/flex-row';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     form: {
         width: '50%',
         '& > label': {
@@ -34,7 +34,6 @@ export default withRouter(function Register(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [quote, setQuote] = useState('');
     const [waiting, setWaiting] = useState(false);
 
     return (
@@ -46,7 +45,7 @@ export default withRouter(function Register(props) {
                     <Typography variant="h1">Register Account</Typography>
                     <form
                         className={classes.form}
-                        onSubmit={(e) => e.preventDefault() && false}
+                        onSubmit={e => e.preventDefault() && false}
                     >
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="name">Name</InputLabel>
@@ -56,7 +55,7 @@ export default withRouter(function Register(props) {
                                 autoComplete="off"
                                 autoFocus
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={e => setName(e.target.value)}
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
@@ -68,31 +67,20 @@ export default withRouter(function Register(props) {
                                 name="email"
                                 autoComplete="off"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={e => setEmail(e.target.value)}
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="password">
+                                Password
+                            </InputLabel>
                             <Input
                                 name="password"
                                 type="password"
                                 id="password"
                                 autoComplete="off"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="quote">
-                                Your Favorite Quote
-                            </InputLabel>
-                            <Input
-                                name="quote"
-                                type="text"
-                                id="quote"
-                                autoComplete="off"
-                                value={quote}
-                                onChange={(e) => setQuote(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                             />
                         </FormControl>
 
@@ -133,9 +121,8 @@ export default withRouter(function Register(props) {
     async function onRegister() {
         setWaiting(true);
         try {
-            await firebase.register(name, email, password);
-            await firebase.addQuote(quote);
-            await firebase.login(email, password);
+            await Firebase.register(name, email, password);
+            await Firebase.login(email, password);
             props.history.replace('/uploader');
         } catch (error) {
             alert(error.message);

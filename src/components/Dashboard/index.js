@@ -1,35 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import firebase from '../../services/firebase';
+import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import MetresClimbed from './stats/metres-climbed';
-import HardestAscent from './stats/hardest-ascent';
+import HardestAscents from './stats/hardest-ascents';
 import SuccessfulAscents from './stats/successful-ascents';
 import HardestFlash from './stats/hardest-flash';
 import HardestOnsight from './stats/hardest-onsight';
 import FavouriteAreas from './stats/favourite-areas';
-import RouteBar from './charts/gradebar/route-bar';
-import BoulderingBar from './charts/gradebar/boulder-bar';
-import RouteLine from './charts/gradeLine/route-line';
-import VolumeBar from './charts/volumeBar/volumeBar';
+import RouteBar from './charts/route-bar';
+import BoulderingBar from './charts/boulder-bar';
+import RouteLine from './charts/route-line';
+import VolumeBar from './charts/volume-bar';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(theme => ({}));
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
     const [quote, setQuote] = useState('');
 
     useEffect(() => {
-        if (!firebase.getCurrentUsername()) {
+        if (!Firebase.getCurrentUsername()) {
             // not logged in
             alert('Please login first');
             props.history.replace('/login');
-        } else {
-            firebase.getCurrentUserQuote().then(setQuote);
         }
     }, [quote]);
 
@@ -45,16 +43,8 @@ export default withRouter(function Dashboard(props) {
                 <FlexRow>
                     <FlexColumn>
                         <Typography variant="h1">
-                            Hello {firebase.getCurrentUsername()}, welcome to
+                            Hello {Firebase.getCurrentUsername()}, welcome to
                             your dashboard
-                        </Typography>
-                        <Typography variant="h2">
-                            Your quote:{' '}
-                            {quote ? (
-                                `"${quote}"`
-                            ) : (
-                                <CircularProgress size={20} />
-                            )}
                         </Typography>
                     </FlexColumn>
                 </FlexRow>
@@ -62,7 +52,7 @@ export default withRouter(function Dashboard(props) {
                     <FlexColumn>
                         <MetresClimbed />
                         <SuccessfulAscents />
-                        <HardestAscent />
+                        <HardestAscents />
                         <HardestFlash />
                         <HardestOnsight />
                         <FavouriteAreas />
@@ -80,7 +70,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <RouteLine />
+                    {/* <RouteLine /> */}
                 </FlexRow>
                 <FlexRow
                     style={{
@@ -88,7 +78,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <VolumeBar />
+                    {/* <VolumeBar /> */}
                 </FlexRow>
             </FlexColumn>
             <FlexColumn
@@ -102,8 +92,8 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <RouteBar />
-                    <BoulderingBar />
+                    {/* <RouteBar />
+                    <BoulderingBar /> */}
                 </FlexRow>
             </FlexColumn>
         </>

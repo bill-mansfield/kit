@@ -1,7 +1,7 @@
 import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
 
-class Ascents {
+class Utils {
     turnPinkPointsRed(tickType) {
         if (tickType === 'Pink point') {
             tickType = 'Red point';
@@ -166,18 +166,7 @@ class Ascents {
     }
 
     successfulTickType(ascentType) {
-        const successfulTickTypes = [
-            'Red point',
-            'Pink point',
-            'Onsight',
-            'Flash',
-            'Tick',
-            'Deep water solo',
-            'Ground up red point',
-            'Top rope',
-        ];
-
-        if (successfulTickTypes.includes(ascentType)) {
+        if (Constants.SUCCESSFUL_TICK_TYPE.includes(ascentType)) {
             return true;
         } else {
             return false;
@@ -185,9 +174,7 @@ class Ascents {
     }
 
     isOnsight(ascentType) {
-        const onsightTickType = 'Onsight';
-
-        if (ascentType === onsightTickType) {
+        if (ascentType === Constants.ONSIGHT_TICK_TYPE) {
             return true;
         } else {
             return false;
@@ -195,9 +182,7 @@ class Ascents {
     }
 
     isFlash(ascentType) {
-        const flashTickType = 'Flash';
-
-        if (ascentType === flashTickType) {
+        if (ascentType === Constants.FLASH_TICK_TYPE) {
             return true;
         } else {
             return false;
@@ -213,4 +198,4 @@ class Ascents {
     }
 }
 
-export default new Ascents();
+export default new Utils();

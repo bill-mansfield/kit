@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Dropzone from 'react-dropzone-uploader';
 import Papa from 'papaparse';
-import firebase from '../../services/firebase';
+import Firebase from '../../services/Firebase';
+import Ascents from '../../models/Ascents';
 import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     preview: {
         padding: '50px 3%',
         borderBottom: 'none',
-        '& > span':{
+        '& > span': {
             color: theme.palette.primary.text,
         },
         '& > div > progress': {
@@ -39,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
         },
         '& > div > span': {
             backgroundImage: 'none !important',
-        }
-    }
+        },
+    },
 }));
 
 export default withRouter(function UploaderComponent(props) {
@@ -48,8 +49,8 @@ export default withRouter(function UploaderComponent(props) {
     const [awaitingUpload, setAwaitingUpload] = useState(true);
 
     const onUpload = () => {
-        props.history.replace('/dashboard')
-    }
+        props.history.replace('/dashboard');
+    };
 
     const getUploadParams = ({ meta }) => {
         return { url: 'https://httpbin.org/post' };
@@ -57,16 +58,12 @@ export default withRouter(function UploaderComponent(props) {
 
     const storeAscents = (file) => {
         Papa.parse(file, {
-            complete: function(results) {
-                let numberOfAscents = results.data.length
-                for (let i = 0; i < numberOfAscents; i++) {
-                    firebase.addAscents(results.data[i]);
-                    console.log('climb logged');
-                }
+            complete: function (parsedResults) {
+                Ascents.validateAscentData(parsedResults);
                 onUpload();
-            }
+            },
         });
-    }
+    };
 
     const handleChangeStatus = ({ meta, file }, status) => {
         console.log(status, meta, file);
@@ -101,12 +98,9 @@ export default withRouter(function UploaderComponent(props) {
                 }}
                 styles={{
                     inputLabel: (files, extra) =>
-                        extra.reject 
-                            ? { color: 'red' }
-                            : { color: 'white' },
+                        extra.reject ? { color: 'red' } : { color: 'white' },
                 }}
             />
         </>
     );
-    
 });
