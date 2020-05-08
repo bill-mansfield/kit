@@ -37,13 +37,15 @@ class Firebase {
     }
 
     isInitialized() {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             this.auth.onAuthStateChanged(resolve);
         });
     }
 
     ascentsRef() {
-        return this.db.collection(`users/${this.auth.currentUser.uid}/ascents`);
+        return this.db.collection(
+            `users/${this.auth.currentUser.uid}/ascents`,
+        );
     }
 
     writeAscents(ascent) {
@@ -91,25 +93,25 @@ class Firebase {
         return response;
     }
 
+    async getAllAscentsOfTickType(tickType) {
+        const ascentsRef = this.ascentsRef().where(
+            'ascentType',
+            '==',
+            tickType,
+        );
+
+        const response = await ascentsRef.get().then(function (querySnapshot) {
+            let ascentsByType = [];
+            querySnapshot.forEach(function (doc) {
+                ascentsByType.push(doc.data());
+            });
+            return ascentsByType;
+        });
+        return response;
+    }
+
     getCurrentUsername() {
         return this.auth.currentUser && this.auth.currentUser.displayName;
-    }
-
-    addQuote(quote) {
-        if (!this.auth.currentUser) {
-            return alert('Not authorized');
-        }
-
-        return this.db.doc(`users_quote/${this.auth.currentUser.uid}`).set({
-            quote,
-        });
-    }
-
-    async getCurrentUserQuote() {
-        const quote = await this.db
-            .doc(`users_quote/${this.auth.currentUser.uid}`)
-            .get();
-        return quote.get('quote');
     }
 }
 

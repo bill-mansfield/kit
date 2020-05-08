@@ -58,22 +58,29 @@ class Stats {
         return 'V' + hardestBoulderAscent;
     }
 
-    async getHardestRouteFlash() {
-        const result = await Firebase.getRouteAscents();
-        let gradeArr = [];
+    async getFavouriteAreas() {
+        const ascents = await Firebase.getCurrentUserAscents();
+        let areas = [];
 
-        for (let i = 0; i < result.length - 1; i++) {
-            if (Utils.isFlash(result.ascentType)) {
-                gradeArr.push(result.routeGrade);
+        for (const ascent of ascents) {
+            let cragName = ascent.cragName;
+
+            if (areas.includes(cragName) === false) {
+                if (cragName != undefined) {
+                    areas.push(cragName);
+                }
             }
         }
-        let hardestRouteFlash = 0;
-        if (Math.max(...gradeArr) > 0) {
-            hardestRouteFlash = Math.max(...gradeArr);
-        } else {
-            hardestRouteFlash = 'No Route Flashes';
-        }
-        return hardestRouteFlash;
+        return areas;
+    }
+
+    async getHardestTickType(tickType) {
+        let tickTypeAscents = await Firebase.getAllAscentsOfTickType(tickType);
+
+        let gradeArr = tickTypeAscents.map(function (ascent) {
+            return ascent.ascentGrade;
+        });
+        return Math.max(...gradeArr);
     }
 }
 

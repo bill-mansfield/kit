@@ -22,7 +22,7 @@ class Ascents {
         ascentObj.name = ascent[0];
         ascentObj.ascentId = ascent[1];
         ascentObj.ascentLink = ascent[2];
-        ascentObj.ascentType = ascent[3];
+        ascentObj.ascentType = this.sanitiseAscentType(ascent[3]);
         ascentObj.ascentGrade = this.saveGradesInAus(ascent[4]);
         ascentObj.isBoulder = this.isBoulder(ascent[4]);
         ascentObj.numberOfAscents = ascent[5];
@@ -46,8 +46,15 @@ class Ascents {
         ascentObj.tripName = ascent[23];
         ascentObj.tripId = ascent[24];
         ascentObj.tripLink = ascent[25];
-
         Firebase.writeAscents(ascentObj);
+    }
+
+    sanitiseAscentType(ascentType) {
+        if (ascentType === 'Pink point') {
+            return 'Red point';
+        } else {
+            return ascentType;
+        }
     }
 
     sanitiseHeight(height) {

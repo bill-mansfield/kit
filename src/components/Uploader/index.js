@@ -6,7 +6,7 @@ import FlexColumn from '../layouts/flex-column';
 import UploaderComponent from '../Uploader/uploader';
 import Navbar from '../Nav/navbar';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(theme => ({}));
 
 export default function Uploader(props) {
     const classes = useStyles();
@@ -17,8 +17,6 @@ export default function Uploader(props) {
             // not logged in
             alert('Please login first');
             props.history.replace('/login');
-        } else {
-            Firebase.getCurrentUserQuote().then(setQuote);
         }
     }, [quote]);
 

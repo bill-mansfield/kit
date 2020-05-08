@@ -17,7 +17,7 @@ import BoulderingBar from './charts/boulder-bar';
 import RouteLine from './charts/route-line';
 import VolumeBar from './charts/volume-bar';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(theme => ({}));
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
@@ -28,8 +28,6 @@ export default withRouter(function Dashboard(props) {
             // not logged in
             alert('Please login first');
             props.history.replace('/login');
-        } else {
-            Firebase.getCurrentUserQuote().then(setQuote);
         }
     }, [quote]);
 
@@ -48,14 +46,6 @@ export default withRouter(function Dashboard(props) {
                             Hello {Firebase.getCurrentUsername()}, welcome to
                             your dashboard
                         </Typography>
-                        <Typography variant="h2">
-                            Your quote:{' '}
-                            {quote ? (
-                                `"${quote}"`
-                            ) : (
-                                <CircularProgress size={20} />
-                            )}
-                        </Typography>
                     </FlexColumn>
                 </FlexRow>
                 <FlexRow>
@@ -64,8 +54,8 @@ export default withRouter(function Dashboard(props) {
                         <SuccessfulAscents />
                         <HardestAscents />
                         <HardestFlash />
-                        {/* <HardestOnsight /> */}
-                        {/* <FavouriteAreas /> */}
+                        <HardestOnsight />
+                        <FavouriteAreas />
                     </FlexColumn>
                 </FlexRow>
             </FlexColumn>
