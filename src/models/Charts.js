@@ -6,15 +6,7 @@ import Utils from '../utils/Utils.js';
 class Charts {
     async getBarData(style) {
         //Determine if route data or bouldering data is requested
-        if (style === 'Route') {
-            const ascents = await Firebase.getRouteAscents();
-        } else if (style === 'Boulder') {
-            const ascents = await Firebase.getBoulderAscents();
-        } else {
-            return null;
-        }
-
-        const ascents = await Firebase.getRouteAscents();
+        let ascents = await Utils.getAscentsByStyle(style);
         let gradeArr = [];
         let gradeRefArr = [];
 
@@ -23,7 +15,11 @@ class Charts {
 
             //Create grade object to store record of how many ascents of each
             //tick type
-            gradeObj.Grade = ascent.ascentGrade;
+            if (style === 'Route') {
+                gradeObj.Grade = ascent.ascentGrade;
+            } else {
+                gradeObj.Grade = parseInt(ascent.ascentGrade.slice(1));
+            }
             gradeObj.Onsight = 0;
             gradeObj.Flash = 0;
             gradeObj.Redpoint = 0;
@@ -44,8 +40,11 @@ class Charts {
             gradeArr = Utils.incrementTickType(
                 gradeArr,
                 ascent.ascentType,
-                ascent.ascentGrade,
+                gradeObj.Grade,
             );
+        }
+        if (style !== 'Route') {
+            gradeArr = Utils.addTheVee(gradeArr);
         }
         return gradeArr;
     }

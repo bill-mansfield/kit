@@ -1,7 +1,16 @@
 import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
+import Firebase from '../services/Firebase.js';
 
 class Utils {
+    async getAscentsByStyle(style) {
+        if (style === 'Route') {
+            return await Firebase.getRouteAscents();
+        } else {
+            return await Firebase.getBoulderAscents();
+        }
+    }
+
     turnPinkPointsRed(tickType) {
         if (tickType === 'Pink point') {
             tickType = 'Red point';
@@ -101,7 +110,7 @@ class Utils {
     convertGradeToAus(gradeValue) {
         if (
             gradeValue != undefined &&
-            Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
+            Constants.FRENCH_GRADE_IDENTIFYER.some(el =>
                 gradeValue.includes(el),
             ) &&
             gradeValue.includes('.') === false
@@ -114,6 +123,13 @@ class Utils {
         } else {
             return gradeValue;
         }
+    }
+
+    addTheVee(gradeArray) {
+        for (const gradeObject of gradeArray) {
+            gradeObject.Grade = 'V' + gradeObject.Grade;
+        }
+        return gradeArray;
     }
 
     incrementTickType(gradeArray, tickType, gradeValue) {

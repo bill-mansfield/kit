@@ -12,59 +12,6 @@ export default function BoulderBar() {
     useEffect(() => {
         const fetchData = async () => {
             setData(await Charts.getBarData('Boulder'));
-            //const result = await Firebase.getCurrentUserAscents();
-            //let gradeArr = [];
-            //let gradeRefArr = [];
-            //// Starts at 1 as the first row of the CSV(result) is column titles
-            //for (let i = 1; i < result.length; i++) {
-            //    let ascent = result[i].file;
-            //    let gradeValue = ascent[9];
-            //    let tickType = ascent[3];
-
-            //    // Remove the 'V' from grading for sorting simplicity
-            //    // Skip over undefined cases
-            //    if (gradeValue != undefined) {
-            //        if (
-            //            gradeValue.includes('V') === false ||
-            //            ascent[0] === ''
-            //        ) {
-            //            continue;
-            //        } else {
-            //            gradeValue = gradeValue.replace('V', '');
-            //        }
-            //    } else {
-            //        continue;
-            //    }
-            //    if (gradeRefArr.includes(gradeValue) === false) {
-            //        //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade object in gradeArr..
-            //        gradeRefArr.push(gradeValue);
-            //        gradeArr.push(
-            //            new Object({
-            //                Grade: gradeValue,
-            //                Onsight: 0,
-            //                Flash: 0,
-            //                Send: 0,
-            //                Tick: 0,
-            //                Repeat: 0,
-            //                Unsuccessful: 0,
-            //            }),
-            //        );
-            //        Ascents.incrementTickType(gradeArr, tickType, gradeValue);
-            //    } else if (gradeRefArr.includes(gradeValue)) {
-            //        Ascents.incrementTickType(gradeArr, tickType, gradeValue);
-            //    }
-            //}
-            //// Order the grades from lowest to highests
-            //gradeArr.sort(function (a, b) {
-            //    return a.Grade - b.Grade;
-            //});
-
-            //// Put back the V from the grade that was previously removed
-            //for (let i = 0; i < gradeArr.length; i++) {
-            //    let theV = 'V';
-            //    gradeArr[i].Grade = theV += gradeArr[i].Grade;
-            //}
-            //setData(gradeArr);
         };
         fetchData();
     }, []);
@@ -74,7 +21,7 @@ export default function BoulderBar() {
     };
 
     const renderChart = () => {
-        if (data.length === 0) {
+        if (data === undefined) {
             return null;
         } else {
             return (
