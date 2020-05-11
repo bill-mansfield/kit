@@ -17,7 +17,7 @@ import BoulderingBar from './charts/boulder-bar';
 import RouteLine from './charts/route-line';
 import VolumeBar from './charts/volume-bar';
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles((theme) => ({}));
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
@@ -29,7 +29,7 @@ export default withRouter(function Dashboard(props) {
             alert('Please login first');
             props.history.replace('/login');
         }
-    }, [quote]);
+    }, [props.history, quote]);
 
     return (
         <>
@@ -92,8 +92,8 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <RouteBar />
-                    <BoulderingBar /> */}
+                    <RouteBar />
+                    <BoulderingBar />
                 </FlexRow>
             </FlexColumn>
         </>

@@ -68,6 +68,8 @@ class Utils {
                     }
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -145,9 +147,19 @@ class Utils {
                     case 'Unsuccessful':
                         gradeArray[i].Unsuccessful++;
                         break;
+                    default:
+                        break;
                 }
             }
         }
+        return this.sortGradeArrByGrade(gradeArray);
+    }
+
+    sortGradeArrByGrade(gradeArray) {
+        gradeArray.sort((a, b) => {
+            return a.Grade - b.Grade;
+        });
+        return gradeArray;
     }
 
     notableTickType(ascentType) {

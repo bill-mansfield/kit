@@ -3,6 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import Firebase from '../../../services/Firebase';
 import Ascents from '../../../models/Ascents';
 import * as Constants from '../../../utils/Constants';
+import Charts from '../../../models/Charts.js';
 
 export default function RouteBar() {
     const [data, setData] = useState([
@@ -11,64 +12,7 @@ export default function RouteBar() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await Firebase.getCurrentUserAscents();
-            let gradeArr = [];
-            let gradeRefArr = [];
-            // Starts at 1 as the first row of the CSV(result) is column titles
-            for (let i = 1; i < result.length; i++) {
-                let ascent = result[i].file;
-                let gradeValue = ascent[9];
-                let tickType = ascent[3];
-
-                if (
-                    gradeValue != undefined &&
-                    Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
-                        gradeValue.includes(el),
-                    )
-                ) {
-                    continue;
-                }
-
-                // Remove boulder ascents/undefined/empty string cases
-                if (
-                    (gradeValue != undefined && gradeValue.includes('V')) ||
-                    ascent[0] === ''
-                ) {
-                    continue;
-                }
-
-                gradeValue = Ascents.convertGradeToAus(gradeValue);
-
-                // Remove half and half grades where the conversion returns a split e.g 5.11c = 21/22
-                if (gradeValue.includes('/')) {
-                    gradeValue = Ascents.roundDownSplitGrades(gradeValue);
-                }
-
-                if (gradeRefArr.includes(gradeValue) === false) {
-                    //GradeRefArr is a referance array to check if there are any ascents recorded for that grade type, if not; create grade.
-                    gradeRefArr.push(gradeValue);
-                    gradeArr.push(
-                        new Object({
-                            Grade: gradeValue,
-                            Onsight: 0,
-                            Flash: 0,
-                            Redpoint: 0,
-                            Tick: 0,
-                            Unsuccessful: 0,
-                        }),
-                    );
-                    Ascents.incrementTickType(gradeArr, tickType, gradeValue);
-                } else if (gradeRefArr.includes(gradeValue)) {
-                    Ascents.incrementTickType(gradeArr, tickType, gradeValue);
-                }
-            }
-            // Arrange grades in consecutive order
-            gradeArr.sort(function (a, b) {
-                return a.Grade - b.Grade;
-            });
-            if (gradeArr.length != 0) {
-                setData(gradeArr);
-            }
+            setData(await Charts.getBarData('Route'));
         };
         fetchData();
     }, []);
@@ -78,7 +22,7 @@ export default function RouteBar() {
     };
 
     const renderChart = () => {
-        if (data.length === 0) {
+        if (data === undefined) {
             return null;
         } else {
             return (

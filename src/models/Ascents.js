@@ -66,7 +66,7 @@ class Ascents {
     }
 
     isBoulder(grade) {
-        if (grade != undefined && grade.includes('V')) {
+        if (grade !== undefined && grade.includes('V')) {
             return true;
         } else {
             return false;

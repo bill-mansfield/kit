@@ -1,6 +1,4 @@
-import * as Constants from '../utils/Constants';
 import Firebase from '../services/Firebase';
-import Utils from '../utils/Utils';
 
 class Stats {
     // Total Metres climbed method
@@ -11,7 +9,6 @@ class Stats {
         for (const ascent of ascents) {
             heights.push(ascent.routeHeight);
         }
-
         return heights.reduce((totalHeight, height) => totalHeight + height);
     }
 
@@ -22,7 +19,7 @@ class Stats {
 
     async getHardestBoulderAscent() {
         const ascents = await Firebase.getSuccessfulBoulderAscents();
-        let gradeArr = ascents.map(ascent =>
+        let gradeArr = ascents.map((ascent) =>
             parseInt(ascent.ascentGrade.slice(1)),
         );
         return 'V' + Math.max(...gradeArr);
