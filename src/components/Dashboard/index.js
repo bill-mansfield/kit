@@ -17,7 +17,7 @@ import BoulderingBar from './charts/boulder-bar';
 import RouteLine from './charts/route-line';
 import VolumeBar from './charts/volume-bar';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(theme => ({}));
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
@@ -70,7 +70,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <RouteLine /> */}
+                    <RouteLine />
                 </FlexRow>
                 <FlexRow
                     style={{
@@ -78,7 +78,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <VolumeBar /> */}
+                    <VolumeBar />
                 </FlexRow>
             </FlexColumn>
             <FlexColumn

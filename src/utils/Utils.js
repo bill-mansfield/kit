@@ -110,7 +110,7 @@ class Utils {
     convertGradeToAus(gradeValue) {
         if (
             gradeValue != undefined &&
-            Constants.FRENCH_GRADE_IDENTIFYER.some(el =>
+            Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
                 gradeValue.includes(el),
             ) &&
             gradeValue.includes('.') === false

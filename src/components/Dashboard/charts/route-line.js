@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import Firebase from '../../../services/Firebase';
-import Ascents from '../../../models/Ascents';
-import * as Constants from '../../../utils/Constants';
+import Charts from '../../../models/Charts';
 
 export default function RouteLine() {
     const [data, setData] = useState([
@@ -31,55 +29,7 @@ export default function RouteLine() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await Firebase.getCurrentUserAscents();
-            let tickTypeRefArr = [];
-            let tickTypeArr = [];
-            let highestOnsights = [];
-            let highestFlashes = [];
-            let highestRedPoints = [];
-            // Starts at 1 as the first row of the CSV(result) is column titles
-            for (let i = 1; i < result.length; i++) {
-                let ascent = result[i].file;
-                let gradeValue = ascent[9];
-                let tickType = ascent[3];
-                let ascentDate = ascent[21];
-
-                if (gradeValue != undefined) {
-                    // Remove boulder ascents/trash grades/empty string cases
-                    if (
-                        Constants.TRASH_GRADE_IDENTIFYER.some((el) =>
-                            gradeValue.includes(el),
-                        ) ||
-                        gradeValue.includes('V') ||
-                        ascent[0] === ''
-                    ) {
-                        continue;
-                    }
-                }
-
-                tickType = Ascents.turnPinkPointsRed(tickType);
-                gradeValue = Ascents.convertGradeToAus(gradeValue);
-
-                if (tickTypeRefArr.includes(tickType) === false) {
-                    if (Ascents.notableTickType(tickType)) {
-                        tickTypeRefArr.push(tickType);
-                        let tickTypeObj = {};
-                        tickTypeObj.id = tickType;
-                        tickTypeArr.push(tickTypeObj);
-                    }
-                }
-
-                Ascents.logAscentfForTickType(
-                    tickType,
-                    ascentDate,
-                    gradeValue,
-                    tickTypeArr,
-                    highestOnsights,
-                    highestFlashes,
-                    highestRedPoints,
-                );
-            }
-            setData(tickTypeArr);
+            setData(await Charts.getLineData('Route'));
         };
         fetchData();
     }, []);
@@ -91,7 +41,7 @@ export default function RouteLine() {
     const yscale = 13;
 
     const renderChart = () => {
-        if (data.length === 0) {
+        if (data === undefined) {
             return null;
         } else {
             return (

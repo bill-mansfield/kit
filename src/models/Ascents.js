@@ -40,13 +40,19 @@ class Ascents {
         ascentObj.climbedWith = ascent[17];
         ascentObj.comment = ascent[18];
         ascentObj.quality = ascent[19];
-        ascentObj.ascentDate = ascent[20];
+        ascentObj.ascentDate = this.sanitiseDate(ascent[20]);
         ascentObj.logDate = ascent[21];
         ascentObj.shot = ascent[22];
         ascentObj.tripName = ascent[23];
         ascentObj.tripId = ascent[24];
         ascentObj.tripLink = ascent[25];
         Firebase.writeAscents(ascentObj);
+    }
+
+    sanitiseDate(ascentDate) {
+        if (ascentDate != undefined && ascentDate != 'Log Date') {
+            return ascentDate.slice(0, 7);
+        }
     }
 
     sanitiseAscentType(ascentType) {
