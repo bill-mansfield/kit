@@ -70,7 +70,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <RouteLine />
+                    {/* <RouteLine /> */}
                 </FlexRow>
                 <FlexRow
                     style={{
@@ -78,7 +78,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <VolumeBar />
+                    {/* <VolumeBar /> */}
                 </FlexRow>
             </FlexColumn>
             <FlexColumn
@@ -92,7 +92,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    <RouteBar />
+                    {/* <RouteBar /> */}
                     <BoulderingBar />
                 </FlexRow>
             </FlexColumn>

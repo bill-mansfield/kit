@@ -29,6 +29,7 @@ export default function RouteLine() {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log(await Charts.getLineData('Route'));
             setData(await Charts.getLineData('Route'));
         };
         fetchData();

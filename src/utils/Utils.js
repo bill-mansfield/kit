@@ -31,7 +31,7 @@ class Utils {
         let gradeAndTime = {};
 
         if (ascentDate != undefined) {
-            gradeAndTime.x = ascentDate.slice(0, 10);
+            gradeAndTime.x = ascentDate + '-01';
         }
         if (this.isANumber(gradeValue)) {
             gradeAndTime.y = gradeValue;
@@ -110,7 +110,7 @@ class Utils {
     convertGradeToAus(gradeValue) {
         if (
             gradeValue != undefined &&
-            Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
+            Constants.FRENCH_GRADE_IDENTIFYER.some(el =>
                 gradeValue.includes(el),
             ) &&
             gradeValue.includes('.') === false

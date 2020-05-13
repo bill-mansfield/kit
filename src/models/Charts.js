@@ -99,7 +99,6 @@ class Charts {
         ascentDateArr.sort((a, b) => {
             return new Date(a) - new Date(b);
         });
-        console.log(ascentDateArr);
 
         //The following code is spaghetti
         //It takes all the ascents and records amount of acents in each month
@@ -125,7 +124,6 @@ class Charts {
         ascentDateArr.sort((a, b) => {
             return new Date(a) - new Date(b);
         });
-        console.log(ascentDateArr);
 
         let counts = {};
         ascentDateArr.forEach(function (x) {
@@ -140,14 +138,13 @@ class Charts {
             ascentObj.y = ascentArr[i][1] - 1; // Extra ascent removed as one was added during additon of null ascent months
             ascentFinalArr.push(ascentObj);
         }
-        console.log(ascentFinalArr);
+
         // Nest data in required nivo format
         let finalObj = {};
         let lastArr = [];
         finalObj.id = 'Number of ascents';
         finalObj.data = ascentFinalArr;
         lastArr.push(finalObj);
-        console.log(lastArr);
         return lastArr;
     }
 }

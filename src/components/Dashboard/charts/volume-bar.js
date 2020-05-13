@@ -15,7 +15,6 @@ export default function VolumeBar() {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(await Charts.getVolumeData('Route'));
             setData(await Charts.getVolumeData('Route'));
         };
         fetchData();
@@ -48,7 +47,7 @@ export default function VolumeBar() {
                         max: 'auto',
                     }}
                     axisLeft={null}
-                    axisBottom={{ format: 'native' }}
+                    axisBottom={null}
                     colors={{ scheme: 'nivo' }}
                     pointSize={10}
                     pointColor={{ theme: 'background' }}
