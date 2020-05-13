@@ -30,7 +30,7 @@ class Utils {
     ) {
         let gradeAndTime = {};
 
-        if (ascentDate != undefined) {
+        if (ascentDate !== undefined) {
             gradeAndTime.x = ascentDate + '-01';
         }
         if (this.isANumber(gradeValue)) {
@@ -109,15 +109,15 @@ class Utils {
 
     convertGradeToAus(gradeValue) {
         if (
-            gradeValue != undefined &&
-            Constants.FRENCH_GRADE_IDENTIFYER.some(el =>
+            gradeValue !== undefined &&
+            Constants.FRENCH_GRADE_IDENTIFYER.some((el) =>
                 gradeValue.includes(el),
             ) &&
             gradeValue.includes('.') === false
         ) {
             gradeValue = this.getAusGrade(gradeValue, 'french');
             return gradeValue;
-        } else if (gradeValue != undefined && gradeValue.includes('.')) {
+        } else if (gradeValue !== undefined && gradeValue.includes('.')) {
             gradeValue = this.getAusGrade(gradeValue, 'yds');
             return gradeValue;
         } else {
@@ -130,6 +130,23 @@ class Utils {
             gradeObject.Grade = 'V' + gradeObject.Grade;
         }
         return gradeArray;
+    }
+
+    gradesToString(gradeArray) {
+        for (const grade of gradeArray) {
+            grade.Grade = grade.Grade.toString();
+        }
+        return gradeArray;
+    }
+
+    cleanGradeArr(style, gradeArray) {
+        for (const gradeObject of gradeArray) {
+            if (style === 'Route') {
+                gradeObject.Grade = gradeObject.Grade.toString();
+            } else {
+                gradeObject.Grade = 'V' + gradeObject.Grade;
+            }
+        }
     }
 
     incrementTickType(gradeArray, tickType, gradeValue) {

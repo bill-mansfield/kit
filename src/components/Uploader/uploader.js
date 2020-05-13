@@ -1,10 +1,9 @@
 import 'react-dropzone-uploader/dist/styles.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Dropzone from 'react-dropzone-uploader';
 import Papa from 'papaparse';
-import Firebase from '../../services/Firebase';
 import Ascents from '../../models/Ascents';
 import { withRouter } from 'react-router-dom';
 
@@ -46,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default withRouter(function UploaderComponent(props) {
     const classes = useStyles();
-    const [awaitingUpload, setAwaitingUpload] = useState(true);
 
     const onUpload = () => {
         props.history.replace('/dashboard');

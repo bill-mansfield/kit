@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Firebase from '../../../services/Firebase';
 import Stats from '../../../models/Stats';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(theme => ({}));
 
 export default function MetresClimbed() {
     const classes = useStyles();

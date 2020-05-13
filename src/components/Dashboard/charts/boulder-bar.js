@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import Firebase from '../../../services/Firebase';
-import Ascents from '../../../models/Ascents';
 import Charts from '../../../models/Charts.js';
 
 export default function BoulderBar() {
     const [data, setData] = useState([
-        { grade: 'V1', Onsight: 3, Flash: 8, Send: 15 },
+        { Grade: 'V1', Onsight: 3, Flash: 8, Send: 15 },
     ]);
 
     useEffect(() => {
@@ -41,48 +39,6 @@ export default function BoulderBar() {
                     theme={theme}
                     colors={{ scheme: 'nivo' }}
                     layout="horizontal"
-                    defs={[
-                        {
-                            id: 'dots',
-                            type: 'patternDots',
-                            background: 'inherit',
-                            color: '#38bcb2',
-                            size: 4,
-                            padding: 1,
-                            stagger: true,
-                        },
-                        {
-                            id: 'lines',
-                            type: 'patternLines',
-                            background: 'inherit',
-                            color: '#eed312',
-                            rotation: -45,
-                            lineWidth: 6,
-                            spacing: 10,
-                        },
-                    ]}
-                    borderColor={{
-                        from: 'color',
-                        modifiers: [['brighter', 1.6]],
-                    }}
-                    axisTop={null}
-                    axisRight={null}
-                    axisBottom={{
-                        tickSize: 5,
-                        tickPadding: 5,
-                        tickRotation: 0,
-                        legend: 'Ticks',
-                        legendPosition: 'middle',
-                        legendOffset: 32,
-                    }}
-                    axisLeft={{
-                        tickSize: 5,
-                        tickPadding: 5,
-                        tickRotation: 0,
-                        legend: 'Grade',
-                        legendPosition: 'middle',
-                        legendOffset: -40,
-                    }}
                     labelSkipWidth={12}
                     labelSkipHeight={12}
                     labelTextColor={{

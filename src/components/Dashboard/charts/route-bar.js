@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import Firebase from '../../../services/Firebase';
-import Ascents from '../../../models/Ascents';
-import * as Constants from '../../../utils/Constants';
 import Charts from '../../../models/Charts.js';
 
 export default function RouteBar() {
     const [data, setData] = useState([
-        { grade: '16', Onsight: 3, Flash: 8, Redpoint: 15 },
+        { Grade: '16', Onsight: 3, Flash: 8, Redpoint: 15 },
     ]);
 
     useEffect(() => {

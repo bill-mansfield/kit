@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
@@ -17,19 +17,14 @@ import BoulderingBar from './charts/boulder-bar';
 import RouteLine from './charts/route-line';
 import VolumeBar from './charts/volume-bar';
 
-const useStyles = makeStyles(theme => ({}));
-
 export default withRouter(function Dashboard(props) {
-    const classes = useStyles();
-    const [quote, setQuote] = useState('');
-
     useEffect(() => {
         if (!Firebase.getCurrentUsername()) {
             // not logged in
             alert('Please login first');
             props.history.replace('/login');
         }
-    }, [props.history, quote]);
+    }, [props.history]);
 
     return (
         <>
@@ -70,7 +65,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <RouteLine /> */}
+                    <RouteLine />
                 </FlexRow>
                 <FlexRow
                     style={{
@@ -78,7 +73,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <VolumeBar /> */}
+                    <VolumeBar />
                 </FlexRow>
             </FlexColumn>
             <FlexColumn
@@ -92,7 +87,7 @@ export default withRouter(function Dashboard(props) {
                         width: '66vw',
                     }}
                 >
-                    {/* <RouteBar /> */}
+                    <RouteBar />
                     <BoulderingBar />
                 </FlexRow>
             </FlexColumn>

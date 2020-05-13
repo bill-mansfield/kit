@@ -1,6 +1,3 @@
-import * as Constants from '../utils/Constants';
-import Firebase from '../services/Firebase';
-import Ascents from '../models/Ascents';
 import Utils from '../utils/Utils.js';
 import * as dayjs from 'dayjs';
 
@@ -44,9 +41,7 @@ class Charts {
                 gradeObj.Grade,
             );
         }
-        if (style !== 'Route') {
-            gradeArr = Utils.addTheVee(gradeArr);
-        }
+        Utils.cleanGradeArr(style, gradeArr);
         return gradeArr;
     }
 

@@ -50,7 +50,7 @@ class Ascents {
     }
 
     sanitiseDate(ascentDate) {
-        if (ascentDate != undefined && ascentDate != 'Log Date') {
+        if (ascentDate !== undefined && ascentDate !== 'Log Date') {
             return ascentDate.slice(0, 7);
         }
     }

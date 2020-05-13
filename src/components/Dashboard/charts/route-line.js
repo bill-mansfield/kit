@@ -29,7 +29,6 @@ export default function RouteLine() {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(await Charts.getLineData('Route'));
             setData(await Charts.getLineData('Route'));
         };
         fetchData();
@@ -38,8 +37,6 @@ export default function RouteLine() {
     const theme = {
         textColor: '#fff',
     };
-
-    const yscale = 13;
 
     const renderChart = () => {
         if (data === undefined) {
