@@ -5,6 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import logo from '../../assets/logo_transparent.png';
 import Firebase from '../../services/Firebase';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +32,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar(props) {
     const classes = useStyles();
 
+    const [colourTheme, setColourTheme] = React.useState({
+        dark: false,
+    });
+    console.log(colourTheme.dark);
+
+    const handleChange = (event) => {
+        setColourTheme({
+            ...colourTheme,
+            [event.target.name]: event.target.checked,
+        });
+    };
+
     return (
         <div className={classes.root}>
             <AppBar className={classes.header} position="static">
@@ -44,6 +58,16 @@ export default function Navbar(props) {
                     <Button onClick={logout} href="/" color="inherit">
                         Logout
                     </Button>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={colourTheme.dark}
+                                onChange={handleChange}
+                                name="dark"
+                            />
+                        }
+                        label="Dark mode"
+                    />
                 </Toolbar>
             </AppBar>
         </div>

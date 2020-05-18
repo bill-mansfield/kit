@@ -15,11 +15,6 @@ import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
 const useStyles = makeStyles((theme) => ({
-    '*': {
-        margin: '0',
-        padding: '0',
-    },
-
     loader: {
         width: '100%',
         height: '100vh',

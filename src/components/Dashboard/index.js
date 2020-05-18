@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
