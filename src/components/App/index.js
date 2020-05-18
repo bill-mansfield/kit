@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function App() {
+export default function App(theme) {
     const classes = useStyles();
     const [firebaseInitialized, setFirebaseInitialized] = useState(false);
 

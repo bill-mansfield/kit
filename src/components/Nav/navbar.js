@@ -29,20 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Navbar(props) {
+export default function Navbar(props, theme) {
     const classes = useStyles();
-
-    const [colourTheme, setColourTheme] = React.useState({
-        dark: false,
-    });
-    console.log(colourTheme.dark);
-
-    const handleChange = (event) => {
-        setColourTheme({
-            ...colourTheme,
-            [event.target.name]: event.target.checked,
-        });
-    };
 
     return (
         <div className={classes.root}>
@@ -59,13 +47,7 @@ export default function Navbar(props) {
                         Logout
                     </Button>
                     <FormControlLabel
-                        control={
-                            <Switch
-                                checked={colourTheme.dark}
-                                onChange={handleChange}
-                                name="dark"
-                            />
-                        }
+                        control={<Switch onClick={theme.useDarkTheme()} />}
                         label="Dark mode"
                     />
                 </Toolbar>

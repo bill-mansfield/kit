@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
@@ -11,29 +11,8 @@ function pxToRem(value) {
 }
 
 const breakpoints = createBreakpoints({});
-const darkTheme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#002b36',
-            light: '#eee8d5',
-        },
-        secondary: {
-            main: '#93a1a1',
-            light: '#586e75',
-        },
-        text: {
-            main: '#073642',
-            light: '#fdf6e3',
-        },
-        accent: {
-            green: '#859900',
-            cyan: '#2aa198',
-            blue: '#268bd2',
-        },
-    },
-});
 
-const theme = createMuiTheme({
+const themeObject = {
     breakpoints: {
         values: {
             xs: 0,
@@ -112,28 +91,51 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#eee8d5',
-            dark: '#002b36',
+            // dark: '#002b36',
         },
         secondary: {
             main: '#586e75',
-            dark: '#93a1a1',
+            // dark: '#93a1a1',
         },
         text: {
             main: '#fdf6e3',
-            dark: '#073642',
+            // dark: '#073642',
         },
         accent: {
             green: '#859900',
             cyan: '#2aa198',
             blue: '#268bd2',
         },
+        type: 'light',
     },
-});
+};
+console.log(themeObject);
 
 export default function Theme(props) {
-    const darkTheme = false;
+    const useDarkTheme = () => {
+        const [darkTheme, setDarkTheme] = useState(themeObject);
+        const {
+            palette: { type },
+        } = darkTheme;
+        const toggleDarkTheme = () => {
+            const updatedTheme = {
+                ...darkTheme,
+                palette: {
+                    ...themeObject.palette,
+                    type: type === 'light' ? 'dark' : 'light',
+                },
+            };
+            setDarkTheme(updatedTheme);
+        };
+        console.log(darkTheme);
+        return [darkTheme, toggleDarkTheme];
+    };
+
+    const [darkTheme, toggleDarkTheme] = useDarkTheme();
+    const themeConfig = createMuiTheme(darkTheme);
+
     return ThemeProvider({
         ...props,
-        theme: darkTheme ? { theme, ...darkTheme } : theme,
+        theme: themeConfig,
     });
 }
