@@ -46,10 +46,6 @@ export default function Navbar(props, theme) {
                     <Button onClick={logout} href="/" color="inherit">
                         Logout
                     </Button>
-                    <FormControlLabel
-                        control={<Switch onClick={theme.useDarkTheme()} />}
-                        label="Dark mode"
-                    />
                 </Toolbar>
             </AppBar>
         </div>

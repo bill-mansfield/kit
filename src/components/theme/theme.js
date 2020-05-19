@@ -112,30 +112,8 @@ const themeObject = {
 console.log(themeObject);
 
 export default function Theme(props) {
-    const useDarkTheme = () => {
-        const [darkTheme, setDarkTheme] = useState(themeObject);
-        const {
-            palette: { type },
-        } = darkTheme;
-        const toggleDarkTheme = () => {
-            const updatedTheme = {
-                ...darkTheme,
-                palette: {
-                    ...themeObject.palette,
-                    type: type === 'light' ? 'dark' : 'light',
-                },
-            };
-            setDarkTheme(updatedTheme);
-        };
-        console.log(darkTheme);
-        return [darkTheme, toggleDarkTheme];
-    };
-
-    const [darkTheme, toggleDarkTheme] = useDarkTheme();
-    const themeConfig = createMuiTheme(darkTheme);
-
     return ThemeProvider({
         ...props,
-        theme: themeConfig,
+        theme: createMuiTheme(themeObject),
     });
 }
