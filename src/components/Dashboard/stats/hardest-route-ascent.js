@@ -5,21 +5,23 @@ import Stats from '../../../models/Stats';
 
 const useStyles = makeStyles((theme) => ({}));
 
-export default function HardestFlash() {
+export default function HardestRouteAscent() {
     const classes = useStyles();
-    const [data, setData] = useState(16);
+    const [routeData, setRouteData] = useState('9c+');
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(await Stats.getHardestTickType('Flash'));
+            setRouteData(await Stats.getHardestTickType('Red point'));
         };
         fetchData();
-    }, [data]);
+    }, []);
 
     return (
         <Typography className={classes.metresClimbed} variant="h2">
-            Hardest Flash:
-            {Number.isInteger(data) ? ' ' + data : ' No recorded flashes'}
+            Hardest red point Ascent:
+            {Number.isInteger(routeData)
+                ? ' ' + routeData
+                : ' No recorded red points'}
         </Typography>
     );
 }

@@ -38,7 +38,7 @@ class Firebase {
     }
 
     isInitialized() {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             this.auth.onAuthStateChanged(resolve);
         });
     }
@@ -79,11 +79,16 @@ class Firebase {
     }
 
     async getAscentsOfTickType(tickType) {
-        const ascentsRef = this.ascentsRef().where(
-            'ascentType',
-            '==',
-            tickType,
-        );
+        const ascentsRef = this.ascentsRef()
+            .where('ascentType', '==', tickType)
+            .where('isBoulder', '==', false);
+        return await this.getRequestAscents(ascentsRef);
+    }
+
+    async getBoulderAscentsOfTickType(tickType) {
+        const ascentsRef = this.ascentsRef()
+            .where('ascentType', '==', tickType)
+            .where('isBoulder', '==', true);
         return await this.getRequestAscents(ascentsRef);
     }
 

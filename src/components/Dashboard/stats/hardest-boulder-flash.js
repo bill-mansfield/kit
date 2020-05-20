@@ -5,21 +5,24 @@ import Stats from '../../../models/Stats';
 
 const useStyles = makeStyles((theme) => ({}));
 
-export default function HardestFlash() {
+export default function HardestRouteAscent() {
     const classes = useStyles();
-    const [data, setData] = useState(16);
+    const [boulderData, setBoulderData] = useState('V12');
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(await Stats.getHardestTickType('Flash'));
+            setBoulderData(await Stats.getHardestBoulderTickType('Flash'));
+            console.log(boulderData);
         };
         fetchData();
-    }, [data]);
+    }, [boulderData]);
 
     return (
         <Typography className={classes.metresClimbed} variant="h2">
-            Hardest Flash:
-            {Number.isInteger(data) ? ' ' + data : ' No recorded flashes'}
+            Hardest Boulder Flash:
+            {boulderData === 'VNaN'
+                ? ' No recorded boulder ascents'
+                : ' ' + boulderData}
         </Typography>
     );
 }

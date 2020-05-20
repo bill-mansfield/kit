@@ -44,10 +44,18 @@ class Stats {
     async getHardestTickType(tickType) {
         let tickTypeAscents = await Firebase.getAscentsOfTickType(tickType);
 
-        let gradeArr = tickTypeAscents.map(function (ascent) {
+        let gradeArr = tickTypeAscents.map((ascent) => {
             return ascent.ascentGrade;
         });
         return Math.max(...gradeArr);
+    }
+
+    async getHardestBoulderTickType(tickType) {
+        const ascents = await Firebase.getBoulderAscentsOfTickType(tickType);
+        let gradeArr = ascents.map((ascent) =>
+            parseInt(ascent.ascentGrade.slice(1)),
+        );
+        return 'V' + Math.max(...gradeArr);
     }
 }
 
