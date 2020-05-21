@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.secondary.main,
     },
 }));
 

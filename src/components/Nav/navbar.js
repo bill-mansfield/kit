@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import themeContext from '../../hooks/themeContext';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -31,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar(props, theme) {
     const classes = useStyles();
+    const { dispatch } = useContext(themeContext);
+    const handleChange = () => {
+        dispatch({ type: 'TOGGLE_DARK_MODE' });
+    };
 
     return (
         <div className={classes.root}>
@@ -43,9 +48,13 @@ export default function Navbar(props, theme) {
                     />
                 </a>
                 <Toolbar>
-                    <Button onClick={logout} href="/" color="inherit">
+                    <Button onClick={logout} href="/">
                         Logout
                     </Button>
+                    <FormControlLabel
+                        control={<Switch onChange={handleChange} />}
+                        label="Dark theme"
+                    />
                 </Toolbar>
             </AppBar>
         </div>
