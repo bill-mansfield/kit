@@ -17,11 +17,15 @@ export default function HardestRouteAscent() {
     }, []);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Hardest red point Ascent:
-            {Number.isInteger(routeData)
-                ? ' ' + routeData
-                : ' No recorded red points'}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Hardest red point Ascent:
+            </Typography>
+            <Typography variant="h2">
+                {Number.isInteger(routeData)
+                    ? ' ' + routeData
+                    : ' No recorded red points'}
+            </Typography>
+        </>
     );
 }

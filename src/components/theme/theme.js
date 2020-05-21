@@ -12,10 +12,10 @@ function pxToRem(value) {
 const breakpoints = createBreakpoints({});
 
 export default function Theme(props) {
+    const children = props;
     const [state, dispatch] = useReducer(themeReducer, {
         isDark: false,
     });
-    const children = props;
 
     const lightPalette = {
         palette: {

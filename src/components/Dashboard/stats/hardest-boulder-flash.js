@@ -18,11 +18,15 @@ export default function HardestRouteAscent() {
     }, [boulderData]);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Hardest Boulder Flash:
-            {boulderData === 'VNaN'
-                ? ' No recorded boulder ascents'
-                : ' ' + boulderData}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Hardest Boulder Flash:
+            </Typography>
+            <Typography className={classes.metresClimbed} variant="h2">
+                {boulderData === 'VNaN'
+                    ? ' No recorded boulder ascents'
+                    : ' ' + boulderData}
+            </Typography>
+        </>
     );
 }

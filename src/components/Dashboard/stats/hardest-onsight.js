@@ -17,9 +17,13 @@ export default function HardestOnsight() {
     }, []);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Hardest Onsight:
-            {Number.isInteger(data) ? ' ' + data : ' No recorded onsights'}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Hardest Onsight:
+            </Typography>
+            <Typography variant="h2">
+                {Number.isInteger(data) ? ' ' + data : ' No recorded onsights'}
+            </Typography>
+        </>
     );
 }

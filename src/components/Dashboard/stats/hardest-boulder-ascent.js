@@ -17,11 +17,15 @@ export default function HardestRouteAscent() {
     }, []);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Hardest Boulder Ascent:
-            {boulderData === 'VNaN'
-                ? ' No recorded boulder ascents'
-                : ' ' + boulderData}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Hardest Boulder Ascent:
+            </Typography>
+            <Typography className={classes.metresClimbed} variant="h2">
+                {boulderData === 'VNaN'
+                    ? ' No recorded boulder ascents'
+                    : ' ' + boulderData}
+            </Typography>
+        </>
     );
 }
