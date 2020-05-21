@@ -20,7 +20,7 @@ export default function HardestRouteAscent() {
     return (
         <>
             <Typography className={classes.metresClimbed} variant="h2">
-                Hardest Boulder Flash:
+                Flash:
             </Typography>
             <Typography className={classes.metresClimbed} variant="h2">
                 {boulderData === 'VNaN'

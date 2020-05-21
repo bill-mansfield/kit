@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stats from '../../../models/Stats';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles((theme) => ({}));
 
 export default function MetresClimbed() {
     const classes = useStyles();
@@ -18,8 +18,11 @@ export default function MetresClimbed() {
     }, []);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Metres climbed: {data}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Metres climbed:
+            </Typography>
+            <Typography variant="h2">{data}</Typography>
+        </>
     );
 }

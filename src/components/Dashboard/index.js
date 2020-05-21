@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
+import { useTheme } from '@material-ui/core/styles';
 import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import RouteBar from './charts/route-bar';
@@ -12,6 +13,7 @@ import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
 
 export default withRouter(function Dashboard(props) {
+    const theme = useTheme();
     useEffect(() => {
         if (!Firebase.getCurrentUsername()) {
             // not logged in
@@ -23,53 +25,57 @@ export default withRouter(function Dashboard(props) {
     return (
         <>
             <Navbar />
-            <FlexColumn
-                style={{
-                    justifyContent: 'center',
-                    height: '91vh',
-                    paddingLeft: '5%',
-                    paddingRight: '5%',
-                }}
-            >
-                <NameTitle />
-                <StatsTable />
-            </FlexColumn>
-            <FlexColumn
-                style={{
-                    height: '140vh',
-                }}
-            >
-                <FlexRow
+            <FlexColumn>
+                <FlexColumn
+                    style={{
+                        justifyContent: 'center',
+                        height: '40vh',
+                        paddingLeft: '5%',
+                        paddingRight: '5%',
+                        marginTop: '10%',
+                    }}
+                >
+                    <NameTitle />
+                    <StatsTable />
+                </FlexColumn>
+                <FlexColumn
                     style={{
                         height: '60vh',
-                        width: '66vw',
+                        marginTop: '3%',
                     }}
                 >
-                    <RouteLine />
-                </FlexRow>
-                <FlexRow
+                    <FlexRow
+                        style={{
+                            height: '60vh',
+                            width: '66vw',
+                        }}
+                    >
+                        <RouteBar />
+                        <BoulderingBar />
+                    </FlexRow>
+                </FlexColumn>
+                <FlexColumn
                     style={{
-                        height: '20vh',
-                        width: '66vw',
+                        height: '80vh',
                     }}
                 >
-                    <VolumeBar />
-                </FlexRow>
-            </FlexColumn>
-            <FlexColumn
-                style={{
-                    height: '65vh',
-                }}
-            >
-                <FlexRow
-                    style={{
-                        height: '60vh',
-                        width: '66vw',
-                    }}
-                >
-                    <RouteBar />
-                    <BoulderingBar />
-                </FlexRow>
+                    <FlexRow
+                        style={{
+                            height: '60vh',
+                            width: '66vw',
+                        }}
+                    >
+                        <RouteLine />
+                    </FlexRow>
+                    <FlexRow
+                        style={{
+                            height: '20vh',
+                            width: '66vw',
+                        }}
+                    >
+                        <VolumeBar />
+                    </FlexRow>
+                </FlexColumn>
             </FlexColumn>
         </>
     );

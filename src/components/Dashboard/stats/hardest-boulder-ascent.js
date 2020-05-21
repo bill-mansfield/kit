@@ -19,7 +19,7 @@ export default function HardestRouteAscent() {
     return (
         <>
             <Typography className={classes.metresClimbed} variant="h2">
-                Hardest Boulder Ascent:
+                Tick:
             </Typography>
             <Typography className={classes.metresClimbed} variant="h2">
                 {boulderData === 'VNaN'

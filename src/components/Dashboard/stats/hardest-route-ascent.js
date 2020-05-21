@@ -19,7 +19,7 @@ export default function HardestRouteAscent() {
     return (
         <>
             <Typography className={classes.metresClimbed} variant="h2">
-                Hardest red point Ascent:
+                Red point:
             </Typography>
             <Typography variant="h2">
                 {Number.isInteger(routeData)

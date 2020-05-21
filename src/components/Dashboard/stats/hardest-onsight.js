@@ -19,7 +19,7 @@ export default function HardestOnsight() {
     return (
         <>
             <Typography className={classes.metresClimbed} variant="h2">
-                Hardest Onsight:
+                Onsight:
             </Typography>
             <Typography variant="h2">
                 {Number.isInteger(data) ? ' ' + data : ' No recorded onsights'}

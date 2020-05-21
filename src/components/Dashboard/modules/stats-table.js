@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         height: '100%',
         '& > div': {
-            height: '22%',
+            height: '25%',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                paddingLeft: theme.spacing(2),
+                marginLeft: theme.spacing(2),
             },
             '& > h2:nth-of-type(1)': {
                 width: '70%',
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
             },
             '& > h2:nth-of-type(2)': {
                 width: '30%',
+                borderLeft: `3px solid ${theme.palette.secondary.main}`,
             },
         },
     },
@@ -60,16 +61,28 @@ export default function StatsTable(props) {
                 style={{
                     flexDirection: 'row',
                     backgroundColor: theme.palette.primary.main,
+                    width: '60%',
+                    boxShadow: '2px 2px 15px',
                 }}
             >
                 <div
                     className={classes.statsCol}
                     style={{
                         borderRight: `3px solid ${theme.palette.secondary.main}`,
+                        width: '100%',
                     }}
                 >
                     <div style={{ justifyContent: 'center' }}>
-                        <Typography variant="h2">Route Ascents</Typography>
+                        <Typography
+                            style={{
+                                width: '100%',
+                                padding: '0',
+                                justifyContent: 'center',
+                            }}
+                            variant="h2"
+                        >
+                            Route Ascents
+                        </Typography>
                     </div>
                     <div>
                         <HardestRouteAscent />
@@ -77,13 +90,27 @@ export default function StatsTable(props) {
                     <div>
                         <HardestFlash />
                     </div>
-                    <div>
+                    <div style={{ borderBottom: 'none' }}>
                         <HardestOnsight />
                     </div>
                 </div>
-                <div className={classes.statsCol}>
+                <div
+                    className={classes.statsCol}
+                    style={{
+                        width: '100%',
+                    }}
+                >
                     <div style={{ justifyContent: 'center' }}>
-                        <Typography variant="h2">Boulder Ascents</Typography>
+                        <Typography
+                            variant="h2"
+                            style={{
+                                width: '100%',
+                                padding: '0',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            Boulder Ascents
+                        </Typography>
                     </div>
                     <div>
                         <HardestBoulderAscent />
@@ -91,18 +118,35 @@ export default function StatsTable(props) {
                     <div>
                         <HardestBoulderFlash />
                     </div>
+                    <div style={{ borderBottom: 'none' }}>
+                        <Typography variant="h2">Tallest boulder:</Typography>
+                    </div>
                 </div>
             </FlexColumn>
-            <div className={classes.statsCol}>
+            <div
+                style={{
+                    width: '35%',
+                    backgroundColor: theme.palette.primary.main,
+                    boxShadow: '2px 2px 15px',
+                }}
+                className={classes.statsCol}
+            >
                 <div>
                     <MetresClimbed />
                 </div>
                 <div>
                     <SuccessfulAscents />
                 </div>
-                <div>
-                    <FavouriteAreas />
+                <div
+                    style={{
+                        borderBottom: 'none',
+                        height: '10%',
+                        marginTop: '5px',
+                    }}
+                >
+                    <Typography variant="h2">Your climbing areas:</Typography>
                 </div>
+                <FavouriteAreas />
             </div>
         </FlexRow>
     );

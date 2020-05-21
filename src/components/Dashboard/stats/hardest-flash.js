@@ -19,7 +19,7 @@ export default function HardestFlash() {
     return (
         <>
             <Typography className={classes.metresClimbed} variant="h2">
-                Hardest Flash:
+                Flash:
             </Typography>
             <Typography variant="h2">
                 {Number.isInteger(data) ? ' ' + data : ' No recorded flashes'}

@@ -17,8 +17,11 @@ export default function SuccessfulAscents() {
     }, []);
 
     return (
-        <Typography className={classes.metresClimbed} variant="h2">
-            Amount of successful ascents: {data}
-        </Typography>
+        <>
+            <Typography className={classes.metresClimbed} variant="h2">
+                Successful ascents:
+            </Typography>
+            <Typography variant="h2">{data}</Typography>
+        </>
     );
 }

@@ -6,7 +6,13 @@ import Stats from '../../../models/Stats';
 const useStyles = makeStyles((theme) => ({
     listItem: {
         color: theme.palette.primary.text,
+        marginRight: '5px',
         listStyle: 'none',
+        backgroundColor: theme.palette.accent.green,
+        border: `2px solid ${theme.palette.accent.green}`,
+        borderRadius: '20px',
+        marginBottom: '4px',
+        padding: '2px 4px 2px 4px',
     },
 }));
 
@@ -23,8 +29,14 @@ export default function FavouriteAreas() {
 
     return (
         <>
-            <Typography variant="h2">Your climbing areas:</Typography>
-            <ul>
+            <ul
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    height: '15%',
+                }}
+            >
                 {data.map((item) => (
                     <li key={item} className={classes.listItem}>
                         {item}
