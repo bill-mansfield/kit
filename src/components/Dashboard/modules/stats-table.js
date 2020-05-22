@@ -43,6 +43,38 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    statsTableLeft: {
+        backgroundColor: theme.palette.primary.main,
+        boxShadow: '2px 2px 15px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        height: '30vh',
+        [theme.breakpoints.up('md')]: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '60%',
+        },
+    },
+    statsTableRight: {
+        marginTop: '20px',
+        [theme.breakpoints.up('md')]: {
+            width: '35%',
+            marginTop: '0',
+        },
+    },
+    statsRow: {
+        marginTop: theme.spacing(4),
+        justifyContent: 'space-between',
+        height: '60vh',
+        display: 'flex',
+        flexDirection: 'column',
+        [theme.breakpoints.up('md')]: {
+            height: '30vh',
+            flexDirection: 'row',
+        },
+    },
 }));
 
 export default function StatsTable(props) {
@@ -50,21 +82,8 @@ export default function StatsTable(props) {
     const theme = useTheme();
 
     return (
-        <FlexRow
-            style={{
-                marginTop: theme.spacing(4),
-                justifyContent: 'space-between',
-                height: '30vh',
-            }}
-        >
-            <FlexColumn
-                style={{
-                    flexDirection: 'row',
-                    backgroundColor: theme.palette.primary.main,
-                    width: '60%',
-                    boxShadow: '2px 2px 15px',
-                }}
-            >
+        <div className={classes.statsRow}>
+            <div className={classes.statsTableLeft}>
                 <div
                     className={classes.statsCol}
                     style={{
@@ -122,32 +141,31 @@ export default function StatsTable(props) {
                         <Typography variant="h2">Tallest boulder:</Typography>
                     </div>
                 </div>
-            </FlexColumn>
-            <div
-                style={{
-                    width: '35%',
-                    backgroundColor: theme.palette.primary.main,
-                    boxShadow: '2px 2px 15px',
-                }}
-                className={classes.statsCol}
-            >
-                <div>
-                    <MetresClimbed />
-                </div>
-                <div>
-                    <SuccessfulAscents />
-                </div>
-                <div
-                    style={{
-                        borderBottom: 'none',
-                        height: '10%',
-                        marginTop: '5px',
-                    }}
-                >
-                    <Typography variant="h2">Your climbing areas:</Typography>
-                </div>
-                <FavouriteAreas />
             </div>
-        </FlexRow>
+            <div
+                className={`${classes.statsTableLeft} ${classes.statsTableRight}`}
+            >
+                <div className={classes.statsCol}>
+                    <div>
+                        <MetresClimbed />
+                    </div>
+                    <div>
+                        <SuccessfulAscents />
+                    </div>
+                    <div
+                        style={{
+                            borderBottom: 'none',
+                            height: '10%',
+                            marginTop: '5px',
+                        }}
+                    >
+                        <Typography variant="h2">
+                            Your climbing areas:
+                        </Typography>
+                    </div>
+                    <FavouriteAreas />
+                </div>
+            </div>
+        </div>
     );
 }

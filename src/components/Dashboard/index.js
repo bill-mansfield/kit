@@ -11,8 +11,23 @@ import RouteLine from './charts/route-line';
 import VolumeBar from './charts/volume-bar';
 import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    statsWrapper: {
+        justifyContent: 'center',
+        height: '80vh',
+        [theme.breakpoints.up('md')]: {
+            height: '40vh',
+        },
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        marginTop: '10%',
+    },
+}));
 
 export default withRouter(function Dashboard(props) {
+    const classes = useStyles();
     const theme = useTheme();
     useEffect(() => {
         if (!Firebase.getCurrentUsername()) {
@@ -26,18 +41,10 @@ export default withRouter(function Dashboard(props) {
         <>
             <Navbar />
             <FlexColumn>
-                <FlexColumn
-                    style={{
-                        justifyContent: 'center',
-                        height: '40vh',
-                        paddingLeft: '5%',
-                        paddingRight: '5%',
-                        marginTop: '10%',
-                    }}
-                >
+                <div className={classes.statsWrapper}>
                     <NameTitle />
                     <StatsTable />
-                </FlexColumn>
+                </div>
                 <FlexColumn
                     style={{
                         height: '60vh',
