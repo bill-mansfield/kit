@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '20px',
         marginBottom: '4px',
         padding: '2px 4px 2px 4px',
+        height: '28px',
     },
 }));
 

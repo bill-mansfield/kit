@@ -114,6 +114,9 @@ export default function Theme(props) {
             MuiButton: {
                 label: {
                     fontSize: pxToRem(16),
+                    textTransform: 'lowercase',
+                    fontWeight: '400',
+                    width: '170px',
                     color: state.isDark
                         ? darkPalette.palette.text.main
                         : lightPalette.palette.text.main,
