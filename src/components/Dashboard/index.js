@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         height: '89%',
         width: '100%',
         boxShadow: '2px 2px 15px',
-        marginTop: '3%',
+        marginTop: '32px',
         backgroundColor: theme.palette.primary.main,
     },
     lineChartCol: {
@@ -51,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
         height: '85%',
         width: '100%',
         boxShadow: '2px 2px 15px',
-        marginTop: '3%',
+        marginTop: '32px',
         backgroundColor: theme.palette.primary.main,
     },
     volumeChartCol: {
-        height: '85%',
+        height: '80%',
         width: '100%',
         boxShadow: '2px 2px 15px',
         backgroundColor: theme.palette.primary.main,
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
         width: '90%',
         [theme.breakpoints.up('md')]: {
             marginTop: '5%',
-            height: '30vh',
+            height: '40vh',
             width: '60%',
         },
     },
