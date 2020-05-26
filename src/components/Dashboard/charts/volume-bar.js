@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '@material-ui/core/styles';
 import { ResponsiveLine } from '@nivo/line';
 import Charts from '../../../models/Charts.js';
 
@@ -20,8 +21,9 @@ export default function VolumeBar() {
         fetchData();
     }, []);
 
-    const theme = {
-        textColor: '#fff',
+    const theme = useTheme();
+    const textColor = {
+        textColor: theme.palette.text.main,
     };
 
     const renderChart = () => {
@@ -31,8 +33,8 @@ export default function VolumeBar() {
             return (
                 <ResponsiveLine
                     data={data}
-                    theme={theme}
-                    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+                    theme={textColor}
+                    margin={{ top: 50, right: 50, bottom: 75, left: 50 }}
                     curve="step"
                     xScale={{
                         type: 'time',
@@ -46,8 +48,21 @@ export default function VolumeBar() {
                         min: 'auto',
                         max: 'auto',
                     }}
-                    axisLeft={null}
-                    axisBottom={null}
+                    axisLeft={{
+                        tickSize: 5,
+                        tickPadding: 5,
+                        tickRotation: 0,
+                        legend: 'Number of ascents',
+                        legendPosition: 'middle',
+                        legendOffset: -30,
+                    }}
+                    axisBottom={{
+                        format: '%b %d %y',
+                        tickValues: 'every 6 months',
+                        legend: 'time',
+                        legendOffset: -12,
+                        legendOffset: 32,
+                    }}
                     colors={{ scheme: 'nivo' }}
                     pointSize={10}
                     pointColor={{ theme: 'background' }}
@@ -63,20 +78,19 @@ export default function VolumeBar() {
                     enableGridY={false}
                     legends={[
                         {
-                            anchor: 'top-left',
+                            anchor: 'bottom',
                             direction: 'column',
                             justify: false,
-                            translateX: 100,
-                            translateY: 0,
+                            translateX: -50,
+                            translateY: 50,
                             itemsSpacing: 0,
                             itemDirection: 'left-to-right',
-                            itemWidth: 80,
+                            itemWidth: 50,
                             itemHeight: 20,
                             itemOpacity: 0.75,
-                            symbolSize: 12,
-                            symbolShape: 'circle',
-                            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                            itemTextColor: '#fff',
+                            symbolSize: 20,
+                            itemTextColor: theme.palette.text.main,
+                            itemsSpacing: 2,
                         },
                     ]}
                 />

@@ -20,10 +20,10 @@ export default function Theme(props) {
     const lightPalette = {
         palette: {
             primary: {
-                main: '#fdf6e3',
+                main: '#eee8d5',
             },
             secondary: {
-                main: '#93a1a1',
+                main: '#fdf6e3',
             },
             text: {
                 main: '#002b36',
@@ -39,10 +39,10 @@ export default function Theme(props) {
     const darkPalette = {
         palette: {
             primary: {
-                main: '#002b36',
+                main: '#073642',
             },
             secondary: {
-                main: '#586e75',
+                main: '#002b36',
             },
             text: {
                 main: '#fdf6e3',

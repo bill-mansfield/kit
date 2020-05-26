@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '@material-ui/core/styles';
 import { ResponsiveLine } from '@nivo/line';
 import Charts from '../../../models/Charts';
 
@@ -34,8 +35,9 @@ export default function RouteLine() {
         fetchData();
     }, []);
 
-    const theme = {
-        textColor: '#fff',
+    const theme = useTheme();
+    const textColor = {
+        textColor: theme.palette.text.main,
     };
 
     const renderChart = () => {
@@ -45,8 +47,8 @@ export default function RouteLine() {
             return (
                 <ResponsiveLine
                     data={data}
-                    theme={theme}
-                    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+                    theme={textColor}
+                    margin={{ top: 50, right: 50, bottom: 150, left: 50 }}
                     xScale={{
                         type: 'time',
                         format: '%Y-%m-%d',
@@ -61,13 +63,14 @@ export default function RouteLine() {
                     }}
                     axisLeft={{
                         legend: 'Grade',
-                        legendOffset: 12,
+                        legendPosition: 'middle',
+                        legendOffset: -40,
                     }}
                     axisBottom={{
                         format: '%b %d %y',
                         tickValues: 'every 6 months',
                         legend: 'time',
-                        legendOffset: -12,
+                        legendOffset: 30,
                     }}
                     colors={{ scheme: 'nivo' }}
                     pointSize={10}
@@ -80,20 +83,18 @@ export default function RouteLine() {
                     enableGridX={false}
                     legends={[
                         {
-                            anchor: 'bottom-right',
+                            anchor: 'bottom',
                             direction: 'column',
                             justify: false,
-                            translateX: 100,
-                            translateY: 0,
-                            itemsSpacing: 0,
+                            translateX: 0,
+                            translateY: 130,
+                            itemsSpacing: 2,
                             itemDirection: 'left-to-right',
                             itemWidth: 80,
                             itemHeight: 20,
                             itemOpacity: 0.75,
-                            symbolSize: 12,
-                            symbolShape: 'circle',
-                            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                            itemTextColor: '#fff',
+                            symbolSize: 20,
+                            itemTextColor: theme.palette.text.main,
                             effects: [
                                 {
                                     on: 'hover',

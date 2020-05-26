@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             borderBottom: `3px solid ${theme.palette.secondary.main}`,
             '& > h2': {
                 height: '100%',

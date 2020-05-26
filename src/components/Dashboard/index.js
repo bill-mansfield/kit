@@ -3,7 +3,6 @@ import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
 import { useTheme } from '@material-ui/core/styles';
-import FlexRow from '../layouts/flex-row';
 import FlexColumn from '../layouts/flex-column';
 import RouteBar from './charts/route-bar';
 import BoulderingBar from './charts/boulder-bar';
@@ -12,6 +11,7 @@ import VolumeBar from './charts/volume-bar';
 import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {
@@ -23,6 +23,68 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: '5%',
         paddingRight: '5%',
         marginTop: '10%',
+    },
+    barChartsRow: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        height: '120vh',
+        width: '100%',
+        marginTop: '10%',
+        [theme.breakpoints.up('md')]: {
+            height: '60vh',
+            width: '100%',
+            flexDirection: 'row',
+        },
+    },
+    barChartsCol: {
+        height: '89%',
+        width: '100%',
+        boxShadow: '2px 2px 15px',
+        marginTop: '3%',
+        backgroundColor: theme.palette.primary.main,
+    },
+    lineChartCol: {
+        display: 'flex',
+        flexDirection: 'row',
+        height: '85%',
+        width: '100%',
+        boxShadow: '2px 2px 15px',
+        marginTop: '3%',
+        backgroundColor: theme.palette.primary.main,
+    },
+    volumeChartCol: {
+        height: '85%',
+        width: '100%',
+        boxShadow: '2px 2px 15px',
+        backgroundColor: theme.palette.primary.main,
+    },
+    barChartOuter: {
+        height: '45%',
+        width: '90%',
+        [theme.breakpoints.up('md')]: {
+            height: '100%',
+            width: '40%',
+        },
+    },
+    lineChartOuter: {
+        height: '40vh',
+        width: '90%',
+        [theme.breakpoints.up('md')]: {
+            height: '60vh',
+            marginTop: '5%',
+            width: '60%',
+        },
+    },
+    volumeChartOuter: {
+        height: '30vh',
+        width: '90%',
+        [theme.breakpoints.up('md')]: {
+            marginTop: '5%',
+            height: '30vh',
+            width: '60%',
+        },
     },
 }));
 
@@ -45,43 +107,43 @@ export default withRouter(function Dashboard(props) {
                     <NameTitle />
                     <StatsTable />
                 </div>
-                <FlexColumn
-                    style={{
-                        height: '60vh',
-                        marginTop: '3%',
-                    }}
-                >
-                    <FlexRow
-                        style={{
-                            height: '60vh',
-                            width: '66vw',
-                        }}
-                    >
-                        <RouteBar />
-                        <BoulderingBar />
-                    </FlexRow>
-                </FlexColumn>
-                <FlexColumn
-                    style={{
-                        height: '80vh',
-                    }}
-                >
-                    <FlexRow
-                        style={{
-                            height: '60vh',
-                            width: '66vw',
-                        }}
-                    >
-                        <RouteLine />
-                    </FlexRow>
-                    <FlexRow
-                        style={{
-                            height: '20vh',
-                            width: '66vw',
-                        }}
-                    >
-                        <VolumeBar />
-                    </FlexRow>
+                <div className={classes.barChartsRow}>
+                    <div className={classes.barChartOuter}>
+                        <Typography variant="h2">
+                            Route grade distribution
+                        </Typography>
+                        <div className={classes.barChartsCol}>
+                            <RouteBar />
+                        </div>
+                    </div>
+                    <div className={classes.barChartOuter}>
+                        <Typography variant="h2">
+                            Boulder grade distribution
+                        </Typography>
+                        <div className={classes.barChartsCol}>
+                            <BoulderingBar />
+                        </div>
+                    </div>
+                </div>
+                <FlexColumn style={{ width: '100%' }}>
+                    <div className={classes.lineChartOuter}>
+                        <Typography variant="h2">
+                            Route grade and ticktype over time
+                        </Typography>
+                        <div className={classes.lineChartCol}>
+                            <RouteLine />
+                        </div>
+                    </div>
+                    <div className={classes.volumeChartOuter}>
+                        <Typography variant="h2">
+                            Amount of ascents completed over time
+                        </Typography>
+                        <div
+                            className={`${classes.lineChartCol} ${classes.volumeChartCol}`}
+                        >
+                            <VolumeBar />
+                        </div>
+                    </div>
                 </FlexColumn>
             </FlexColumn>
         </>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import Charts from '../../../models/Charts.js';
+import { useTheme } from '@material-ui/core/styles';
 
 export default function BoulderBar() {
     const [data, setData] = useState([
@@ -14,8 +15,9 @@ export default function BoulderBar() {
         fetchData();
     }, []);
 
-    const theme = {
-        textColor: '#fff',
+    const theme = useTheme();
+    const textColor = {
+        textColor: theme.palette.text.main,
     };
 
     const renderChart = () => {
@@ -34,9 +36,9 @@ export default function BoulderBar() {
                         'Unsuccessful',
                     ]}
                     indexBy="Grade"
-                    margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                    margin={{ top: 50, right: 50, bottom: 150, left: 60 }}
                     padding={0.3}
-                    theme={theme}
+                    theme={textColor}
                     colors={{ scheme: 'nivo' }}
                     layout="horizontal"
                     labelSkipWidth={12}
@@ -45,21 +47,26 @@ export default function BoulderBar() {
                         from: 'color',
                         modifiers: [['brighter', 1.6]],
                     }}
+                    axisLeft={{
+                        legend: 'Grade',
+                        legendPosition: 'middle',
+                        legendOffset: -40,
+                    }}
                     legends={[
                         {
                             dataFrom: 'keys',
-                            anchor: 'bottom-right',
+                            anchor: 'bottom',
                             direction: 'column',
                             justify: false,
-                            translateX: 120,
-                            translateY: 0,
+                            translateX: 0,
+                            translateY: 130,
                             itemsSpacing: 2,
                             itemWidth: 100,
                             itemHeight: 20,
                             itemDirection: 'left-to-right',
                             itemOpacity: 0.85,
                             symbolSize: 20,
-                            itemTextColor: '#fff',
+                            itemTextColor: theme.palette.text.main,
                             effects: [
                                 {
                                     on: 'hover',
