@@ -32,7 +32,7 @@ export default function RouteBar() {
                     margin={{ top: 50, right: 50, bottom: 150, left: 60 }}
                     padding={0.3}
                     theme={textColor}
-                    colors={{ scheme: 'nivo' }}
+                    colors={{ scheme: 'red_yellow_green' }}
                     layout="horizontal"
                     defs={[
                         {

@@ -64,8 +64,6 @@ export default withRouter(function UploaderComponent(props) {
     };
 
     const handleChangeStatus = ({ meta, file }, status) => {
-        console.log(status, meta, file);
-
         if (status === 'rejected_file_type') {
             alert('Bad file type, please upload a .csv file');
         }

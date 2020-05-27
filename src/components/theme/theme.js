@@ -33,6 +33,9 @@ export default function Theme(props) {
                 cyan: '#2aa198',
                 blue: '#268bd2',
             },
+            danger: {
+                main: 'red',
+            },
         },
     };
 
@@ -51,6 +54,9 @@ export default function Theme(props) {
                 green: '#859900',
                 cyan: '#2aa198',
                 blue: '#268bd2',
+            },
+            danger: {
+                main: 'red',
             },
         },
     };

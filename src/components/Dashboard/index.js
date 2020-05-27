@@ -12,11 +12,12 @@ import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import AddAscent from './modules/add-new-ascent';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {
         justifyContent: 'center',
-        height: '80vh',
+        height: '76vh',
         [theme.breakpoints.up('md')]: {
             height: '40vh',
         },
@@ -31,11 +32,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         height: '120vh',
         width: '100%',
-        marginTop: '10%',
+        paddingBottom: '15px',
         [theme.breakpoints.up('md')]: {
             height: '60vh',
             width: '100%',
             flexDirection: 'row',
+            marginTop: '10%',
         },
     },
     barChartsCol: {
@@ -63,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     barChartOuter: {
         height: '45%',
         width: '90%',
+        marginBottom: '5%',
         [theme.breakpoints.up('md')]: {
             height: '100%',
             width: '40%',
@@ -80,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
     volumeChartOuter: {
         height: '30vh',
         width: '90%',
+        marginTop: '10%',
+        paddingBottom: '15px',
         [theme.breakpoints.up('md')]: {
             marginTop: '5%',
             height: '40vh',
@@ -145,6 +150,7 @@ export default withRouter(function Dashboard(props) {
                         </div>
                     </div>
                 </FlexColumn>
+                <AddAscent />
             </FlexColumn>
         </>
     );

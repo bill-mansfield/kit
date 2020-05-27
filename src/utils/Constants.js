@@ -39,3 +39,22 @@ export const ONSIGHT_TICK_TYPE = 'Onsight';
 export const FRENCH_GRADE_IDENTIFYER = ['a', 'b', 'c'];
 
 export const TRASH_GRADE_IDENTIFYER = ['X', 'R', 'Route', '5+'];
+
+export const BOULDER_GRADE_GREEN = ['V0', 'V1'];
+
+export const BOULDER_GRADE_YELLOW = ['V2', 'V3'];
+
+export const BOULDER_GRADE_ORANGE = ['V4', 'V5'];
+
+export const BOULDER_GRADE_RED = ['V6', 'V7', 'V8', 'V9'];
+
+export const BOULDER_GRADE_PURPLE = [
+    'V10',
+    'V11',
+    'V12',
+    'V13',
+    'V14',
+    'V15',
+    'V16',
+    'V17',
+];

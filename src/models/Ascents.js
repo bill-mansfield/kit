@@ -49,6 +49,20 @@ class Ascents {
         Firebase.writeAscents(ascentObj);
     }
 
+    addNewAscent(ascent) {
+        let ascentObj = {};
+        ascentObj.name = ascent.climbName;
+        ascentObj.ascentType = ascent.ascentType;
+        ascentObj.ascentGrade = this.saveGradesInAus(ascent.grade);
+        ascentObj.routeGrade = this.saveGradesInAus(ascent.grade);
+        ascentObj.isBoulder = this.isBoulder(ascent.grade);
+        ascentObj.ascentHeight = ascent.height;
+        ascentObj.ascentDate = ascent.when;
+        ascentObj.cragName = ascent.cragName;
+        console.log(ascentObj);
+        Firebase.writeAscents(ascentObj);
+    }
+
     sanitiseDate(ascentDate) {
         if (ascentDate !== undefined && ascentDate !== 'Log Date') {
             return ascentDate.slice(0, 7);
@@ -66,8 +80,10 @@ class Ascents {
     sanitiseHeight(height) {
         if (height === undefined || height === '') {
             return 0;
-        } else {
+        } else if (height.includes('m')) {
             return (height = parseInt(height.slice(0, -1)));
+        } else {
+            return parseInt(height);
         }
     }
 

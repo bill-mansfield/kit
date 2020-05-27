@@ -63,7 +63,7 @@ export default function VolumeBar() {
                         legendOffset: -12,
                         legendOffset: 32,
                     }}
-                    colors={{ scheme: 'nivo' }}
+                    colors={{ scheme: 'red_yellow_green' }}
                     pointSize={10}
                     pointColor={{ theme: 'background' }}
                     pointBorderWidth={2}

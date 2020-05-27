@@ -1,8 +1,45 @@
 import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
 import Firebase from '../services/Firebase.js';
+import { useTheme } from '@material-ui/styles';
 
 class Utils {
+    determineDifficultyColor(ascentGrade, isBoulder) {
+        const theme = useTheme();
+        let bgColor = '';
+
+        if (isBoulder === false) {
+            if (ascentGrade === 0) {
+                bgColor = theme.palette.primary.main;
+            } else if (ascentGrade <= 14) {
+                bgColor = 'green';
+            } else if (ascentGrade >= 15 && ascentGrade <= 19) {
+                bgColor = 'yellow';
+            } else if (ascentGrade >= 20 && ascentGrade <= 24) {
+                bgColor = 'orange';
+            } else if (ascentGrade >= 25 && ascentGrade <= 30) {
+                bgColor = 'red';
+            } else {
+                bgColor = 'purple';
+            }
+        } else if (isBoulder === true) {
+            if (Constants.BOULDER_GRADE_GREEN.includes(ascentGrade)) {
+                bgColor = 'green';
+            } else if (Constants.BOULDER_GRADE_YELLOW.includes(ascentGrade)) {
+                bgColor = 'yellow';
+            } else if (Constants.BOULDER_GRADE_ORANGE.includes(ascentGrade)) {
+                bgColor = 'orange';
+            } else if (Constants.BOULDER_GRADE_RED.includes(ascentGrade)) {
+                bgColor = 'red';
+            } else if (Constants.BOULDER_GRADE_PURPLE.includes(ascentGrade)) {
+                bgColor = 'purple';
+            } else {
+                bgColor = theme.palette.primary.main;
+            }
+        }
+        return bgColor;
+    }
+
     async getAscentsByStyle(style) {
         if (style === 'Route') {
             return await Firebase.getRouteAscents();
