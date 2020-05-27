@@ -31,7 +31,7 @@ export default function HardestFlash() {
                     ),
                 }}
             >
-                {Number.isInteger(data) ? ' ' + data : ' No recorded flashes'}
+                {Number.isInteger(data) ? ' ' + data : ' No flashes'}
             </Typography>
         </>
     );

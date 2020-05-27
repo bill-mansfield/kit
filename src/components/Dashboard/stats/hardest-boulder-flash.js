@@ -23,9 +23,18 @@ export default function HardestRouteAscent() {
             <Typography className={classes.metresClimbed} variant="h2">
                 Flash:
             </Typography>
-            <Typography className={classes.metresClimbed} variant="h2">
+            <Typography
+                className={classes.metresClimbed}
+                variant="h2"
+                style={{
+                    backgroundColor: Utils.determineDifficultyColor(
+                        boulderData,
+                        true,
+                    ),
+                }}
+            >
                 {boulderData === 'VNaN'
-                    ? ' No recorded boulder ascents'
+                    ? ' No boulder ascents'
                     : ' ' + boulderData}
             </Typography>
         </>

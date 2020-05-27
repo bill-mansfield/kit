@@ -33,7 +33,7 @@ export default function HardestRouteAscent() {
             >
                 {Number.isInteger(routeData)
                     ? ' ' + routeData
-                    : ' No recorded red points'}
+                    : ' No red points'}
             </Typography>
         </>
     );
