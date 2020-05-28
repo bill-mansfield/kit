@@ -130,6 +130,9 @@ export default function Theme(props) {
                         fontSize: pxToRem(18),
                     },
                 },
+                contained: {
+                    backgroundColor: darkPalette.palette.accent.green,
+                },
             },
             MuiInput: {
                 underline: {

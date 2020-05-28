@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
+    formLabel: {
+        color: `${theme.palette.text.main} !important`,
+        '& > label': {
+            color: `${theme.palette.text.main} !important`,
+        },
+    },
 }));
 
 export default function AddAscent() {
@@ -85,7 +91,7 @@ export default function AddAscent() {
     const [waiting, setWaiting] = useState(false);
 
     return (
-        <FlexColumn>
+        <FlexColumn style={{ marginTop: '25px' }}>
             <ExpansionPanel
                 style={{ backgroundColor: theme.palette.secondary.main }}
             >
@@ -104,7 +110,10 @@ export default function AddAscent() {
                             onSubmit={(e) => e.preventDefault() && false}
                         >
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="climbName">
+                                <InputLabel
+                                    className={classes.formLabel}
+                                    htmlFor="climbName"
+                                >
                                     Climb Name
                                 </InputLabel>
                                 <Input
@@ -119,7 +128,10 @@ export default function AddAscent() {
                                 />
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="ascentType">
+                                <InputLabel
+                                    className={classes.formLabel}
+                                    htmlFor="ascentType"
+                                >
                                     Ascent type
                                 </InputLabel>
                                 <Select
@@ -142,7 +154,12 @@ export default function AddAscent() {
                                 </Select>
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="grade">Grade</InputLabel>
+                                <InputLabel
+                                    className={classes.formLabel}
+                                    htmlFor="grade"
+                                >
+                                    Grade
+                                </InputLabel>
                                 <Input
                                     name="grade"
                                     type="grade"
@@ -153,7 +170,10 @@ export default function AddAscent() {
                                 />
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="height">
+                                <InputLabel
+                                    className={classes.formLabel}
+                                    htmlFor="height"
+                                >
                                     Climb height
                                 </InputLabel>
                                 <Input
@@ -170,6 +190,7 @@ export default function AddAscent() {
                                     <KeyboardDatePicker
                                         disableToolbar
                                         disableFuture
+                                        className={classes.formLabel}
                                         variant="inline"
                                         label="Ascent date"
                                         id="date-picker-inline"
@@ -183,7 +204,10 @@ export default function AddAscent() {
                                 </MuiPickersUtilsProvider>
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="cragName">
+                                <InputLabel
+                                    className={classes.formLabel}
+                                    htmlFor="cragName"
+                                >
                                     What is the name of the crag?
                                 </InputLabel>
                                 <Input
@@ -206,7 +230,6 @@ export default function AddAscent() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    color="green"
                                     onClick={handleSubmit}
                                     className={classes.submit}
                                 >
