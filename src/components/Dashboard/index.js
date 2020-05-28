@@ -84,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
         height: '30vh',
         width: '90%',
         marginTop: '10%',
-        paddingBottom: '15px',
         [theme.breakpoints.up('md')]: {
             marginTop: '5%',
             height: '40vh',
@@ -107,7 +106,7 @@ export default withRouter(function Dashboard(props) {
     return (
         <>
             <Navbar />
-            <FlexColumn>
+            <FlexColumn style={{ marginBottom: '15px' }}>
                 <div className={classes.statsWrapper}>
                     <NameTitle />
                     <StatsTable />
@@ -130,7 +129,7 @@ export default withRouter(function Dashboard(props) {
                         </div>
                     </div>
                 </div>
-                <FlexColumn style={{ width: '100%' }}>
+                <FlexColumn style={{ width: '100%', marginBottom: '25px' }}>
                     <div className={classes.lineChartOuter}>
                         <Typography variant="h2">
                             Route grade and ticktype over time

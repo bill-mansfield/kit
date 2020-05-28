@@ -57,8 +57,8 @@ class Firebase {
         );
     }
 
-    writeAscents(ascent) {
-        return this.db
+    async writeAscents(ascent) {
+        return await this.db
             .collection(`users/${this.auth.currentUser.uid}/ascents`)
             .add(ascent);
     }

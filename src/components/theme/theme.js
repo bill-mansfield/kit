@@ -150,7 +150,6 @@ export default function Theme(props) {
         ...theme,
         ...lightPalette,
     };
-    console.log(darkTheme);
 
     return (
         <themeContext.Provider value={{ state, dispatch }}>

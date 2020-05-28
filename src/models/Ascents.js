@@ -56,11 +56,12 @@ class Ascents {
         ascentObj.ascentGrade = this.saveGradesInAus(ascent.grade);
         ascentObj.routeGrade = this.saveGradesInAus(ascent.grade);
         ascentObj.isBoulder = this.isBoulder(ascent.grade);
-        ascentObj.ascentHeight = ascent.height;
+        ascentObj.routeHeight = this.sanitiseHeight(ascent.height);
         ascentObj.ascentDate = ascent.when;
         ascentObj.cragName = ascent.cragName;
-        console.log(ascentObj);
-        Firebase.writeAscents(ascentObj);
+        Firebase.writeAscents(ascentObj).then(() => {
+            window.location.reload();
+        });
     }
 
     sanitiseDate(ascentDate) {

@@ -13,7 +13,6 @@ export default function HardestRouteAscent() {
     useEffect(() => {
         const fetchData = async () => {
             setBoulderData(await Stats.getHardestBoulderTickType('Flash'));
-            console.log(boulderData);
         };
         fetchData();
     }, [boulderData]);
