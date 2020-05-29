@@ -13,6 +13,7 @@ import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddAscent from './modules/add-new-ascent';
+import Goals from './modules/goals';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {
@@ -107,8 +108,9 @@ export default withRouter(function Dashboard(props) {
         <>
             <Navbar />
             <FlexColumn style={{ marginBottom: '15px' }}>
+                <NameTitle />
+                <Goals />
                 <div className={classes.statsWrapper}>
-                    <NameTitle />
                     <StatsTable />
                 </div>
                 <div className={classes.barChartsRow}>
