@@ -63,6 +63,12 @@ class Firebase {
             .add(ascent);
     }
 
+    async writeGoal(goal) {
+        return await this.db
+            .collection(`users${this.auth.currentUser.uid}/goals`)
+            .add(goal);
+    }
+
     async getAllAscents() {
         const ascentsRef = this.ascentsRef();
         return await this.getRequestAscents(ascentsRef);
