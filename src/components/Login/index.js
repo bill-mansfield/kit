@@ -37,7 +37,6 @@ export default withRouter(function SignIn(props) {
             <BackgroundImage />
             <AuthWrapper>
                 <AuthInnerWrapper>
-                    <IconAvatar />
                     <Typography variant="h1">Sign in</Typography>
                     <form
                         className={classes.form}
@@ -57,7 +56,9 @@ export default withRouter(function SignIn(props) {
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="password">
+                                Password
+                            </InputLabel>
                             <Input
                                 name="password"
                                 type="password"

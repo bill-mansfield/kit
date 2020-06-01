@@ -16,7 +16,7 @@ import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
 import IconAvatar from '../icon-avatar';
 import FlexRow from '../layouts/flex-row';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     form: {
         width: '50%',
         '& > label': {
@@ -41,11 +41,10 @@ export default withRouter(function Register(props) {
             <BackgroundImage />
             <AuthWrapper>
                 <AuthInnerWrapper>
-                    <IconAvatar />
                     <Typography variant="h1">Register Account</Typography>
                     <form
                         className={classes.form}
-                        onSubmit={e => e.preventDefault() && false}
+                        onSubmit={(e) => e.preventDefault() && false}
                     >
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="name">Name</InputLabel>
@@ -55,7 +54,7 @@ export default withRouter(function Register(props) {
                                 autoComplete="off"
                                 autoFocus
                                 value={name}
-                                onChange={e => setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
@@ -67,7 +66,7 @@ export default withRouter(function Register(props) {
                                 name="email"
                                 autoComplete="off"
                                 value={email}
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
@@ -80,7 +79,7 @@ export default withRouter(function Register(props) {
                                 id="password"
                                 autoComplete="off"
                                 value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </FormControl>
 
