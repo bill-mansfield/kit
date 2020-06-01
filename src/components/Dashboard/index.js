@@ -13,7 +13,7 @@ import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddAscent from './modules/add-new-ascent';
-import Goal from './modules/goal';
+import Goal from './goals/goal';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {

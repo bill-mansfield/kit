@@ -43,6 +43,28 @@ class Firebase {
         });
     }
 
+    goalRef() {
+        return this.db.collection(`users/${this.auth.currentUser.uid}/goals`);
+    }
+
+    async writeGoal(goal) {
+        return await this.db
+            .collection(`users/${this.auth.currentUser.uid}/goals`)
+            .add(goal);
+    }
+
+    async getAllGoals() {
+        const goalRef = this.goalRef();
+        return await goalRef.get().then(function (querySnapshot) {
+            let goals = [];
+
+            querySnapshot.forEach(function (doc) {
+                goals.push(doc.data());
+            });
+            return goals;
+        });
+    }
+
     ascentsRef() {
         return this.db.collection(
             `users/${this.auth.currentUser.uid}/ascents`,
@@ -61,12 +83,6 @@ class Firebase {
         return await this.db
             .collection(`users/${this.auth.currentUser.uid}/ascents`)
             .add(ascent);
-    }
-
-    async writeGoal(goal) {
-        return await this.db
-            .collection(`users${this.auth.currentUser.uid}/goals`)
-            .add(goal);
     }
 
     async getAllAscents() {

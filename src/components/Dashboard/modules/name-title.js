@@ -13,6 +13,8 @@ export default function NameTitle() {
             style={{
                 borderBottom: `2px solid ${theme.palette.primary.main}`,
                 justifyContent: 'flex-start',
+                marginTop: '10%',
+                width: '90%',
             }}
         >
             <FlexColumn>

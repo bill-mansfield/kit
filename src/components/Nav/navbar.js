@@ -141,7 +141,7 @@ export default function Navbar(props, theme) {
                     >
                         <Grid item>light</Grid>
                         <Grid item>
-                            <Switch onChange={handleChange} />
+                            <Switch color="" onChange={handleChange} />
                         </Grid>
                         <Grid item>dark</Grid>
                     </Grid>
