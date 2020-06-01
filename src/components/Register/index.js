@@ -70,9 +70,7 @@ export default withRouter(function Register(props) {
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">
-                                Password
-                            </InputLabel>
+                            <InputLabel htmlFor="password">Password</InputLabel>
                             <Input
                                 name="password"
                                 type="password"
@@ -118,10 +116,10 @@ export default withRouter(function Register(props) {
     );
 
     async function onRegister() {
-        setWaiting(true);
         try {
             await Firebase.register(name, email, password);
             await Firebase.login(email, password);
+            setWaiting(true);
             props.history.replace('/uploader');
         } catch (error) {
             alert(error.message);

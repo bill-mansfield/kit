@@ -56,9 +56,7 @@ export default withRouter(function SignIn(props) {
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">
-                                Password
-                            </InputLabel>
+                            <InputLabel htmlFor="password">Password</InputLabel>
                             <Input
                                 name="password"
                                 type="password"
@@ -102,9 +100,9 @@ export default withRouter(function SignIn(props) {
     );
 
     async function login() {
-        setWaiting(true);
         try {
             await Firebase.login(email, password);
+            setWaiting(true);
             props.history.replace('/dashboard');
         } catch (error) {
             alert(error.message);
