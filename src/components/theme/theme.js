@@ -107,6 +107,11 @@ export default function Theme(props) {
                         fontSize: pxToRem(21),
                     },
                 },
+                h6: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
                 body1: {
                     fontSize: pxToRem(14),
                     color: state.isDark
@@ -115,6 +120,42 @@ export default function Theme(props) {
                     [breakpoints.up('md')]: {
                         fontSize: pxToRem(18),
                     },
+                },
+                caption: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
+            },
+            MuiTableCell: {
+                root: {
+                    borderBottom: `1px solid ${
+                        state.isDark
+                            ? darkPalette.palette.secondary.main
+                            : lightPalette.palette.secondary.main
+                    }`,
+                },
+                body: {
+                    color: `${
+                        state.isDark
+                            ? darkPalette.palette.text.main
+                            : lightPalette.palette.text.main
+                    } !important`,
+                },
+                head: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                    backgroundColor: `${
+                        state.isDark
+                            ? darkPalette.palette.secondary.main
+                            : lightPalette.palette.secondary.main
+                    } !important`,
+                },
+                alignLeft: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
                 },
             },
             MuiButton: {
@@ -134,11 +175,44 @@ export default function Theme(props) {
                     backgroundColor: darkPalette.palette.accent.green,
                 },
             },
+            MuiIconButton: {
+                root: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
+                colorInherit: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
+            },
+            MuiTablePagination: {
+                root: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
+            },
+            MuiSelect: {
+                icon: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
+                },
+            },
             MuiInput: {
                 underline: {
                     '&:before': {
                         content: 'none',
                     },
+                },
+            },
+            MuiInputBase: {
+                root: {
+                    color: state.isDark
+                        ? darkPalette.palette.text.main
+                        : lightPalette.palette.text.main,
                 },
             },
         },

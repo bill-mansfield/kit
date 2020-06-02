@@ -4,6 +4,22 @@ import Firebase from '../services/Firebase.js';
 import { useTheme } from '@material-ui/styles';
 
 class Utils {
+    async cleanTableAscents(ascentArr) {
+        ascentArr = await ascentArr;
+        let cleanAscentArr = [];
+
+        for (const ascent of ascentArr) {
+            let cleanAscentObj = {};
+            cleanAscentObj.name = ascent.name;
+            cleanAscentObj.ascentType = ascent.ascentType;
+            cleanAscentObj.grade = ascent.ascentGrade;
+            cleanAscentObj.cragName = ascent.cragName;
+            cleanAscentObj.height = ascent.routeHeight;
+            cleanAscentArr.push(cleanAscentObj);
+        }
+        return cleanAscentArr;
+    }
+
     determineDifficultyColor(ascentGrade, isBoulder) {
         const theme = useTheme();
         let bgColor = '';

@@ -12,8 +12,8 @@ import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AddAscent from './modules/add-new-ascent';
 import Goal from './goals/goal';
+import Footer from './modules/footer';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         },
         paddingLeft: '5%',
         paddingRight: '5%',
-        marginTop: '10%',
+        marginTop: '3%',
     },
     barChartsRow: {
         display: 'flex',
@@ -107,9 +107,8 @@ export default withRouter(function Dashboard(props) {
     return (
         <>
             <Navbar />
-            <FlexColumn style={{ marginBottom: '15px' }}>
+            <FlexColumn style={{ paddingBottom: '15px' }}>
                 <NameTitle />
-                <Goal />
                 <div className={classes.statsWrapper}>
                     <StatsTable />
                 </div>
@@ -151,8 +150,9 @@ export default withRouter(function Dashboard(props) {
                         </div>
                     </div>
                 </FlexColumn>
-                <AddAscent />
+                <Goal />
             </FlexColumn>
+            <Footer />
         </>
     );
 });

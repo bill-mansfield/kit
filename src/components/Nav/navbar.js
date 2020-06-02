@@ -75,7 +75,7 @@ export default function Navbar(props, theme) {
         right: false,
     });
 
-    const menuArr = ['demo', 'add ascent', 'logout'];
+    const menuArr = ['demo', 'ascents', 'logout'];
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -126,7 +126,9 @@ export default function Navbar(props, theme) {
                                 button
                                 key={text}
                             >
-                                <ListItemText primary={text} />
+                                <a href={text}>
+                                    <ListItemText primary={text} />
+                                </a>
                             </ListItem>
                         ))}
                     </List>
@@ -141,7 +143,7 @@ export default function Navbar(props, theme) {
                     >
                         <Grid item>light</Grid>
                         <Grid item>
-                            <Switch color="" onChange={handleChange} />
+                            <Switch color="default" onChange={handleChange} />
                         </Grid>
                         <Grid item>dark</Grid>
                     </Grid>
