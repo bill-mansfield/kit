@@ -59,9 +59,12 @@ class Ascents {
         ascentObj.routeHeight = this.sanitiseHeight(ascent.height);
         ascentObj.ascentDate = ascent.when;
         ascentObj.cragName = ascent.cragName;
-        Firebase.writeAscents(ascentObj).then(() => {
-            window.location.reload();
-        });
+        Firebase.writeAscents(ascentObj);
+    }
+
+    editAscent(ascent) {
+        // TODO: uniquely identify ascent object to be able to update some
+        // fields from ascent table
     }
 
     sanitiseDate(ascentDate) {

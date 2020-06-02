@@ -10,11 +10,12 @@ class Utils {
 
         for (const ascent of ascentArr) {
             let cleanAscentObj = {};
-            cleanAscentObj.name = ascent.name;
+            cleanAscentObj.climbName = ascent.name;
             cleanAscentObj.ascentType = ascent.ascentType;
             cleanAscentObj.grade = ascent.ascentGrade;
             cleanAscentObj.cragName = ascent.cragName;
             cleanAscentObj.height = ascent.routeHeight;
+            cleanAscentObj.when = ascent.ascentDate;
             cleanAscentArr.push(cleanAscentObj);
         }
         return cleanAscentArr;

@@ -5,21 +5,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '../../models/Ascents-table';
 import { useTheme } from '@material-ui/core/styles';
 import * as icons from '../../assets/icons';
+import Ascents from '../../models/Ascents';
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function AscentsTable(props) {
     const theme = useTheme();
     const tableIcons = icons.tableIcons;
-    const [state, setState] = React.useState({
-        columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Ascent Type', field: 'ascentType' },
-            { title: 'Grade', field: 'grade' },
-            { title: 'Crag', field: 'cragName' },
-            { title: 'Height', field: 'height' },
-        ],
-    });
+
+    const [columns, setColumns] = React.useState([
+        { title: 'Name', field: 'climbName' },
+        { title: 'Ascent Type', field: 'ascentType' },
+        { title: 'Grade', field: 'grade' },
+        { title: 'Crag', field: 'cragName' },
+        { title: 'Height', field: 'height' },
+        { title: 'Date', field: 'when' },
+    ]);
 
     const [data, setData] = useState();
 
@@ -35,38 +36,36 @@ export default function AscentsTable(props) {
             style={{ backgroundColor: theme.palette.primary.main }}
             title="Your Ascents"
             icons={tableIcons}
-            columns={state.columns}
+            columns={columns}
             data={data}
             editable={{
                 onRowAdd: (newData) =>
-                    new Promise((resolve) => {
+                    new Promise((resolve, reject) => {
                         setTimeout(() => {
+                            setData([...data, newData]);
+                            Ascents.addNewAscent(newData);
                             resolve();
-                            setState((prevState) => {
-                                const data = [...prevState.data];
-                                data.push(newData);
-                                return { ...prevState, data };
-                            });
-                        }, 600);
+                        }, 1000);
                     }),
                 onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve) => {
+                    new Promise((resolve, reject) => {
                         setTimeout(() => {
+                            const dataUpdate = [...data];
+                            const index = oldData.tableData.id;
+                            dataUpdate[index] = newData;
+                            console.log(newData);
+                            //TODO: Use Ascents.editAscent() to somehow
+                            //identify ascent object and update fields
+                            setData([...dataUpdate]);
+
                             resolve();
-                            if (oldData) {
-                                setState((prevState) => {
-                                    const data = [...prevState.data];
-                                    data[data.indexOf(oldData)] = newData;
-                                    return { ...prevState, data };
-                                });
-                            }
-                        }, 600);
+                        }, 1000);
                     }),
                 onRowDelete: (oldData) =>
                     new Promise((resolve) => {
                         setTimeout(() => {
                             resolve();
-                            setState((prevState) => {
+                            setColumns((prevState) => {
                                 const data = [...prevState.data];
                                 data.splice(data.indexOf(oldData), 1);
                                 return { ...prevState, data };
