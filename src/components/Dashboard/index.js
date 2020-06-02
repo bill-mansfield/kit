@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
     barChartsCol: {
         height: '89%',
         width: '100%',
-        boxShadow: '2px 2px 15px',
+        boxShadow:
+            '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
         marginTop: '32px',
         backgroundColor: theme.palette.primary.main,
     },
@@ -53,14 +54,16 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         height: '85%',
         width: '100%',
-        boxShadow: '2px 2px 15px',
+        boxShadow:
+            '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
         marginTop: '32px',
         backgroundColor: theme.palette.primary.main,
     },
     volumeChartCol: {
         height: '80%',
         width: '100%',
-        boxShadow: '2px 2px 15px',
+        boxShadow:
+            '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
         backgroundColor: theme.palette.primary.main,
     },
     barChartOuter: {
@@ -71,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
             height: '100%',
             width: '40%',
         },
+        '& > h2': {
+            borderBottom: `2px solid ${theme.palette.primary.main}`,
+        },
     },
     lineChartOuter: {
         height: '40vh',
@@ -79,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
             height: '60vh',
             marginTop: '5%',
             width: '60%',
+        },
+        '& > h2': {
+            borderBottom: `2px solid ${theme.palette.primary.main}`,
         },
     },
     volumeChartOuter: {
@@ -89,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
             marginTop: '5%',
             height: '40vh',
             width: '60%',
+        },
+        '& > h2': {
+            borderBottom: `2px solid ${theme.palette.primary.main}`,
         },
     },
 }));

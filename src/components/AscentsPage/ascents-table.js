@@ -78,8 +78,6 @@ export default function AscentsTable(props) {
         fetchData();
     }, []);
 
-    console.log(data);
-
     return (
         <MaterialTable
             style={{ backgroundColor: theme.palette.primary.main }}

@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: '5px',
         paddingRight: '5px',
         textAlign: 'center',
+        '& > a': {
+            textDecoration: 'none',
+        },
     },
     menuList: {
         display: 'none',
@@ -101,7 +104,9 @@ export default function Navbar(props, theme) {
             <List>
                 {menuArr.map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemText primary={text} />
+                        <a style={{ textDecoration: 'none' }} href={text}>
+                            <ListItemText primary={text} />
+                        </a>
                     </ListItem>
                 ))}
             </List>
