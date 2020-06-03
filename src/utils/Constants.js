@@ -32,6 +32,28 @@ export const SUCCESSFUL_TICK_TYPE = [
     'Send',
 ];
 
+export const ALL_TICK_TYPES = [
+    'Red point',
+    'Onsight',
+    'Flash',
+    'Tick',
+    'Deep water solo',
+    'Ground up red point',
+    'Pink point',
+    'Top rope',
+    'Send',
+    'Repeat',
+    'Hang dog',
+    'Second clean',
+    'Ghost',
+    'Attempt',
+    'Retreat',
+    'Second with rest',
+    'Dab',
+    'Working',
+    'Top rope onsight',
+];
+
 export const FLASH_TICK_TYPE = 'Flash';
 
 export const ONSIGHT_TICK_TYPE = 'Onsight';

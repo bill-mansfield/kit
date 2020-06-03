@@ -1,9 +1,25 @@
+import React from 'react';
 import * as Constants from './Constants';
 import ClimbingGrade from 'climbing-grade';
 import Firebase from '../services/Firebase.js';
 import { useTheme } from '@material-ui/styles';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class Utils {
+    createTickTypeSelects() {
+        let menuItemArr = [];
+        for (const tickType of Constants.ALL_TICK_TYPES) {
+            let menuItem = '';
+            menuItem = (
+                <MenuItem key={tickType} value={tickType}>
+                    {tickType}
+                </MenuItem>
+            );
+            menuItemArr.push(menuItem);
+        }
+        return menuItemArr;
+    }
+
     async cleanTableAscents(ascentArr) {
         ascentArr = await ascentArr;
         let cleanAscentArr = [];

@@ -6,6 +6,8 @@ import Table from '../../models/Table';
 import { useTheme } from '@material-ui/core/styles';
 import * as icons from '../../assets/icons';
 import Ascents from '../../models/Ascents';
+import Select from '@material-ui/core/Select';
+import Utils from '../../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -15,7 +17,21 @@ export default function AscentsTable(props) {
 
     const [columns, setColumns] = React.useState([
         { title: 'Name', field: 'climbName' },
-        { title: 'Ascent Type', field: 'ascentType' },
+        {
+            title: 'Ascent Type',
+            field: 'ascentType',
+            editComponent: (props) => (
+                <Select
+                    name="ascentType"
+                    id="ascentType"
+                    autoComplete="off"
+                    value={props.value}
+                    onChange={(e) => props.onChange(e.target.value)}
+                >
+                    {Utils.createTickTypeSelects()}
+                </Select>
+            ),
+        },
         { title: 'Grade', field: 'grade' },
         { title: 'Crag', field: 'cragName' },
         { title: 'Height', field: 'height' },
