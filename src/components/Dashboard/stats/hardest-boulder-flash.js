@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({}));
 
 export default function HardestRouteAscent() {
     const classes = useStyles();
-    const [boulderData, setBoulderData] = useState('V12');
+    const [boulderData, setBoulderData] = useState('0');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,8 +32,8 @@ export default function HardestRouteAscent() {
                     ),
                 }}
             >
-                {boulderData === 'VNaN'
-                    ? ' No boulder ascents'
+                {boulderData === 'VNaN' || boulderData === 'V-Infinity'
+                    ? '0'
                     : ' ' + boulderData}
             </Typography>
         </>

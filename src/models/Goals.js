@@ -5,8 +5,16 @@ class Goals {
         Firebase.writeGoal(goal);
     }
 
-    getAllGoals() {
-        return Firebase.getAllGoals();
+    async getGoals() {
+        return await Firebase.getGoals();
+    }
+
+    async updateGoal(goal) {
+        Firebase.updateGoal(goal);
+    }
+
+    async deleteGoal(goal) {
+        Firebase.deleteGoal(goal);
     }
 }
 

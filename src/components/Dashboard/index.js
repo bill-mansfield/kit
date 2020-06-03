@@ -12,15 +12,17 @@ import NameTitle from './modules/name-title';
 import StatsTable from './modules/stats-table';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Goal from './goals/goal';
+import GoalTable from './goals/goals-table';
 import Footer from './modules/footer';
 
 const useStyles = makeStyles((theme) => ({
     statsWrapper: {
         justifyContent: 'center',
         height: '76vh',
+        width: '90vw',
         [theme.breakpoints.up('md')]: {
             height: '40vh',
+            width: '80vw',
         },
         paddingLeft: '5%',
         paddingRight: '5%',
@@ -162,7 +164,7 @@ export default withRouter(function Dashboard(props) {
                         </div>
                     </div>
                 </FlexColumn>
-                <Goal />
+                <GoalTable />
             </FlexColumn>
             <Footer />
         </>

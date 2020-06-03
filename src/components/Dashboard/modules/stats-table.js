@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'flex-start',
         flexDirection: 'column',
         height: '100%',
+        width: '100%',
         '& > div': {
             height: '25%',
             width: '100%',
@@ -160,9 +161,7 @@ export default function StatsTable(props) {
                             marginTop: '5px',
                         }}
                     >
-                        <Typography variant="h2">
-                            Your climbing areas:
-                        </Typography>
+                        <Typography variant="h2">Regions:</Typography>
                     </div>
                     <FavouriteAreas />
                 </div>

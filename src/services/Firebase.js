@@ -45,7 +45,7 @@ class Firebase {
 
     async getAscentsForTable() {
         const ascentsRef = this.ascentsRef();
-        return await this.getAscentsWithID(ascentsRef);
+        return await this.getDocsWithID(ascentsRef);
     }
 
     async updateAscent(ascent) {
@@ -63,19 +63,16 @@ class Firebase {
     }
 
     async deleteAscent(ascent) {
-        this.ascentsRef()
-            .doc(ascent.ID)
-            .delete()
-            .then(function () {
-                console.log('Document successfully deleted!');
-            })
-            .catch(function (error) {
-                console.error('Error removing document: ', error);
-            });
+        this.ascentsRef().doc(ascent.ID).delete();
     }
 
     goalRef() {
         return this.db.collection(`users/${this.auth.currentUser.uid}/goals`);
+    }
+
+    async getGoals() {
+        const goalRef = this.goalRef();
+        return await this.getDocsWithID(goalRef);
     }
 
     async writeGoal(goal) {
@@ -84,16 +81,17 @@ class Firebase {
             .add(goal);
     }
 
-    async getAllGoals() {
-        const goalRef = this.goalRef();
-        return await goalRef.get().then(function (querySnapshot) {
-            let goals = [];
-
-            querySnapshot.forEach(function (doc) {
-                goals.push(doc.data());
-            });
-            return goals;
+    async updateGoal(goal) {
+        let ref = this.goalRef().doc(goal.ID);
+        return ref.update({
+            ascentType: goal.ascentType,
+            grade: goal.grade,
+            name: goal.climbName,
         });
+    }
+
+    async deleteGoal(goal) {
+        this.goalRef().doc(goal.ID).delete();
     }
 
     ascentsRef() {
@@ -169,17 +167,17 @@ class Firebase {
         return response;
     }
 
-    async getAscentsWithID(ref) {
+    async getDocsWithID(ref) {
         const response = await ref.get().then(function (querySnapshot) {
-            let ascents = [];
+            let docArr = [];
 
             querySnapshot.forEach(function (doc) {
-                let ascentObj = {};
-                ascentObj = doc.data();
-                ascentObj.ID = doc.id;
-                ascents.push(ascentObj);
+                let docObj = {};
+                docObj = doc.data();
+                docObj.ID = doc.id;
+                docArr.push(docObj);
             });
-            return ascents;
+            return docArr;
         });
         return response;
     }

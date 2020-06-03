@@ -31,7 +31,7 @@ export default function HardestOnsight() {
                     ),
                 }}
             >
-                {Number.isInteger(data) ? ' ' + data : ' No onsights'}
+                {Number.isInteger(data) ? ' ' + data : '0'}
             </Typography>
         </>
     );

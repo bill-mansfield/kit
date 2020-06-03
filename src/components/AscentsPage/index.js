@@ -57,7 +57,7 @@ export default withRouter(function AscentsPage(props) {
                         All of your ascents in one place
                     </Typography>
                     <Typography variant="h3">
-                        You can add edit and delete ascents here
+                        You can add, edit and delete ascents here
                     </Typography>
                 </div>
                 <div className={classes.tableWrapper}>

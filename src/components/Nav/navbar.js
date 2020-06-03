@@ -36,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
     },
     menuItem: {
         width: '15vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         [theme.breakpoints.up('md')]: {
             width: '150px',
         },
-        paddingLeft: '5px',
-        paddingRight: '5px',
-        textAlign: 'center',
         '& > a': {
             textDecoration: 'none',
         },
@@ -64,6 +64,18 @@ const useStyles = makeStyles((theme) => ({
         '& > :nth-of-type(3)': {
             backgroundColor: theme.palette.primary.main,
         },
+    },
+    logoutButton: {
+        width: '90%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        [theme.breakpoints.up('sm')]: {
+            width: '25%',
+            height: '60%',
+            marginTop: 'auto',
+            marginBottom: 'auto',
+        },
+        mobileList: {},
     },
 }));
 
@@ -92,6 +104,18 @@ export default function Navbar(props, theme) {
         setState({ ...state, [anchor]: open });
     };
 
+    const logoutButton = (
+        <Button
+            className={classes.logoutButton}
+            onClick={logout}
+            href="/"
+            variant="contained"
+            color="secondary"
+        >
+            logout
+        </Button>
+    );
+
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -101,7 +125,14 @@ export default function Navbar(props, theme) {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
+            <List
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                }}
+            >
                 {menuArr.map((text, index) => (
                     <ListItem button key={text}>
                         <a style={{ textDecoration: 'none' }} href={text}>
@@ -109,14 +140,7 @@ export default function Navbar(props, theme) {
                         </a>
                     </ListItem>
                 ))}
-                <Button
-                    onClick={logout}
-                    href="/"
-                    variant="contained"
-                    color="secondary"
-                >
-                    logout
-                </Button>
+                {logoutButton}
             </List>
         </div>
     );
@@ -144,6 +168,7 @@ export default function Navbar(props, theme) {
                                 </a>
                             </ListItem>
                         ))}
+                        {logoutButton}
                     </List>
                     <Grid
                         component="label"
