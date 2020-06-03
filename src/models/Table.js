@@ -12,6 +12,10 @@ class Table {
         //Or else users will fuck thier own data up
         Firebase.updateAscent(ascent);
     }
+
+    async deleteAscent(ascent) {
+        Firebase.deleteAscent(ascent);
+    }
 }
 
 export default new Table();

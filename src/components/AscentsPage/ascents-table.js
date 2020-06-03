@@ -43,6 +43,8 @@ export default function AscentsTable(props) {
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
                             setData([...data, newData]);
+
+                            //Write new ascent to DB
                             Ascents.addNewAscent(newData);
                             resolve();
                         }, 1000);
@@ -53,7 +55,8 @@ export default function AscentsTable(props) {
                             const dataUpdate = [...data];
                             const index = oldData.tableData.id;
                             dataUpdate[index] = newData;
-                            console.log(newData);
+
+                            //Update DB with updated ascent
                             Table.updateAscent(newData);
                             setData([...dataUpdate]);
 
@@ -61,15 +64,18 @@ export default function AscentsTable(props) {
                         }, 1000);
                     }),
                 onRowDelete: (oldData) =>
-                    new Promise((resolve) => {
+                    new Promise((resolve, reject) => {
                         setTimeout(() => {
+                            const dataDelete = [...data];
+                            const index = oldData.tableData.id;
+                            dataDelete.splice(index, 1);
+
+                            //Delete ascent from DB
+                            Table.deleteAscent(oldData);
+                            setData([...dataDelete]);
+
                             resolve();
-                            setColumns((prevState) => {
-                                const data = [...prevState.data];
-                                data.splice(data.indexOf(oldData), 1);
-                                return { ...prevState, data };
-                            });
-                        }, 600);
+                        }, 1000);
                     }),
             }}
         />

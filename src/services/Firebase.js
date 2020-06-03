@@ -49,7 +49,6 @@ class Firebase {
     }
 
     async updateAscent(ascent) {
-        console.log(ascent);
         let ref = this.ascentsRef().doc(ascent.ID);
         return ref.update({
             ascentType: ascent.ascentType,
@@ -61,6 +60,18 @@ class Firebase {
             routeHeight: ascent.height,
             ascentDate: ascent.when,
         });
+    }
+
+    async deleteAscent(ascent) {
+        this.ascentsRef()
+            .doc(ascent.ID)
+            .delete()
+            .then(function () {
+                console.log('Document successfully deleted!');
+            })
+            .catch(function (error) {
+                console.error('Error removing document: ', error);
+            });
     }
 
     goalRef() {
