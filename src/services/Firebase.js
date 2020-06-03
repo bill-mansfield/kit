@@ -43,6 +43,26 @@ class Firebase {
         });
     }
 
+    async getAscentsForTable() {
+        const ascentsRef = this.ascentsRef();
+        return await this.getAscentsWithID(ascentsRef);
+    }
+
+    async updateAscent(ascent) {
+        console.log(ascent);
+        let ref = this.ascentsRef().doc(ascent.ID);
+        return ref.update({
+            ascentType: ascent.ascentType,
+            climbName: ascent.climbName,
+            name: ascent.climbName,
+            cragName: ascent.cragName,
+            ascentGrade: ascent.grade,
+            routeGrade: ascent.grade,
+            routeHeight: ascent.height,
+            ascentDate: ascent.when,
+        });
+    }
+
     goalRef() {
         return this.db.collection(`users/${this.auth.currentUser.uid}/goals`);
     }
@@ -132,6 +152,21 @@ class Firebase {
 
             querySnapshot.forEach(function (doc) {
                 ascents.push(doc.data());
+            });
+            return ascents;
+        });
+        return response;
+    }
+
+    async getAscentsWithID(ref) {
+        const response = await ref.get().then(function (querySnapshot) {
+            let ascents = [];
+
+            querySnapshot.forEach(function (doc) {
+                let ascentObj = {};
+                ascentObj = doc.data();
+                ascentObj.ID = doc.id;
+                ascents.push(ascentObj);
             });
             return ascents;
         });

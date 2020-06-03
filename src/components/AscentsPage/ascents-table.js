@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Firebase from '../../services/Firebase';
 import MaterialTable from 'material-table';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '../../models/Ascents-table';
+import Table from '../../models/Table';
 import { useTheme } from '@material-ui/core/styles';
 import * as icons from '../../assets/icons';
 import Ascents from '../../models/Ascents';
@@ -54,8 +54,7 @@ export default function AscentsTable(props) {
                             const index = oldData.tableData.id;
                             dataUpdate[index] = newData;
                             console.log(newData);
-                            //TODO: Use Ascents.editAscent() to somehow
-                            //identify ascent object and update fields
+                            Table.updateAscent(newData);
                             setData([...dataUpdate]);
 
                             resolve();

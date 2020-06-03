@@ -10,6 +10,7 @@ class Utils {
 
         for (const ascent of ascentArr) {
             let cleanAscentObj = {};
+            cleanAscentObj.ID = ascent.ID;
             cleanAscentObj.climbName = ascent.name;
             cleanAscentObj.ascentType = ascent.ascentType;
             cleanAscentObj.grade = ascent.ascentGrade;

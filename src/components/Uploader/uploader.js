@@ -74,9 +74,7 @@ export default withRouter(function UploaderComponent(props) {
 
     return (
         <>
-            <Typography variant="h3">
-                Please upload your ascent data in in a .csv below
-            </Typography>
+            <Typography variant="h3">File type: .csv only</Typography>
             <Dropzone
                 getUploadParams={getUploadParams}
                 onChangeStatus={handleChangeStatus}
