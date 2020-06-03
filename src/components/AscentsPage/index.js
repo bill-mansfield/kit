@@ -49,7 +49,9 @@ export default withRouter(function AscentsPage(props) {
     return (
         <>
             <Navbar />
-            <FlexColumn>
+            <FlexColumn
+                style={{ justifyContent: 'space-between', height: '90vh' }}
+            >
                 <div className={classes.titleWrapper}>
                     <Typography variant="h2">
                         All of your ascents in one place

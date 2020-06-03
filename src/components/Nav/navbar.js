@@ -78,7 +78,7 @@ export default function Navbar(props, theme) {
         right: false,
     });
 
-    const menuArr = ['demo', 'ascents', 'logout'];
+    const menuArr = ['demo', 'ascents'];
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -109,6 +109,14 @@ export default function Navbar(props, theme) {
                         </a>
                     </ListItem>
                 ))}
+                <Button
+                    onClick={logout}
+                    href="/"
+                    variant="contained"
+                    color="secondary"
+                >
+                    logout
+                </Button>
             </List>
         </div>
     );
