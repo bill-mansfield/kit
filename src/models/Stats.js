@@ -9,7 +9,11 @@ class Stats {
         for (const ascent of ascents) {
             heights.push(ascent.routeHeight);
         }
-        return heights.reduce((totalHeight, height) => totalHeight + height);
+        if (heights.length !== 0) {
+            return heights.reduce(
+                (totalHeight, height) => totalHeight + height,
+            );
+        }
     }
 
     async getSuccessfulAscents() {

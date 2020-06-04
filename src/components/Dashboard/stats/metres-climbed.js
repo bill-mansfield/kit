@@ -12,7 +12,11 @@ export default function MetresClimbed() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await Stats.getTotalMetersClimbed();
-            setData(result + 'm'); // 'm' is for meters
+            if (result === undefined) {
+                setData('0m');
+            } else {
+                setData(result + 'm'); // 'm' is for meters
+            }
         };
         fetchData();
     }, []);
