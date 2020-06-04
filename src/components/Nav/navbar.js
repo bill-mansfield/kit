@@ -90,7 +90,7 @@ export default function Navbar(props, theme) {
         right: false,
     });
 
-    const menuArr = ['demo', 'ascents'];
+    const menuArr = ['ascents'];
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -103,6 +103,22 @@ export default function Navbar(props, theme) {
 
         setState({ ...state, [anchor]: open });
     };
+
+    const loginAsDemo = () => {
+        Firebase.login('demo@new.com', 'hujiko');
+    };
+
+    const demoButton = (
+        <ListItem button key="demo">
+            <a
+                style={{ textDecoration: 'none' }}
+                onCLick={loginAsDemo()}
+                href="demo"
+            >
+                <ListItemText primary="demo" />
+            </a>
+        </ListItem>
+    );
 
     const logoutButton = (
         <Button
@@ -133,6 +149,7 @@ export default function Navbar(props, theme) {
                     flexDirection: 'column',
                 }}
             >
+                {demoButton}
                 {menuArr.map((text, index) => (
                     <ListItem button key={text}>
                         <a style={{ textDecoration: 'none' }} href={text}>

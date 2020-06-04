@@ -6,8 +6,6 @@ import Dashboard from '../Dashboard/index';
 
 const useStyles = makeStyles((theme) => ({}));
 
-const demoAccount = 'S3AkoSndziUGPOgTUaQDVnEdIKG2';
-
 export default withRouter(function Demo(props) {
     const classes = useStyles();
 

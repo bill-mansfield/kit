@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stats from '../../../models/Stats';
+import Utils from '../../../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -22,10 +23,10 @@ export default function FavouriteAreas() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(await Stats.getFavouriteAreas());
+            setData(await Utils.reduceAreas(Stats.getFavouriteAreas()));
         };
         fetchData();
-    }, []);
+    }, [data]);
 
     return (
         <>
@@ -34,7 +35,7 @@ export default function FavouriteAreas() {
                     display: 'flex',
                     flexDirection: 'row',
                     flexWrap: 'wrap',
-                    height: '15%',
+                    overflow: 'hidden',
                 }}
             >
                 {data.map((item) => (

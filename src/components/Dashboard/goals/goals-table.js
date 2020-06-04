@@ -67,6 +67,7 @@ export default function GoalTable(props) {
             style={{
                 width: '80%',
                 backgroundColor: theme.palette.primary.main,
+                marginTop: '5%',
             }}
             title="Your Goals"
             icons={tableIcons}
