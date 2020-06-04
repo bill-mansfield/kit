@@ -62,7 +62,7 @@ export const FRENCH_GRADE_IDENTIFYER = ['a', 'b', 'c'];
 
 export const TRASH_GRADE_IDENTIFYER = ['X', 'R', 'Route', '5+'];
 
-export const BOULDER_GRADE_GREEN = ['V0', 'V1'];
+export const BOULDER_GRADE_GREEN = ['V-Infinity', 'V0', 'V1'];
 
 export const BOULDER_GRADE_YELLOW = ['V2', 'V3'];
 
