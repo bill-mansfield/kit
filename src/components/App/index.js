@@ -4,6 +4,7 @@ import Login from '../Login';
 import Register from '../Register';
 import Uploader from '../Uploader';
 import Dashboard from '../Dashboard';
+import Demo from '../Demo';
 import AscentsPage from '../AscentsPage';
 import Theme from '../theme/theme';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,6 +46,7 @@ export default function App(theme) {
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/uploader" component={Uploader} />
                     <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/demo" component={Demo} />
                     <Route exact path="/ascents" component={AscentsPage} />
                 </Switch>
             </Router>

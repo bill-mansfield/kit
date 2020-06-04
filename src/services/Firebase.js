@@ -70,15 +70,19 @@ class Firebase {
         return this.db.collection(`users/${this.auth.currentUser.uid}/goals`);
     }
 
+    ascentsRef() {
+        return this.db.collection(
+            `users/${this.auth.currentUser.uid}/ascents`,
+        );
+    }
+
     async getGoals() {
         const goalRef = this.goalRef();
         return await this.getDocsWithID(goalRef);
     }
 
     async writeGoal(goal) {
-        return await this.db
-            .collection(`users/${this.auth.currentUser.uid}/goals`)
-            .add(goal);
+        return await this.goalRef().add(goal);
     }
 
     async updateGoal(goal) {
@@ -93,12 +97,6 @@ class Firebase {
 
     async deleteGoal(goal) {
         this.goalRef().doc(goal.ID).delete();
-    }
-
-    ascentsRef() {
-        return this.db.collection(
-            `users/${this.auth.currentUser.uid}/ascents`,
-        );
     }
 
     successfulAscentsRef() {
