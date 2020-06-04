@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Firebase from '../../services/Firebase';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
-import { useTheme } from '@material-ui/core/styles';
 import FlexColumn from '../layouts/flex-column';
 import RouteBar from './charts/route-bar';
 import BoulderingBar from './charts/boulder-bar';
@@ -109,7 +108,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
-    const theme = useTheme();
     useEffect(() => {
         if (!Firebase.getCurrentUsername()) {
             // not logged in

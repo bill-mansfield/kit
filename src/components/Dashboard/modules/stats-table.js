@@ -2,8 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import FlexRow from '../../layouts/flex-row';
-import FlexColumn from '../../layouts/flex-column';
 import MetresClimbed from '../stats/metres-climbed';
 import HardestRouteAscent from '../stats/hardest-route-ascent';
 import HardestBoulderAscent from '../stats/hardest-boulder-ascent';

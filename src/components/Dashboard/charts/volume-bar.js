@@ -61,7 +61,6 @@ export default function VolumeBar() {
                         tickValues: 'every 6 months',
                         legend: 'time',
                         legendOffset: -12,
-                        legendOffset: 32,
                     }}
                     colors={{ scheme: 'red_yellow_green' }}
                     pointSize={10}
@@ -90,7 +89,6 @@ export default function VolumeBar() {
                             itemOpacity: 0.75,
                             symbolSize: 20,
                             itemTextColor: theme.palette.text.main,
-                            itemsSpacing: 2,
                         },
                     ]}
                 />

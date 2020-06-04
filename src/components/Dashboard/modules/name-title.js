@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import Firebase from '../../../services/Firebase';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import FlexRow from '../../layouts/flex-row';
 import FlexColumn from '../../layouts/flex-column';
 

@@ -13,7 +13,6 @@ import Firebase from '../../services/Firebase';
 import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
-import IconAvatar from '../icon-avatar';
 import FlexRow from '../layouts/flex-row';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +55,9 @@ export default withRouter(function SignIn(props) {
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="password">
+                                Password
+                            </InputLabel>
                             <Input
                                 name="password"
                                 type="password"

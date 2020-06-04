@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { forwardRef } from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -29,9 +29,7 @@ export const tableIcons = {
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
     LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => (
-        <ChevronRight {...props} ref={ref} />
-    )),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
     PreviousPage: forwardRef((props, ref) => (
         <ChevronLeft {...props} ref={ref} />
     )),
@@ -43,7 +41,5 @@ export const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => (
         <Remove {...props} ref={ref} />
     )),
-    ViewColumn: forwardRef((props, ref) => (
-        <ViewColumn {...props} ref={ref} />
-    )),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };

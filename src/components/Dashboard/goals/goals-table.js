@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Firebase from '../../../services/Firebase';
 import AddAscentFrom from '../modules/add-ascent-form';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-import { Typography } from '@material-ui/core';
 import MaterialTable from 'material-table';
-import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 import * as icons from '../../../assets/icons';
@@ -12,16 +9,8 @@ import Goals from '../../../models/Goals';
 import Select from '@material-ui/core/Select';
 import Utils from '../../../utils/Utils';
 
-const useStyles = makeStyles((theme) => ({
-    logAscentFormWrapper: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-}));
-
 export default function GoalTable(props) {
     const theme = useTheme();
-    const classes = useStyles();
     const tableIcons = icons.tableIcons;
 
     const [columns, setColumns] = React.useState([

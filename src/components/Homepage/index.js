@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
-import IconAvatar from '../icon-avatar';
 import FlexRow from '../layouts/flex-row';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +27,8 @@ export default function Homepage() {
                 <AuthInnerWrapper>
                     <Typography variant="h1">Hello Crusher!</Typography>
                     <Typography variant="h2">
-                        Welcome to KIT, a place for you to keep all of your
-                        rock climbing ascent data.
+                        Welcome to KIT, a place for you to keep all of your rock
+                        climbing ascent data.
                     </Typography>
                     <FlexRow
                         style={{

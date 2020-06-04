@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     FormControl,
@@ -9,7 +9,6 @@ import {
 import Select from '@material-ui/core/Select';
 import Utils from '../../../utils/Utils';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import FlexRow from '../../layouts/flex-row';
 import Ascents from '../../../models/Ascents';
