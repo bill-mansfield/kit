@@ -84,6 +84,7 @@ class Firebase {
     async updateGoal(goal) {
         let ref = this.goalRef().doc(goal.ID);
         return ref.update({
+            status: goal.status,
             ascentType: goal.ascentType,
             grade: goal.grade,
             name: goal.climbName,

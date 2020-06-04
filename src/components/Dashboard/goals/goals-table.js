@@ -1,22 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import Firebase from '../../../services/Firebase';
+import AddAscentFrom from '../modules/add-ascent-form';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import { Typography } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '../../../models/Table';
+import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 import * as icons from '../../../assets/icons';
 import Goals from '../../../models/Goals';
 import Select from '@material-ui/core/Select';
 import Utils from '../../../utils/Utils';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+    logAscentFormWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+}));
 
 export default function GoalTable(props) {
     const theme = useTheme();
+    const classes = useStyles();
     const tableIcons = icons.tableIcons;
 
     const [columns, setColumns] = React.useState([
+        {
+            title: 'Status',
+            field: 'status',
+            editComponent: (props) => (
+                <Select
+                    name="ascentType"
+                    id="ascentType"
+                    autoComplete="off"
+                    value={props.value}
+                    onChange={(e) => props.onChange(e.target.value)}
+                >
+                    <MenuItem key="To do" value="To do">
+                        To do
+                    </MenuItem>
+                    <MenuItem key="Completed" value="Completed">
+                        Completed
+                    </MenuItem>
+                </Select>
+            ),
+        },
         {
             title: 'Ascent Type',
             field: 'ascentType',
@@ -95,6 +123,15 @@ export default function GoalTable(props) {
                         }, 1000);
                     }),
             }}
+            detailPanel={[
+                {
+                    tooltip: 'Log ascent',
+                    icon: DoneOutlineIcon,
+                    render: (rowData) => {
+                        return <AddAscentFrom />;
+                    },
+                },
+            ]}
         />
     );
 }

@@ -7,6 +7,7 @@ import {
     CircularProgress,
 } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
+import Utils from '../../../utils/Utils';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +18,20 @@ import DayjsUtils from '@date-io/dayjs';
 import dayjs from 'dayjs';
 
 const useStyles = makeStyles((theme) => ({
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '& > div': {
+            width: '90%',
+            [theme.breakpoints.up('md')]: {
+                width: '60%',
+            },
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
     formCol: {
         display: 'flex',
         width: '90%',
@@ -71,7 +86,6 @@ export default function AddAscentForm() {
         ) {
             return;
         }
-        setWaiting(true);
         ascentObj.climbName = climbName;
         ascentObj.ascentType = ascentType;
         ascentObj.grade = grade;
@@ -79,6 +93,12 @@ export default function AddAscentForm() {
         ascentObj.when = dayjs(when).format('YYYY-MM');
         ascentObj.cragName = cragName;
         Ascents.addNewAscent(ascentObj);
+
+        // fake loading
+        setWaiting(true);
+        setTimeout(function () {
+            setWaiting(false);
+        }, 1000);
     };
 
     const [waiting, setWaiting] = useState(false);
@@ -88,7 +108,7 @@ export default function AddAscentForm() {
             className={classes.form}
             onSubmit={(e) => e.preventDefault() && false}
         >
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <InputLabel className={classes.formLabel} htmlFor="climbName">
                     Climb Name
                 </InputLabel>
@@ -101,7 +121,7 @@ export default function AddAscentForm() {
                     onChange={(e) => setClimbName(e.target.value)}
                 />
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <InputLabel className={classes.formLabel} htmlFor="ascentType">
                     Ascent type
                 </InputLabel>
@@ -112,13 +132,10 @@ export default function AddAscentForm() {
                     value={ascentType}
                     onChange={(e) => setAscentType(e.target.value)}
                 >
-                    <MenuItem value="Onsight">Onsight</MenuItem>
-                    <MenuItem value="Flash">Flash</MenuItem>
-                    <MenuItem value="Red point">Red point</MenuItem>
-                    <MenuItem value="Tick">Tick</MenuItem>
+                    {Utils.createTickTypeSelects()}
                 </Select>
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <InputLabel className={classes.formLabel} htmlFor="grade">
                     Grade
                 </InputLabel>
@@ -131,7 +148,7 @@ export default function AddAscentForm() {
                     onChange={(e) => setGrade(e.target.value)}
                 />
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <InputLabel className={classes.formLabel} htmlFor="height">
                     Climb height
                 </InputLabel>
@@ -144,7 +161,7 @@ export default function AddAscentForm() {
                     onChange={(e) => setHeight(e.target.value)}
                 />
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <MuiPickersUtilsProvider utils={DayjsUtils}>
                     <KeyboardDatePicker
                         disableToolbar
@@ -162,9 +179,9 @@ export default function AddAscentForm() {
                     />
                 </MuiPickersUtilsProvider>
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
+            <FormControl margin="normal" required>
                 <InputLabel className={classes.formLabel} htmlFor="cragName">
-                    What is the name of the crag?
+                    Crag name?
                 </InputLabel>
                 <Input
                     name="cragName"
@@ -177,12 +194,18 @@ export default function AddAscentForm() {
             </FormControl>
             {waiting ? (
                 <FlexRow>
-                    <CircularProgress size={20} />
+                    <CircularProgress
+                        style={{
+                            color: 'green',
+                            marginBottom: '10px',
+                            marginTop: '10px',
+                        }}
+                        size={30}
+                    />
                 </FlexRow>
             ) : (
                 <Button
                     type="submit"
-                    fullWidth
                     variant="contained"
                     onClick={handleSubmit}
                     className={classes.submit}
