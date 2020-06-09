@@ -6,6 +6,7 @@ import BackgroundImage from '../layouts/background-image';
 import AuthWrapper from '../layouts/auth-wrapper';
 import AuthInnerWrapper from '../layouts/auth-inner-wrapper';
 import FlexRow from '../layouts/flex-row';
+import Firebase from '../../services/Firebase';
 
 const useStyles = makeStyles((theme) => ({
     submit: {
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Homepage() {
     const classes = useStyles();
 
+    const loginAsDemo = () => {
+        Firebase.login('demo@new.com', 'hujiko');
+    };
+
     return (
         <>
             <BackgroundImage />
@@ -27,8 +32,8 @@ export default function Homepage() {
                 <AuthInnerWrapper>
                     <Typography variant="h1">Hello Crusher!</Typography>
                     <Typography variant="h2">
-                        Welcome to KIT, a place for you to keep all of your rock
-                        climbing ascent data.
+                        Welcome to KIT, a place for you to keep all of your
+                        rock climbing ascent data.
                     </Typography>
                     <FlexRow
                         style={{
@@ -54,6 +59,17 @@ export default function Homepage() {
                             className={classes.submit}
                         >
                             Login
+                        </Button>
+                    </FlexRow>
+                    <FlexRow>
+                        <Button
+                            variant="contained"
+                            component={Link}
+                            onCLick={loginAsDemo()}
+                            to="/demo"
+                            className={classes.submit}
+                        >
+                            Demo
                         </Button>
                     </FlexRow>
                 </AuthInnerWrapper>
