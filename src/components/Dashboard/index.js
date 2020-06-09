@@ -108,13 +108,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default withRouter(function Dashboard(props) {
     const classes = useStyles();
-    useEffect(() => {
-        if (!Firebase.getCurrentUsername()) {
-            // not logged in
-            alert('Please login first');
-            props.history.replace('/login');
-        }
-    }, [props.history]);
 
     return (
         <>

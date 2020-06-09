@@ -23,27 +23,28 @@ export default function FavouriteAreas() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(await Utils.reduceAreas(Stats.getFavouriteAreas()));
+            setData(await Stats.getFavouriteAreas());
         };
         fetchData();
-    }, [data]);
+    }, []);
 
     return (
         <>
-            <ul
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    overflow: 'hidden',
-                }}
-            >
-                {data.map((item) => (
-                    <li key={item} className={classes.listItem}>
-                        {item}
-                    </li>
-                ))}
-            </ul>
+            currently fucked
+            {/* <ul */}
+            {/*     style={{ */}
+            {/*         display: 'flex', */}
+            {/*         flexDirection: 'row', */}
+            {/*         flexWrap: 'wrap', */}
+            {/*         overflow: 'hidden', */}
+            {/*     }} */}
+            {/* > */}
+            {/*     {data.map((item) => ( */}
+            {/*         <li key={item} className={classes.listItem}> */}
+            {/*             {item} */}
+            {/*         </li> */}
+            {/*     ))} */}
+            {/* </ul> */}
         </>
     );
 }
