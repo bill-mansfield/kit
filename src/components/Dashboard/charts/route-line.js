@@ -48,7 +48,7 @@ export default function RouteLine() {
                 <ResponsiveLine
                     data={data}
                     theme={textColor}
-                    margin={{ top: 50, right: 50, bottom: 150, left: 50 }}
+                    margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
                     xScale={{
                         type: 'time',
                         format: '%Y-%m-%d',
@@ -83,17 +83,17 @@ export default function RouteLine() {
                     enableGridX={false}
                     legends={[
                         {
-                            anchor: 'bottom',
+                            anchor: 'right',
                             direction: 'column',
                             justify: false,
                             translateX: 0,
-                            translateY: 130,
-                            itemsSpacing: 2,
+                            translateY: 50,
+                            itemsSpacing: 1,
                             itemDirection: 'left-to-right',
                             itemWidth: 80,
                             itemHeight: 20,
                             itemOpacity: 0.75,
-                            symbolSize: 20,
+                            symbolSize: 10,
                             itemTextColor: theme.palette.text.main,
                             effects: [
                                 {

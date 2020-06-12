@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import Firebase from '../../services/Firebase';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Navbar from '../Nav/navbar';
 import FlexColumn from '../layouts/flex-column';
@@ -92,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     volumeChartOuter: {
-        height: '30vh',
+        height: '40vh',
         width: '90%',
         marginTop: '10%',
         [theme.breakpoints.up('md')]: {

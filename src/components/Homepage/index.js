@@ -22,7 +22,7 @@ export default function Homepage() {
     const classes = useStyles();
 
     const loginAsDemo = () => {
-        Firebase.login('demo@new.com', 'hujiko');
+        Firebase.login('demoaccount@account.com', 'hujiko');
     };
 
     return (

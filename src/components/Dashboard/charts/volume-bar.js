@@ -34,7 +34,7 @@ export default function VolumeBar() {
                 <ResponsiveLine
                     data={data}
                     theme={textColor}
-                    margin={{ top: 50, right: 50, bottom: 75, left: 50 }}
+                    margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
                     curve="step"
                     xScale={{
                         type: 'time',
@@ -77,17 +77,17 @@ export default function VolumeBar() {
                     enableGridY={false}
                     legends={[
                         {
-                            anchor: 'bottom',
+                            anchor: 'left',
                             direction: 'column',
                             justify: false,
-                            translateX: -50,
-                            translateY: 50,
+                            translateX: 10,
+                            translateY: -50,
                             itemsSpacing: 0,
                             itemDirection: 'left-to-right',
                             itemWidth: 50,
                             itemHeight: 20,
                             itemOpacity: 0.75,
-                            symbolSize: 20,
+                            symbolSize: 10,
                             itemTextColor: theme.palette.text.main,
                         },
                     ]}

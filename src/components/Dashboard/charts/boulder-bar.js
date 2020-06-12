@@ -36,7 +36,7 @@ export default function BoulderBar() {
                         'Unsuccessful',
                     ]}
                     indexBy="Grade"
-                    margin={{ top: 50, right: 50, bottom: 150, left: 60 }}
+                    margin={{ top: 50, right: 50, bottom: 70, left: 60 }}
                     padding={0.3}
                     theme={textColor}
                     colors={{ scheme: 'red_yellow_green' }}
@@ -55,17 +55,17 @@ export default function BoulderBar() {
                     legends={[
                         {
                             dataFrom: 'keys',
-                            anchor: 'bottom',
+                            anchor: 'right',
                             direction: 'column',
                             justify: false,
                             translateX: 0,
-                            translateY: 130,
-                            itemsSpacing: 2,
+                            translateY: 70,
+                            itemsSpacing: 1,
                             itemWidth: 100,
                             itemHeight: 20,
                             itemDirection: 'left-to-right',
                             itemOpacity: 0.85,
-                            symbolSize: 20,
+                            symbolSize: 10,
                             itemTextColor: theme.palette.text.main,
                             effects: [
                                 {

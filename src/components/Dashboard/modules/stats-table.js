@@ -137,9 +137,7 @@ export default function StatsTable(props) {
                     <div>
                         <HardestBoulderFlash />
                     </div>
-                    <div style={{ borderBottom: 'none' }}>
-                        <Typography variant="h2">Tallest boulder:</Typography>
-                    </div>
+                    <div style={{ borderBottom: 'none' }}></div>
                 </div>
             </div>
             <div

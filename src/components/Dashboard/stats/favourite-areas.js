@@ -30,21 +30,20 @@ export default function FavouriteAreas() {
 
     return (
         <>
-            currently fucked
-            {/* <ul */}
-            {/*     style={{ */}
-            {/*         display: 'flex', */}
-            {/*         flexDirection: 'row', */}
-            {/*         flexWrap: 'wrap', */}
-            {/*         overflow: 'hidden', */}
-            {/*     }} */}
-            {/* > */}
-            {/*     {data.map((item) => ( */}
-            {/*         <li key={item} className={classes.listItem}> */}
-            {/*             {item} */}
-            {/*         </li> */}
-            {/*     ))} */}
-            {/* </ul> */}
+            <ul
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    overflow: 'hidden',
+                }}
+            >
+                {data.map((item) => (
+                    <li key={item} className={classes.listItem}>
+                        {item}
+                    </li>
+                ))}
+            </ul>
         </>
     );
 }

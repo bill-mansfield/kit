@@ -7,14 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 class Utils {
     async reduceAreas(data) {
-        // console.log(await data);
-        // let favouriteAreas = [];
-        // favouriteAreas = await data;
-        // while (favouriteAreas.length >= 7) {
-        //     favouriteAreas.pop();
-        // }
-        // console.log(favouriteAreas);
-        // return favouriteAreas;
         return data;
     }
 
