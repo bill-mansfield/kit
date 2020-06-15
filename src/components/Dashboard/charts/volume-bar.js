@@ -58,9 +58,9 @@ export default function VolumeBar() {
                     }}
                     axisBottom={{
                         format: '%b %d %y',
-                        tickValues: 'every 6 months',
+                        tickValues: 'every year',
                         legend: 'time',
-                        legendOffset: -12,
+                        legendOffset: 30,
                     }}
                     colors={{ scheme: 'red_yellow_green' }}
                     pointSize={10}

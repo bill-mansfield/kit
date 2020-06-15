@@ -68,17 +68,18 @@ export default function RouteLine() {
                     }}
                     axisBottom={{
                         format: '%b %d %y',
-                        tickValues: 'every 6 months',
+                        tickValues: 'every year',
                         legend: 'time',
                         legendOffset: 30,
                     }}
                     colors={{ scheme: 'red_yellow_green' }}
-                    pointSize={10}
+                    pointSize={2}
                     pointColor={{ theme: 'background' }}
                     pointBorderWidth={2}
                     pointBorderColor={{ from: 'serieColor' }}
                     pointLabel="y"
                     pointLabelYOffset={-12}
+                    pointLabel="y"
                     useMesh={true}
                     enableGridX={false}
                     legends={[
@@ -87,7 +88,7 @@ export default function RouteLine() {
                             direction: 'column',
                             justify: false,
                             translateX: 0,
-                            translateY: 50,
+                            translateY: 60,
                             itemsSpacing: 1,
                             itemDirection: 'left-to-right',
                             itemWidth: 80,

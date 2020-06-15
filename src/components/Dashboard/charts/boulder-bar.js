@@ -59,7 +59,7 @@ export default function BoulderBar() {
                             direction: 'column',
                             justify: false,
                             translateX: 0,
-                            translateY: 70,
+                            translateY: 80,
                             itemsSpacing: 1,
                             itemWidth: 100,
                             itemHeight: 20,
