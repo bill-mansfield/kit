@@ -79,7 +79,6 @@ export default function RouteLine() {
                     pointBorderColor={{ from: 'serieColor' }}
                     pointLabel="y"
                     pointLabelYOffset={-12}
-                    pointLabel="y"
                     useMesh={true}
                     enableGridX={false}
                     legends={[

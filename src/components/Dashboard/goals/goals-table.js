@@ -13,7 +13,7 @@ export default function GoalTable(props) {
     const theme = useTheme();
     const tableIcons = icons.tableIcons;
 
-    const [columns, setColumns] = React.useState([
+    const [columns] = React.useState([
         {
             title: 'Status',
             field: 'status',

@@ -11,7 +11,7 @@ export default function AscentsTable(props) {
     const theme = useTheme();
     const tableIcons = icons.tableIcons;
 
-    const [columns, setColumns] = React.useState([
+    const [columns] = React.useState([
         { title: 'Name', field: 'climbName' },
         {
             title: 'Ascent Type',

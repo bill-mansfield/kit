@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stats from '../../../models/Stats';
-import Utils from '../../../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
