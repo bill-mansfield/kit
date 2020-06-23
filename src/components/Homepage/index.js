@@ -22,7 +22,7 @@ export default function Homepage() {
     const classes = useStyles();
 
     const loginAsDemo = () => {
-        Firebase.login('testdemo@account.com', 'hujiko');
+        Firebase.login('climbshard@new.com', 'hujiko');
     };
 
     return (
@@ -32,8 +32,8 @@ export default function Homepage() {
                 <AuthInnerWrapper>
                     <Typography variant="h1">Hello Crusher!</Typography>
                     <Typography variant="h2">
-                        Welcome to KIT, a place for you to keep all of your
-                        rock climbing ascent data.
+                        Welcome to KIT, a place for you to keep all of your rock
+                        climbing ascent data.
                     </Typography>
                     <FlexRow
                         style={{

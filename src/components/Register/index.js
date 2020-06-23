@@ -69,7 +69,9 @@ export default withRouter(function Register(props) {
                             />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="password">
+                                Password
+                            </InputLabel>
                             <Input
                                 name="password"
                                 type="password"
@@ -106,7 +108,7 @@ export default withRouter(function Register(props) {
                             to="/login"
                             className={classes.submit}
                         >
-                            Go back
+                            Log in
                         </Button>
                     </form>
                 </AuthInnerWrapper>
